@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    z-index: 5;
+}
+
+html {
+    background: #2DA921;
+}
+
+body {
+    background: black;
+}
+
+#shapes div {
+    width: 20%;
+    height: 50%;
+    border-radius: 70% 30% 70% 30% / 35% 25% 35% 25%;
+    background: #33FF3F;
+    opacity: 25%;
+    position: fixed;
+    animation-name: shape;
+    animation-duration: 25s;
+    animation-timing-function: linear;
+    overflow: hidden;
+    z-index: 2;
+}
+
+@keyframes shape {
+    0% {top: 100%;}
+    100% {top: -50%;}
+}
+
+section#grass {
+    background: black;
+    display: block;
+    position: relative;
+    width: 100vw;
+    height: 20vw;
+    bottom: 0;
+    transition: height ease 1.5s;
+    z-index: 0;
+}
+
+#grass div {
+    background: #2DA921;
+    width: 4vw;
+    overflow: visible;
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    border-radius: 60% 60% 0 0 / 10% 10% 0 0;
+    z-index: 2;
+}
+
+#grass button {
+    display: inline;
+    position: absolute;
+    top: 10vw;
+    left: 30vw;
+    width: 40vw;
+    height: 10vw;
+    background: #306F1A;
+    border-radius: 10% / 50%;
+    border: transparent;
+    z-index: 1;
+}
+
+section#grass:hover {
+    height: 35vw;
+}
