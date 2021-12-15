@@ -1,11 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    z-index: 5;
-}
-
-html {
-    background: #2DA921;
+    font-family: Verdana;
 }
 
 body {
@@ -23,7 +19,7 @@ body {
     animation-duration: 25s;
     animation-timing-function: linear;
     overflow: hidden;
-    z-index: 2;
+    z-index: -1;
 }
 
 @keyframes shape {
@@ -32,14 +28,11 @@ body {
 }
 
 section#grass {
-    background: black;
     display: block;
     position: relative;
     width: 100vw;
     height: 20vw;
-    bottom: 0;
     transition: height ease 1.5s;
-    z-index: 0;
 }
 
 #grass div {
@@ -50,22 +43,36 @@ section#grass {
     position: absolute;
     bottom: 0;
     border-radius: 60% 60% 0 0 / 10% 10% 0 0;
-    z-index: 2;
 }
 
 #grass button {
-    display: inline;
+    display: inline-block;
     position: absolute;
     top: 10vw;
     left: 30vw;
     width: 40vw;
     height: 10vw;
-    background: #306F1A;
+    color: rgba(241, 71, 100, 1);
+    background-color: rgba(241, 71, 100, 0.1);
+    padding: 0.8vw;
     border-radius: 10% / 50%;
-    border: transparent;
-    z-index: 1;
+    border: 0.7vw solid rgba(241, 71, 100, 1);
+    font-size: 5.5vw;
+}
+
+section#ground {
+    background: #2DA921;
+    height: 22vw;
+    width: 100vw;
+    display: block;
+    position: relative;
+    transition: height ease 1.5s;
 }
 
 section#grass:hover {
     height: 35vw;
+}
+
+section#grass:hover + section#ground {
+    height: 7vw;
 }
