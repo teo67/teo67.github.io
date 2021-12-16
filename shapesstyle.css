@@ -1,0 +1,88 @@
+#shapes div {
+    width: 20%;
+    height: 50%;
+    border-radius: 70% 30% 70% 30% / 35% 25% 35% 25%;
+    background: #33FF3F;
+    opacity: 25%;
+    position: fixed;
+    animation-name: shape;
+    animation-duration: 25s;
+    animation-timing-function: linear;
+    overflow: hidden;
+    z-index: -1;
+}
+
+@keyframes shape {
+    0% {top: 100%;}
+    100% {top: -50%;}
+}
+
+section#grass {
+    display: block;
+    position: relative;
+    width: 100vw;
+    height: 20vw;
+    transition: height ease 1.5s;
+}
+
+#grass div {
+    background: #2DA921;
+    width: 4vw;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    border-radius: 60% 60% 0 0 / 10% 10% 0 0;
+}
+
+#grass button {
+    display: block;
+    position: absolute;
+    top: 10vw;
+    left: 30vw;
+    width: 40vw;
+    height: 10vw;
+    color: rgba(241, 71, 100, 1);
+    background-color: rgba(241, 71, 100, 0.1);
+    padding: 0.8vw;
+    border-radius: 10% / 50%;
+    border: 0.7vw solid rgba(241, 71, 100, 1);
+    font-size: 5.5vw;
+}
+
+section#ground {
+    background: #2DA921;
+    height: 15vw;
+    width: 100vw;
+    display: block;
+    position: relative;
+    transition: height ease 1.5s;
+}
+
+p#ground-line {
+    height: 3vw;
+    width: 90vw;
+    left: 5vw;
+    bottom: 2vw;
+    display: block;
+    position: absolute;
+    background: #0C0C0C;
+    border-radius: 3% / 80%;
+    z-index: 1;
+    opacity: 10%;
+    transition: opacity ease 1.5s;
+    color: #2DA921;
+    text-align: center;
+    padding: 1vw;
+}
+
+section#grass:hover {
+    height: 35vw;
+}
+
+section#grass:hover + section#ground {
+    height: 0vw;
+}
+
+section#grass:hover p#ground-line {
+    opacity: 100%;
+}

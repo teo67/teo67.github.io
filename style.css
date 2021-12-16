@@ -2,77 +2,56 @@
     margin: 0;
     padding: 0;
     font-family: Verdana;
+    box-sizing: border-box;
 }
+
+nav {
+    position: fixed;
+    background: rgba(241, 71, 100, 1);
+    border-radius: 5% / 100%;
+    margin-left: 2.5vw;
+    margin-top: 2.5vh;
+    width: 95vw;
+    height: 10vh;
+    opacity: 50%;
+    transition: opacity ease 1s;
+}
+
+nav:hover {
+    opacity: 100%;
+}
+
+nav a button {
+    background: #0C0C0C;
+    border: transparent;
+    border-radius: 30% / 70%;
+    display: inline-block;
+    margin-top: 1vh;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    color:rgba(241, 71, 100, 1);
+    width: 10vw;
+    height: 8vh;
+    font-size: 1vw;
+    font-weight: bolder;
+    transition: all ease 0.5s;
+}
+
+nav a button:hover {
+    width: 12vw;
+    height: 9.6vh;
+    margin-top: 0.2vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    color: rgba(241, 71, 100, 0.1);
+}
+
+
 
 body {
-    background: black;
+    background: #0C0C0C;
 }
 
-#shapes div {
-    width: 20%;
-    height: 50%;
-    border-radius: 70% 30% 70% 30% / 35% 25% 35% 25%;
-    background: #33FF3F;
-    opacity: 25%;
-    position: fixed;
-    animation-name: shape;
-    animation-duration: 25s;
-    animation-timing-function: linear;
-    overflow: hidden;
-    z-index: -1;
-}
-
-@keyframes shape {
-    0% {top: 100%;}
-    100% {top: -50%;}
-}
-
-section#grass {
-    display: block;
-    position: relative;
-    width: 100vw;
-    height: 20vw;
-    transition: height ease 1.5s;
-}
-
-#grass div {
-    background: #2DA921;
-    width: 4vw;
-    overflow: visible;
-    display: inline-block;
-    position: absolute;
-    bottom: 0;
-    border-radius: 60% 60% 0 0 / 10% 10% 0 0;
-}
-
-#grass button {
-    display: inline-block;
-    position: absolute;
-    top: 10vw;
-    left: 30vw;
-    width: 40vw;
-    height: 10vw;
-    color: rgba(241, 71, 100, 1);
-    background-color: rgba(241, 71, 100, 0.1);
-    padding: 0.8vw;
-    border-radius: 10% / 50%;
-    border: 0.7vw solid rgba(241, 71, 100, 1);
-    font-size: 5.5vw;
-}
-
-section#ground {
-    background: #2DA921;
-    height: 22vw;
-    width: 100vw;
-    display: block;
-    position: relative;
-    transition: height ease 1.5s;
-}
-
-section#grass:hover {
-    height: 35vw;
-}
-
-section#grass:hover + section#ground {
-    height: 7vw;
+body::-webkit-scrollbar {
+    display: none;
 }

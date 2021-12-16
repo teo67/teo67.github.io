@@ -11,7 +11,7 @@ const doShapes = () => {
 }
 
 const makeGrass = () => {
-    for(let i = 0; i < 100; i += 2) {
+    for(let i = 0; i < 97; i += 2) {
         const newShape = document.createElement("div");
         newShape.style.setProperty("height", `${Math.floor(Math.random() * 10) + 10}vw`);
         newShape.style.setProperty("left", `${i}vw`);
