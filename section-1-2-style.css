@@ -1,0 +1,78 @@
+section#section-1 {
+    display: block;
+    position: relative;
+    width: 100vw;
+    height: 60vh;
+    background: rgba(20, 20, 20, 0.5);
+    z-index: 0;
+}
+
+section#section-1 ul {
+    vertical-align: top;
+    display: inline-block;
+    width: 45vw;
+    height: 50vh;
+    line-height: 8vh;
+    margin-top: 10vh;
+    margin-left: 5vw;
+}
+
+section#section-1 ul li {
+    color: rgba(241, 71, 100, 1);
+    font-size: 2vw;
+}
+
+section#section-1 img {
+    display: block;
+    float: right;
+    height: 60vh;
+    margin-right: 5vw;
+}
+
+section#section-1 div#a {
+    position: absolute;
+    width: 1vw;
+    height: 60vh;
+    background: rgba(241, 71, 100, 1);
+    top: 0;
+    left: calc(94vw - 60vh);
+    transition: left ease 0.5s;
+}
+
+section#section-1 div#b {
+    position: absolute;
+    width: 60vh;
+    height: 60vh;
+    background: rgba(16, 16, 16, 1);
+    top: 0;
+    right: 5vw;
+    transition: width ease 0.5s;
+}
+
+section#section-1 div#c {
+    position: absolute;
+    width: 60vh;
+    height: 60vh;
+    background: rgba(54, 57, 63, 1);
+    top: 0;
+    opacity: 0;
+    right: 5vw;
+    transition: all ease 0.5s;
+    z-index: -1;
+}
+
+section#section-1:hover div#a {
+    left: 94vw;
+}
+
+section#section-1:hover div#b {
+    width: 0;
+}
+
+section#section-1:hover div#c { 
+    width: 70vh;
+    height: 70vh;
+    right: calc(5vw - 5vh);
+    top: -5vh;
+    opacity: 50%;
+}
