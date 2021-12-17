@@ -1,13 +1,16 @@
 const shapes = document.getElementById("shapes");
 const grass = document.getElementById("grass");
 
+let shapeLeft = 0;
+
 const doShapes = () => {
     if(document.hidden) {
         return;
     }
     const newShape = document.createElement("div");
-    newShape.style.setProperty("left", `${Math.floor(Math.random() * window.innerWidth)}px`);
+    newShape.style.setProperty("left", `${shapeLeft + Math.floor(Math.random() * window.innerWidth * 0.3)}px`);
     shapes.appendChild(newShape);
+    shapeLeft = window.innerWidth / 2 - shapeLeft;
 }
 
 const makeGrass = () => {

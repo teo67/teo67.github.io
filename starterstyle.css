@@ -1,0 +1,81 @@
+section#hidden {
+    display: block;
+    position: relative;
+    margin-top: 7.5vh;
+    width: 100vw;
+    height: 30vh;
+}
+
+section#hidden p {
+    position: absolute;
+    height: 18vh;
+    top: 6vh;
+    font-size: 3vw;
+    line-height: 9vh;
+    text-align: center;
+    left: 15vw;
+    width: 70vw;
+    font-weight: bolder;
+    color: rgba(241, 71, 100, 1);
+}
+
+section#hidden section {
+    position: absolute;
+    height: 24vh;
+    top: 3vh;
+    width: 1vh;
+    left: 85vw;
+    background:rgba(241, 71, 100, 1);
+}
+
+section#hidden div {
+    position: absolute;
+    height: 30vh;
+    border-radius: 0 15vw 5vw 0 / 0 100% 35% 0;
+    z-index: 1;
+    transition: all ease 1s;
+}
+
+section#hidden div h2 {
+    position: absolute;
+    color: #0C0C0C;
+    line-height: 30vh;
+    font-size: 4vh;
+    right: 5vw;
+    font-weight: bold;
+    transform: rotate(45deg);
+}
+
+section#hidden:hover div {
+    border-radius: 0 2vw 2vw 0 / 0 10% 10% 0;
+}
+
+#red {
+    background: rgba(241, 71, 100, 1);
+    width: 33vw;
+}
+
+section#hidden:hover div#red {
+    width: 5vw;
+}
+
+#green {
+    background: #69FF23;
+    width: 66vw;
+}
+
+section#hidden:hover div#green {
+    width: 10vw;
+}
+
+#blue {
+    background: #4FA9FF;
+    width: 99vw;
+}
+
+section#hidden:hover div#blue {
+    width: 15vw;
+}
+
+
+
