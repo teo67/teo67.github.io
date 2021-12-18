@@ -1,4 +1,5 @@
 section#section-1 {
+    margin-top: 7.5vh;
     display: block;
     position: relative;
     width: 100vw;
@@ -22,11 +23,98 @@ section#section-1 ul li {
     font-size: 2vw;
 }
 
+section#section-1 p {
+    vertical-align: top;
+    display: inline-block;
+    width: 45vw;
+    height: 50vh;
+    line-height: 8vh;
+    margin-top: 10vh;
+    margin-right: 5vw;
+    color: rgba(241, 71, 100, 1);
+    font-size: 2vw;
+}
+
+section#section-1 div#d {
+    background:rgba(241, 71, 100, 1);
+    position: absolute;
+    width: 0.5vw;
+    height: 13vh;
+    top: 26vh;
+    left: 50vw;
+    border-radius: 0 0 0 2vh / 0 0 0 2vh;
+}
+
+section#section-1 div#e {
+    background:rgba(241, 71, 100, 1);
+    position: absolute;
+    width: 2vw;
+    height: 1vh;
+    top: 38vh;
+    left: 50vw;
+    border-radius: 0 0 0 2vh / 0 0 0 2vh;
+}
+
+section#section-1 ol {
+    position: absolute;
+    width: 20vw;
+    height: 24vh;
+    left: 52vw;
+    top: 26vh;
+}
+
+section#section-1 ol li {
+    font-size: 3.4vh;
+    margin-left: 6vh;
+    margin-bottom: 0;
+    transition: all ease 0.3s;
+    opacity: 100%;
+}
+
+section#section-1 ol li:hover {
+    margin-bottom: 1vh;
+    margin-left: 5vh;
+    opacity: 30%;
+}
+
+ol li#water {
+    color: #4FA9FF;
+}
+
+ol li#fire {
+    color: #DA3F3F;
+}
+
+ol li#grass {
+    color: #69FF23;
+}
+
+ol li#flying {
+    color: #ACE8E1;
+}
+
+ol li#poison {
+    color: #B64DFF;
+}
+
+ol li#electric {
+    color: #FFFF20;
+}
+
 section#section-1 img {
     display: block;
-    float: right;
     height: 60vh;
+}
+
+section#section-1 img#a {
+    float: right;
     margin-right: 5vw;
+}
+
+section#section-1 img#b {
+    float: left;
+    margin-left: 5vw;
+    margin-right: calc(45vw - 60vh);
 }
 
 section#section-1 div#a {
@@ -35,8 +123,15 @@ section#section-1 div#a {
     height: 60vh;
     background: rgba(241, 71, 100, 1);
     top: 0;
-    left: calc(94vw - 60vh);
     transition: left ease 0.5s;
+}
+
+section#section-1 div#a.a {
+    left: calc(94vw - 60vh);
+}
+
+section#section-1 div#a.b {
+    left: 4vw;
 }
 
 section#section-1 div#b {
@@ -45,24 +140,43 @@ section#section-1 div#b {
     height: 60vh;
     background: rgba(16, 16, 16, 1);
     top: 0;
-    right: 5vw;
     transition: width ease 0.5s;
+}
+
+section#section-1 div#b.a {
+    right: 5vw;
+}
+
+section#section-1 div#b.b {
+    right: calc(95vw - 60vh);
 }
 
 section#section-1 div#c {
     position: absolute;
     width: 60vh;
     height: 60vh;
-    background: rgba(54, 57, 63, 1);
     top: 0;
     opacity: 0;
-    right: 5vw;
     transition: all ease 0.5s;
     z-index: -1;
 }
 
-section#section-1:hover div#a {
+section#section-1 div#c.a { 
+    right: 5vw;
+    background: rgba(54, 57, 63, 1);
+}
+
+section#section-1 div#c.b { 
+    left: 5vw;
+    background: rgba(106, 178, 97, 1);
+}
+
+section#section-1:hover div#a.a {
     left: 94vw;
+}
+
+section#section-1:hover div#a.b {
+    left: calc(4vw + 60vh);
 }
 
 section#section-1:hover div#b {
@@ -72,7 +186,14 @@ section#section-1:hover div#b {
 section#section-1:hover div#c { 
     width: 70vh;
     height: 70vh;
-    right: calc(5vw - 5vh);
     top: -5vh;
     opacity: 50%;
+}
+
+section#section-1:hover div#c.a { 
+    right: calc(5vw - 5vh);
+}
+
+section#section-1:hover div#c.b { 
+    left: calc(5vw - 5vh);
 }

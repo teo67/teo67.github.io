@@ -2,7 +2,6 @@ section#hidden {
     display: block;
     position: relative;
     margin-top: 7.5vh;
-    margin-bottom: 7.5vh;
     width: 100vw;
     height: 30vh;
 }
@@ -52,7 +51,7 @@ section#hidden:hover div {
 }
 
 #red {
-    background: rgba(241, 71, 100, 1);
+    background: #DA3F3F;
     width: 33vw;
 }
 

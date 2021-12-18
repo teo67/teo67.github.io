@@ -1,5 +1,5 @@
 const shapes = document.getElementById("shapes");
-const grass = document.getElementById("grass");
+const grass = document.getElementById("grass-bottom");
 
 let shapeLeft = 0;
 

@@ -17,15 +17,16 @@
     100% {top: -50%;}
 }
 
-section#grass {
+section#grass-bottom {
     display: block;
     position: relative;
+    margin-top: 15vh;
     width: 100vw;
     height: 20vw;
     transition: height ease 1.5s;
 }
 
-#grass div {
+#grass-bottom div {
     background: #2DA921;
     width: 4vw;
     display: block;
@@ -34,7 +35,7 @@ section#grass {
     border-radius: 60% 60% 0 0 / 10% 10% 0 0;
 }
 
-#grass button {
+#grass-bottom button {
     display: block;
     position: absolute;
     top: 10vw;
@@ -47,6 +48,12 @@ section#grass {
     border-radius: 10% / 50%;
     border: 0.7vw solid rgba(241, 71, 100, 1);
     font-size: 5.5vw;
+    transition: all ease 0.5s;
+}
+
+#grass-bottom button:hover {
+    background-color: rgba(241, 71, 100, 0.3);
+    border-color: rgba(241, 71, 100, 0.1);
 }
 
 section#ground {
@@ -75,14 +82,14 @@ p#ground-line {
     padding: 1vw;
 }
 
-section#grass:hover {
+section#grass-bottom:hover {
     height: 35vw;
 }
 
-section#grass:hover + section#ground {
+section#grass-bottom:hover + section#ground {
     height: 0vw;
 }
 
-section#grass:hover p#ground-line {
+section#grass-bottom:hover p#ground-line {
     opacity: 100%;
 }

@@ -146,3 +146,11 @@ body {
 body::-webkit-scrollbar {
     display: none;
 }
+
+em {
+    transition: color ease 0.5s;
+}
+
+em:hover {
+    color: #2DA921;
+}
