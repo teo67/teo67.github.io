@@ -13,18 +13,15 @@ const doShapes = () => {
     shapeLeft = window.innerWidth / 2 - shapeLeft;
 }
 
-const makeGrass = () => {
-    for(let i = 0; i < 97; i += 2) {
-        const newShape = document.createElement("div");
-        newShape.style.setProperty("height", `${Math.floor(Math.random() * 10) + 10}vw`);
-        newShape.style.setProperty("left", `${i}vw`);
-        grass.appendChild(newShape);
-    }
-}
-
 shapes.addEventListener('animationend', event => {
     event.target.remove();
 });
 
-makeGrass();
+for(let i = 0; i < 97; i += 2) {
+    const newShape = document.createElement("div");
+    newShape.style.setProperty("height", `${Math.floor(Math.random() * 10) + 10}vw`);
+    newShape.style.setProperty("left", `${i}vw`);
+    grass.appendChild(newShape);
+}
+
 window.setInterval(doShapes, 7500);

@@ -142,3 +142,42 @@ const commands = [
     )
 ];
 
+const content = document.getElementById("content");
+
+for(const command of commands) {
+    const newElement = document.createElement("section");
+    content.appendChild(newElement);
+    const newUpper = document.createElement("div");
+    newElement.appendChild(newUpper);
+    newUpper.className = "upper";
+    const plusA = document.createElement("div");
+    newUpper.appendChild(plusA);
+    plusA.className = "a";
+    const plusB = document.createElement("div");
+    newUpper.appendChild(plusB);
+    plusB.className = "b";
+    const newText = document.createElement("h1");
+    newUpper.appendChild(newText);
+    newText.innerHTML = command.name;
+    const newDiv = document.createElement("div");
+    newElement.appendChild(newDiv);
+    newDiv.className = "dropdown";
+    const newDescription = document.createElement("p");
+    newDiv.appendChild(newDescription);
+    newDescription.innerHTML = command.description;
+    newDescription.className = "description";
+    newDiv.appendChild(document.createElement("br"));
+    const newArguments = document.createElement("p");
+    newDiv.appendChild(newArguments);
+    newArguments.innerHTML = `{ Usage: d!${command.name} ${command.arguments} }`;
+    newArguments.className = "arguments";
+    newDiv.appendChild(document.createElement("br"));
+    const newRequirements = document.createElement("p");
+    newDiv.appendChild(newRequirements);
+    newRequirements.innerHTML = `Requirements: ${command.requirements}.`;
+    newRequirements.className = "requirements";
+    const newImage = document.createElement("img");
+    newDiv.appendChild(newImage);
+    newImage.setAttribute("src", `../images/${command.name}.png`);
+}
+
