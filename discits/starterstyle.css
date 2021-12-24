@@ -1,3 +1,23 @@
+#main-title h1 {
+    color: #2DA921;
+}
+
+#main-title div#top {
+    background: #2DA921;
+}
+
+#main-title div#bottom {
+    background: #2DA921;
+}
+
+#main-title div#left {
+    background: #2DA921;
+}
+
+#main-title div#right {
+    background: #2DA921;
+}
+
 section#hidden {
     display: block;
     position: relative;

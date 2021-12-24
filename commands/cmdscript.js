@@ -144,6 +144,17 @@ const commands = [
 
 const content = document.getElementById("content");
 
+const showHide = div => {
+    console.log(div.parentElement.lastElementChild.classList.contains("gone"));
+    if(!div.parentElement.lastElementChild.classList.contains("here")) {
+        div.parentElement.lastElementChild.classList.add("here");
+        div.firstElementChild.classList.add("gone");
+    } else {
+        div.parentElement.lastElementChild.classList.remove("here");
+        div.firstElementChild.classList.remove("gone");
+    }
+}
+
 for(const command of commands) {
     const newElement = document.createElement("section");
     content.appendChild(newElement);
@@ -162,6 +173,7 @@ for(const command of commands) {
     const newDiv = document.createElement("div");
     newElement.appendChild(newDiv);
     newDiv.className = "dropdown";
+    newUpper.setAttribute("onclick", "showHide(this)");
     const newDescription = document.createElement("p");
     newDiv.appendChild(newDescription);
     newDescription.innerHTML = command.description;
