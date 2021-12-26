@@ -170,6 +170,9 @@ for(const command of commands) {
     const newText = document.createElement("h1");
     newUpper.appendChild(newText);
     newText.innerHTML = command.name;
+    const arrow = document.createElement("div");
+    newElement.appendChild(arrow);
+    arrow.className = "arrow";
     const newDiv = document.createElement("div");
     newElement.appendChild(newDiv);
     newDiv.className = "dropdown";

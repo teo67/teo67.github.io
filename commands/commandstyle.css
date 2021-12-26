@@ -25,6 +25,7 @@ section#content {
 
 section#content section {
     display: block;
+    position: relative;
     width: 96vw;
     margin-top: 2vh;
     margin-bottom: 2vh;
@@ -51,6 +52,11 @@ section#content section div.upper:hover {
 section#content section div.upper:hover + div.dropdown {
     margin-right: 2vw;
     margin-left: 2vw;
+}
+
+section#content section div.upper:hover + div.arrow {
+    opacity: 100%;
+    left: -2vw;
 }
 
 section#content section div.upper:hover h1 {
@@ -99,6 +105,21 @@ section#content section div.upper h1 {
     font-size: 2vh;
     line-height: 5vh;
     left: calc(4vh + 1vw);
+    transition: all ease 0.5s;
+}
+
+section#content section div.arrow {
+    display: block;
+    position: absolute;
+    opacity: 0%;
+    top: 0;
+    left: -3vw;
+    width: 0vw;
+    height: 0vh;
+    border-left: 2.5vh solid rgba(241, 71, 100, 1);
+    border-top: 2.5vh solid transparent;
+    border-bottom: 2.5vh solid transparent;
+    border-right: 0 solid transparent;
     transition: all ease 0.5s;
 }
 
