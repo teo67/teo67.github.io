@@ -108,3 +108,22 @@ section#content section p:hover {
     color: #2DA921;
     font-size: 1.6vw;
 }
+
+section#content section img {
+    display: block;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    width: 70vw;
+    transition: all ease 0.7s;
+    border: 20px solid rgba(54,57,63, 0.4);
+    border-radius: 1vw;
+}
+
+section#content section img:hover {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
