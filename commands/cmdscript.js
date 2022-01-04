@@ -39,6 +39,12 @@ const commands = [
         'Has registered for an account'
     ),
     new Command(
+        'daily',
+        'Redeem a daily box with xp, items, and more!',
+        '',
+        'Has registered for an account, has at least Tier 1 Premium, is not in battle'
+    ),
+    new Command(
         'equip',
         'This command equips an attack on the Discit you currently have selected.',
         '[index of new attack in the full list (use \'allmoves\')] [attack slot (1 - 4)]',
@@ -135,10 +141,22 @@ const commands = [
         'Have an account, can\'t be used while in combat, both arguments should be positive integers that refer to slots in your party'
     ),
     new Command(
+        'trade',
+        'Trade Discits with other members of your server!',
+        '[@player]',
+        'Has registered for an account, has at least Tier 2 Premium (the other player doesn\'t have to have premium), is not in battle, is in a Discit Station'
+    ),
+    new Command(
         'warp',
         'Using the warp ring, teleport to any location you wish!',
         '[location (example: Route 1)]',
         'Has an account, is not currently in battle'
+    ),
+    new Command(
+        'weekly',
+        'Redeem a weekly box that may contain super rare Discits and items!',
+        '',
+        'Has registered for an account, has at least Tier 3 Premium, is not in battle'
     )
 ];
 

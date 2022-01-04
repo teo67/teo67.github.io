@@ -1,6 +1,6 @@
 #shapes div {
     width: 20vw;
-    height: 50vh;
+    height: 26.3vw;
     border-radius: 70% 30% 70% 30% / 35% 25% 35% 25%;
     background: #33FF3F;
     opacity: 25%;
@@ -20,7 +20,7 @@
 section#grass-bottom {
     display: block;
     position: relative;
-    margin-top: 15vh;
+    margin-top: 17.89vw;
     width: 100vw;
     height: 20vw;
     transition: height ease 1.5s;
@@ -80,6 +80,7 @@ p#ground-line {
     color: #2DA921;
     text-align: center;
     padding: 1vw;
+    font-size: 1vw;
 }
 
 section#grass-bottom:hover {

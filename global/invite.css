@@ -1,0 +1,20 @@
+#main-title h1 {
+    color: grey;
+    font-size: 6.3vw;
+}
+
+#main-title div#top {
+    background: grey;
+}
+
+#main-title div#bottom {
+    background: grey;
+}
+
+#main-title div#left {
+    background: grey;
+}
+
+#main-title div#right {
+    background: grey;
+}

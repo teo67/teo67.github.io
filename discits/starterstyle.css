@@ -21,17 +21,17 @@
 section#hidden {
     display: block;
     position: relative;
-    margin-top: 7.5vh;
+    margin-top: 3.95vw;
     width: 100vw;
-    height: 30vh;
+    height: 15.78vw;
 }
 
 section#hidden p {
     position: absolute;
-    height: 18vh;
-    top: 6vh;
+    height: 9.47vw;
+    top: 3.16vw;
     font-size: 3vw;
-    line-height: 9vh;
+    line-height: 4.73vw;
     text-align: center;
     left: 15vw;
     width: 70vw;
@@ -41,16 +41,16 @@ section#hidden p {
 
 section#hidden section {
     position: absolute;
-    height: 24vh;
-    top: 3vh;
-    width: 1vh;
+    height: 12.63vw;
+    top: 1.58vw;
+    width: 0.53vw;
     left: 85vw;
     background:rgba(241, 71, 100, 1);
 }
 
 section#hidden div {
     position: absolute;
-    height: 30vh;
+    height: 15.78vw;
     border-radius: 0 15vw 5vw 0 / 0 100% 35% 0;
     z-index: 1;
     transition: all ease 1s;
@@ -59,8 +59,8 @@ section#hidden div {
 section#hidden div h2 {
     position: absolute;
     color: #0C0C0C;
-    line-height: 30vh;
-    font-size: 4vh;
+    line-height: 15.78vw;
+    font-size: 2.1vw;
     right: 5vw;
     font-weight: bold;
     transform: rotate(45deg);

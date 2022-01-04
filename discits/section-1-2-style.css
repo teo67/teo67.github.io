@@ -1,9 +1,9 @@
 section#section-1 {
-    margin-top: 7.5vh;
+    margin-top: 3.95vw;
     display: block;
     position: relative;
     width: 100vw;
-    height: 60vh;
+    height: 31.56vw;
     background: rgba(20, 20, 20, 0.5);
     z-index: 0;
 }
@@ -12,9 +12,9 @@ section#section-1 ul {
     vertical-align: top;
     display: inline-block;
     width: 45vw;
-    height: 50vh;
-    line-height: 8vh;
-    margin-top: 10vh;
+    height: 26.30vw;
+    line-height: 4.21vw;
+    margin-top: 5.26vw;
     margin-left: 5vw;
 }
 
@@ -27,9 +27,9 @@ section#section-1 p {
     vertical-align: top;
     display: inline-block;
     width: 45vw;
-    height: 50vh;
-    line-height: 8vh;
-    margin-top: 10vh;
+    height: 26.30vw;
+    line-height: 4.21vw;
+    margin-top: 5.26vw;
     margin-right: 5vw;
     color: rgba(241, 71, 100, 1);
     font-size: 2vw;
@@ -39,41 +39,41 @@ section#section-1 div#d {
     background:rgba(241, 71, 100, 1);
     position: absolute;
     width: 0.5vw;
-    height: 13vh;
-    top: 26vh;
+    height: 6.84vw;
+    top: 13.68vw;
     left: 50vw;
-    border-radius: 0 0 0 2vh / 0 0 0 2vh;
+    border-radius: 0 0 0 1.05vw / 0 0 0 1.05vw;
 }
 
 section#section-1 div#e {
     background:rgba(241, 71, 100, 1);
     position: absolute;
     width: 2vw;
-    height: 1vh;
-    top: 38vh;
+    height: 0.53vw;
+    top: 19.99vw;
     left: 50vw;
-    border-radius: 0 0 0 2vh / 0 0 0 2vh;
+    border-radius: 0 0 0 1.05vw / 0 0 0 1.05vw;
 }
 
 section#section-1 ol {
     position: absolute;
     width: 20vw;
-    height: 24vh;
+    height: 12.63vw;
     left: 52vw;
-    top: 26vh;
+    top: 13.68vw;
 }
 
 section#section-1 ol li {
-    font-size: 3.4vh;
-    margin-left: 6vh;
+    font-size: 1.79vw;
+    margin-left: 3.16vw;
     margin-bottom: 0;
     transition: all ease 0.3s;
     opacity: 100%;
 }
 
 section#section-1 ol li:hover {
-    margin-bottom: 1vh;
-    margin-left: 5vh;
+    margin-bottom: 0.53vw;
+    margin-left: 2.63vw;
     opacity: 30%;
 }
 
@@ -103,7 +103,7 @@ ol li#electric {
 
 section#section-1 img {
     display: block;
-    height: 60vh;
+    height: 31.56vw;
 }
 
 section#section-1 img#a {
@@ -114,20 +114,20 @@ section#section-1 img#a {
 section#section-1 img#b {
     float: left;
     margin-left: 5vw;
-    margin-right: calc(45vw - 60vh);
+    margin-right: 13.44vw;
 }
 
 section#section-1 div#a {
     position: absolute;
     width: 1vw;
-    height: 60vh;
+    height: 31.56vw;
     background: rgba(241, 71, 100, 1);
     top: 0;
     transition: left ease 0.5s;
 }
 
 section#section-1 div#a.a {
-    left: calc(94vw - 60vh);
+    left: 62.44vw;
 }
 
 section#section-1 div#a.b {
@@ -136,8 +136,8 @@ section#section-1 div#a.b {
 
 section#section-1 div#b {
     position: absolute;
-    width: 60vh;
-    height: 60vh;
+    width: 31.56vw;
+    height: 31.56vw;
     background: rgba(16, 16, 16, 1);
     top: 0;
     transition: width ease 0.5s;
@@ -148,13 +148,13 @@ section#section-1 div#b.a {
 }
 
 section#section-1 div#b.b {
-    right: calc(95vw - 60vh);
+    right: 63.44vw;
 }
 
 section#section-1 div#c {
     position: absolute;
-    width: 60vh;
-    height: 60vh;
+    width: 31.56vw;
+    height: 31.56vw;
     top: 0;
     opacity: 0;
     transition: all ease 0.5s;
@@ -176,7 +176,7 @@ section#section-1:hover div#a.a {
 }
 
 section#section-1:hover div#a.b {
-    left: calc(4vw + 60vh);
+    left: 35.56vw;
 }
 
 section#section-1:hover div#b {
@@ -184,16 +184,16 @@ section#section-1:hover div#b {
 }
 
 section#section-1:hover div#c { 
-    width: 70vh;
-    height: 70vh;
-    top: -5vh;
+    width: 36.82vw;
+    height: 36.82vw;
+    top: -2.63vw;
     opacity: 50%;
 }
 
 section#section-1:hover div#c.a { 
-    right: calc(5vw - 5vh);
+    right: calc(5vw - 2.63vw);
 }
 
 section#section-1:hover div#c.b { 
-    left: calc(5vw - 5vh);
+    left: calc(5vw - 2.63vw);
 }
