@@ -2,9 +2,9 @@
 
 <html lang="en">>
     <head>
-        <link href='../global/style.css' rel='stylesheet'>
-        <link href='../global/shapesstyle.css' rel='stylesheet'>
-        <link href='./commandstyle.css' rel='stylesheet'>
+        <link href='./global/style.css' rel='stylesheet'>
+        <link href='./global/shapesstyle.css' rel='stylesheet'>
+        <link href='./commandsf/commandstyle.css' rel='stylesheet'>
         <title>Discits</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,10 +12,10 @@
     <body>
         <header id="top">
             <nav>
-                <a href="../index.html"><button>Home Page</button></a>
-                <a href="./commands.html"><button>Commands</button></a>
-                <a href="../tutorial/tutorial.html"><button>Tutorial</button></a>
-                <a href="../global/invite.html"><button>Invite Us!</button></a>
+                <a href="./home"><button>Home Page</button></a>
+                <a href="./commands"><button>Commands</button></a>
+                <a href="./tutorial"><button>Tutorial</button></a>
+                <a href="./invite"><button>Invite Us!</button></a>
                 <a href="https://discord.gg/vGzHjAz6ue" target="_blank"><button>Support Server</button></a>
                 <a href="https://www.patreon.com/discits" target="_blank"><button>Premium</button></a>
             </nav>
@@ -32,13 +32,13 @@
         </main>
         <footer>
             <section id="grass-bottom">
-                <a href="../global/invite.html"><button>Invite Us!</button></a>
+                <a href="./invite"><button>Invite Us!</button></a>
                 <p id="ground-line"><em>Discits Project 2022</em> - Theo Gerst</p>
             </section>
             <section id="ground"></section>
         </footer>
         <section id="shapes"></section>
-        <script src="../global/script.js"></script>
-        <script src="./cmdscript.js"></script>
+        <script src="./global/script.js"></script>
+        <script src="./commandsf/cmdscript.js"></script>
     </body>
 </html>
