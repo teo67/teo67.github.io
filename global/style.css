@@ -5,6 +5,38 @@
     box-sizing: border-box;
 }
 
+section#rotate {
+    position: fixed;
+    width: 95vw;
+    height: 95vh;
+    top: 2.5vh;
+    left: 2.5vw;
+    background: #0C0C0C;
+    z-index: 20;
+    border-radius: 2vw;
+    opacity: 99%;
+}
+
+@media screen and (orientation: landscape) {
+    section#rotate {
+        display: none;
+    }
+}
+
+section#rotate h1 {
+    position: relative;
+    display: block;
+    color: #2DA921;
+    font-size: 6vh;
+    text-align: center;
+    margin-top: 37vh;
+    margin-left: 2.5vw;
+    width: 90vw;
+    height: 23vh;
+    overflow: hidden;
+    opacity: 75%;
+}
+
 nav {
     position: fixed;
     background: rgba(241, 71, 100, 1);

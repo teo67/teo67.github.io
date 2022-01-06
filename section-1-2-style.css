@@ -1,4 +1,4 @@
-section#section-1 {
+section.section-1 {
     margin-top: 3.95vw;
     display: block;
     position: relative;
@@ -8,7 +8,7 @@ section#section-1 {
     z-index: 0;
 }
 
-section#section-1 ul {
+section.section-1 ul {
     vertical-align: top;
     display: inline-block;
     width: 45vw;
@@ -18,12 +18,12 @@ section#section-1 ul {
     margin-left: 5vw;
 }
 
-section#section-1 ul li {
+section.section-1 ul li {
     color: rgba(241, 71, 100, 1);
     font-size: 2vw;
 }
 
-section#section-1 p {
+section.section-1 p {
     vertical-align: top;
     display: inline-block;
     width: 45vw;
@@ -35,7 +35,7 @@ section#section-1 p {
     font-size: 2vw;
 }
 
-section#section-1 div#d {
+section.section-1 div#d {
     background:rgba(241, 71, 100, 1);
     position: absolute;
     width: 0.5vw;
@@ -45,7 +45,7 @@ section#section-1 div#d {
     border-radius: 0 0 0 1.05vw / 0 0 0 1.05vw;
 }
 
-section#section-1 div#e {
+section.section-1 div#e {
     background:rgba(241, 71, 100, 1);
     position: absolute;
     width: 2vw;
@@ -55,7 +55,7 @@ section#section-1 div#e {
     border-radius: 0 0 0 1.05vw / 0 0 0 1.05vw;
 }
 
-section#section-1 ol {
+section.section-1 ol {
     position: absolute;
     width: 20vw;
     height: 12.63vw;
@@ -63,7 +63,7 @@ section#section-1 ol {
     top: 13.68vw;
 }
 
-section#section-1 ol li {
+section.section-1 ol li {
     font-size: 1.79vw;
     margin-left: 3.16vw;
     margin-bottom: 0;
@@ -71,7 +71,7 @@ section#section-1 ol li {
     opacity: 100%;
 }
 
-section#section-1 ol li:hover {
+section.section-1 ol li:hover {
     margin-bottom: 0.53vw;
     margin-left: 2.63vw;
     opacity: 30%;
@@ -101,23 +101,23 @@ ol li#electric {
     color: #FFFF20;
 }
 
-section#section-1 img {
+section.section-1 img {
     display: block;
     height: 31.56vw;
 }
 
-section#section-1 img#a {
+section.section-1 img#a {
     float: right;
     margin-right: 5vw;
 }
 
-section#section-1 img#b {
+section.section-1 img#b {
     float: left;
     margin-left: 5vw;
     margin-right: 13.44vw;
 }
 
-section#section-1 div#a {
+section.section-1 div#a {
     position: absolute;
     width: 1vw;
     height: 31.56vw;
@@ -126,15 +126,15 @@ section#section-1 div#a {
     transition: left ease 0.5s;
 }
 
-section#section-1 div#a.a {
+section.section-1 div#a.a {
     left: 62.44vw;
 }
 
-section#section-1 div#a.b {
+section.section-1 div#a.b {
     left: 4vw;
 }
 
-section#section-1 div#b {
+section.section-1 div#b {
     position: absolute;
     width: 31.56vw;
     height: 31.56vw;
@@ -143,15 +143,15 @@ section#section-1 div#b {
     transition: width ease 0.5s;
 }
 
-section#section-1 div#b.a {
+section.section-1 div#b.a {
     right: 5vw;
 }
 
-section#section-1 div#b.b {
+section.section-1 div#b.b {
     right: 63.44vw;
 }
 
-section#section-1 div#c {
+section.section-1 div#c {
     position: absolute;
     width: 31.56vw;
     height: 31.56vw;
@@ -161,39 +161,39 @@ section#section-1 div#c {
     z-index: -1;
 }
 
-section#section-1 div#c.a { 
+section.section-1 div#c.a { 
     right: 5vw;
     background: rgba(54, 57, 63, 1);
 }
 
-section#section-1 div#c.b { 
+section.section-1 div#c.b { 
     left: 5vw;
     background: rgba(106, 178, 97, 1);
 }
 
-section#section-1:hover div#a.a {
+section.section-1.active div#a.a {
     left: 94vw;
 }
 
-section#section-1:hover div#a.b {
+section.section-1.active div#a.b {
     left: 35.56vw;
 }
 
-section#section-1:hover div#b {
+section.section-1.active div#b {
     width: 0;
 }
 
-section#section-1:hover div#c { 
+section.section-1.active div#c { 
     width: 36.82vw;
     height: 36.82vw;
     top: -2.63vw;
     opacity: 50%;
 }
 
-section#section-1:hover div#c.a { 
+section.section-1.active div#c.a { 
     right: calc(5vw - 2.63vw);
 }
 
-section#section-1:hover div#c.b { 
+section.section-1.active div#c.b { 
     left: calc(5vw - 2.63vw);
 }
