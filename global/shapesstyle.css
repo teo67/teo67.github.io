@@ -83,6 +83,17 @@ p#ground-line {
     font-size: 1vw;
 }
 
+p#ground-line a {
+    color: #B64DFF;
+    text-decoration: none;
+    transition: color ease 0.5s;
+}
+
+p#ground-line a:hover {
+    color: #2DA921;
+    text-decoration: underline;
+}
+
 section#grass-bottom:hover {
     height: 35vw;
 }

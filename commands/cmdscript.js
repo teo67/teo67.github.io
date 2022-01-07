@@ -211,6 +211,6 @@ for(const command of commands) {
     newRequirements.className = "requirements";
     const newImage = document.createElement("img");
     newDiv.appendChild(newImage);
-    newImage.setAttribute("src", `./images/${command.name}.png`);
+    newImage.setAttribute("src", `../images/${command.name}.png`);
 }
 
