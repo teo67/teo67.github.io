@@ -65,7 +65,7 @@ section#ground {
     transition: height ease 1.5s;
 }
 
-p#ground-line {
+section#ground-line {
     height: 3vw;
     width: 90vw;
     left: 5vw;
@@ -77,19 +77,48 @@ p#ground-line {
     z-index: 1;
     opacity: 10%;
     transition: opacity ease 1.5s;
-    color: #2DA921;
+    padding-left: 5vw;
     text-align: center;
-    padding: 1vw;
-    font-size: 1vw;
 }
 
-p#ground-line a {
+section#ground-line p {
+    display: inline;
+    color: #2da921;
+    font-size: 1vw;
+    height: 3vw;
+    line-height: 3vw;
+    margin-left: -6vw;
+}
+
+section#ground-line a {
+    display: inline;
+    margin-top: 0vw;
+}
+
+section#ground-line a img {
+    margin-top: 0.5vw;
+    height: 2vw;
+    vertical-align: top;
+    margin-left: 1vw;
+    opacity: 70%;
+    transition: all ease 0.2s;
+    border: 2px solid rgba(241, 71, 100, 1);
+    border-radius: 50%;
+}
+
+section#ground-line a img:hover {
+    height: 2.75vw;
+    margin-top: 0.125vw;
+    opacity: 100%;
+}
+
+section#ground-line p a {
     color: #B64DFF;
     text-decoration: none;
     transition: color ease 0.5s;
 }
 
-p#ground-line a:hover {
+section#ground-line p a:hover {
     color: #2DA921;
     text-decoration: underline;
 }
@@ -102,6 +131,6 @@ section#grass-bottom:hover + section#ground {
     height: 0vw;
 }
 
-section#grass-bottom:hover p#ground-line {
+section#grass-bottom:hover section#ground-line {
     opacity: 100%;
 }
