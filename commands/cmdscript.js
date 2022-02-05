@@ -147,6 +147,12 @@ const commands = [
         'Has registered for an account, has at least Tier 2 Premium (the other player doesn\'t have to have premium), is not in battle, is in a Discit Station'
     ),
     new Command(
+        'tutorial', 
+        'View the tutorial instructions for getting started with Discits.', 
+        '',
+        'None'
+    ),
+    new Command(
         'warp',
         'Using the warp ring, teleport to any location you wish!',
         '[location (example: Route 1)]',
