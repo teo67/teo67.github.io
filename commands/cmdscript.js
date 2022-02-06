@@ -135,6 +135,12 @@ const commands = [
         'Have an account, have a Discit selected'
     ),
     new Command(
+        'suggest',
+        'Suggest a bug fix or potential improvement to the Discits bot.',
+        '[suggestion text]',
+        'None'
+    ),
+    new Command(
         'switch',
         'Swap around the positions of two Discits in your party.',
         '[index of Discit #1 in your party] [index of Discit #2 in your party]',
