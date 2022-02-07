@@ -29,7 +29,7 @@ const commands = [
     new Command(
         'choose',
         'Choose a starter Discit between Koulit, Leafid, and Ferenhyde.',
-        '[name of chosen Discit]',
+        '',
         'Have an account, hasn\'t chosen a starter yet'
     ),
     new Command(
