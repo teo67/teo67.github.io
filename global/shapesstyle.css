@@ -1,3 +1,44 @@
+main {
+    min-height: calc(100vh - 37.89vw - 15vw);
+}
+
+@media screen and (orientation: portrait) {
+    section#grass-bottom.hover {
+        height: 35vw;
+    }
+    
+    section#grass-bottom.hover + section#ground {
+        height: 0vw;
+    }
+    
+    section#grass-bottom.hover section#ground-line {
+        opacity: 100%;
+    }
+
+    footer section#ground-line p {
+        display: none;
+    }
+
+    footer section#ground-line a {
+        display: none;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    section#grass-bottom:hover {
+        height: 35vw;
+    }
+    
+    section#grass-bottom:hover + section#ground {
+        height: 0vw;
+    }
+    
+    section#grass-bottom:hover section#ground-line {
+        opacity: 100%;
+    }
+}
+
+
 #shapes div {
     width: 20vw;
     height: 26.3vw;
@@ -123,14 +164,3 @@ section#ground-line p a:hover {
     text-decoration: underline;
 }
 
-section#grass-bottom:hover {
-    height: 35vw;
-}
-
-section#grass-bottom:hover + section#ground {
-    height: 0vw;
-}
-
-section#grass-bottom:hover section#ground-line {
-    opacity: 100%;
-}

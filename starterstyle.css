@@ -1,3 +1,9 @@
+@media screen and (orientation: portrait) {
+    section#hidden div {
+        opacity: 5%;
+    }
+}
+
 #main-title h1 {
     color: #2DA921;
 }
@@ -77,6 +83,7 @@ section#hidden:hover div {
 
 section#hidden:hover div#red {
     width: 5vw;
+    opacity: 100%;
 }
 
 #green {
@@ -86,6 +93,7 @@ section#hidden:hover div#red {
 
 section#hidden:hover div#green {
     width: 10vw;
+    opacity: 100%;
 }
 
 #blue {
@@ -95,6 +103,7 @@ section#hidden:hover div#green {
 
 section#hidden:hover div#blue {
     width: 15vw;
+    opacity: 100%;
 }
 
 

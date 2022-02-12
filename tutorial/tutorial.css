@@ -18,6 +18,67 @@
     background: #FFFF20;
 }
 
+@media screen and (orientation: portrait) {
+    main section#content section img {
+        display: none;
+    }
+    main section#content section {
+        border-color: #2DA921;
+        opacity: 100%;
+        background: rgba(45, 169, 33, 0.3);
+    }
+    main section#content section h1 {
+        color: #2DA921;
+    }
+    main section#content section p {
+        color: #2DA921;
+    }
+    main section#content section div {
+        background-color: #2DA921;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    section#content section:hover {
+        opacity: 100%;
+        border-radius: 3rem;
+        padding-top: 1.05vw;
+        padding-bottom: 1.05vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+        border-color: #FFFF20;
+        background: transparent;
+    }
+    section#content section:hover div {
+        width: calc(82vw - 1.05vw);
+        background: #2DA921;
+        height: 1rem;
+        border-radius: 2vw;
+    }
+    
+    section#content section:hover h1 {
+        color: #FFFF20;
+    }
+    
+    section#content section:hover p {
+        color: #FFFF20;
+    }
+    section#content section h1:hover {
+        color: #2DA921;
+        font-size: 2rem;
+    }
+    section#content section p:hover {
+        color: #2DA921;
+        font-size: 1.75rem;
+    }
+    section#content section img:hover {
+        padding-top: 1.05vw;
+        padding-bottom: 1.05vw;
+        padding-left: 1vw;
+        padding-right: 1vw;
+    }
+}
+
 section#content {
     position: relative;
     display: block;
@@ -30,36 +91,10 @@ section#content section {
     margin-top: 2.63vw;
     display: block;
     background: rgba(182, 77, 255, 0.3);
-    border: 0.53vw solid #B64DFF;
+    border: 0.3rem solid #B64DFF;
     opacity: 40%;
-    border-radius: 1vw;
+    border-radius: 0.5rem;
     transition: all ease 0.7s;
-}
-
-section#content section:hover {
-    opacity: 100%;
-    border-radius: 3vw;
-    padding-top: 1.05vw;
-    padding-bottom: 1.05vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    border-color: #FFFF20;
-    background: transparent;
-}
-
-section#content section:hover div {
-    width: calc(82vw - 1.05vw);
-    background: #2DA921;
-    height: 1.58vw;
-    border-radius: 2vw;
-}
-
-section#content section:hover h1 {
-    color: #FFFF20;
-}
-
-section#content section:hover p {
-    color: #FFFF20;
 }
 
 section#content section h1 {
@@ -69,13 +104,8 @@ section#content section h1 {
     padding-left: 2vw;
     padding-right: 2vw;
     color: #B64DFF;
-    font-size: 2vw;
+    font-size: 1.5rem;
     transition: all ease 0.7s;
-}
-
-section#content section h1:hover {
-    color: #2DA921;
-    font-size: 2.3vw;
 }
 
 section#content section div {
@@ -86,7 +116,7 @@ section#content section div {
     margin-right: 2vw;
     background: #B64DFF;
     width: calc(86vw - 1.05vw);
-    height: 0.53vw;
+    height: 0.53rem;
     transition: all ease 0.7s;
     border-radius: 0.5vw;
     opacity: 20%;
@@ -99,14 +129,9 @@ section#content section p {
     padding-left: 2vw;
     padding-right: 2vw;
     color: #B64DFF;
-    font-size: 1.5vw;
+    font-size: 1.25rem;
     font-weight: bold;
     transition: all ease 0.7s;
-}
-
-section#content section p:hover {
-    color: #2DA921;
-    font-size: 1.6vw;
 }
 
 section#content section img {
@@ -119,11 +144,4 @@ section#content section img {
     transition: all ease 0.7s;
     border: 1vw solid rgba(54,57,63, 0.4);
     border-radius: 1vw;
-}
-
-section#content section img:hover {
-    padding-top: 1.05vw;
-    padding-bottom: 1.05vw;
-    padding-left: 1vw;
-    padding-right: 1vw;
 }

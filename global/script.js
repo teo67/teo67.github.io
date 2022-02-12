@@ -1,6 +1,7 @@
 const shapes = document.getElementById("shapes");
 const grass = document.getElementById("grass-bottom");
-
+const ground = document.getElementById("ground");
+const menu = document.getElementById("menu");
 
 let shapeLeft = 0;
 
@@ -25,4 +26,21 @@ for(let i = 0; i < 97; i += 2) {
     grass.appendChild(newShape);
 }
 
+function toggleMenu() {
+    if(menu.classList.contains("hidden")) {
+        menu.classList.remove("hidden");
+    } else {
+        menu.classList.add("hidden");
+    }
+}
+
+const revealGrass = () => {
+    if(Math.abs(ground.getBoundingClientRect().bottom - window.innerHeight) <= 1) {
+        grass.classList.add("hover");
+    } else {
+        grass.classList.remove("hover");
+    }
+}
+
 window.setInterval(doShapes, 7500);
+window.addEventListener("scroll", revealGrass);

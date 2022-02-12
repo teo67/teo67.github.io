@@ -18,6 +18,12 @@
     background: rgba(241, 71, 100, 1);
 }
 
+@media screen and (orientation: portrait) {
+    main section#content section div.dropdown img {
+        display: none;
+    }
+}
+
 section#content {
     display: block;
     margin-top: 2.63vw;
@@ -27,8 +33,8 @@ section#content section {
     display: block;
     position: relative;
     width: 96vw;
-    margin-top: 1.05vw;
-    margin-bottom: 1.05vw;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     margin-left: 2vw;
     margin-right: 2vw;
 }
@@ -36,10 +42,10 @@ section#content section {
 section#content section div.upper {
     position: relative;
     display: block;
-    height: 2.63vw;
+    height: 2rem;
     background:rgba(241, 71, 100, 0.1);
     border: 1px solid rgba(241, 71, 100, 1);
-    border-radius: 1vw;
+    border-radius: 0.5rem;
     transition: all ease 0.5s;
 }
 
@@ -74,11 +80,11 @@ section#content section div.upper:hover div.b {
 section#content section div.upper div.a {
     background: rgba(241, 71, 100, 1);
     position: absolute;
-    width: 0.53vw;
-    height: 1.58vw;
-    top: 0.53vw;
-    left: 1.05vw;
-    border-radius: 0.53vw;
+    width: 0.25rem;
+    height: 0.75rem;
+    top: 0.625rem;
+    left: 0.75rem;
+    border-radius: 0.53rem;
     transition: all ease 0.5s;
     display: block;
 }
@@ -90,11 +96,11 @@ section#content section div.upper div.a.gone {
 section#content section div.upper div.b {
     background: rgba(241, 71, 100, 1);
     position: absolute;
-    width: 1.58vw;
-    height: 0.53vw;
-    top: 1.05vw;
-    left: 0.53vw;
-    border-radius: 0.53vw;
+    width: 0.75rem;
+    height: 0.25rem;
+    top: 0.875rem;
+    left: 0.5rem;
+    border-radius: 0.53rem;
     transition: all ease 0.5s;
 }
 
@@ -102,23 +108,23 @@ section#content section div.upper h1 {
     position: absolute;
     color: rgba(241, 71, 100, 1);
     font-weight: bold;
-    font-size: 1.05vw;
-    line-height: 2.63vw;
-    left: 3.1vw;
+    font-size: 1rem;
+    line-height: 2rem;
+    left: 1.75rem;
     transition: all ease 0.5s;
 }
 
 section#content section div.arrow {
     display: block;
     position: absolute;
-    opacity: 0%;
+    opacity: 100%;
     top: 0;
-    left: -3vw;
+    left: calc(-2vw - 1rem);
     width: 0;
     height: 0;
-    border-left: 1.32vw solid rgba(241, 71, 100, 1);
-    border-top: 1.32vw solid transparent;
-    border-bottom: 1.32vw solid transparent;
+    border-left: 1rem solid rgba(241, 71, 100, 1);
+    border-top: 1rem solid transparent;
+    border-bottom: 1rem solid transparent;
     border-right: 0 solid transparent;
     transition: all ease 0.5s;
 }
@@ -126,15 +132,15 @@ section#content section div.arrow {
 section#content section div.dropdown {
     display: none;
     position: relative;
-    margin-top: 1.05vw;
-    margin-bottom: 1.05vw;
-    padding-top: 1.05vw;
-    padding-bottom: 1.05vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     background: rgba(45, 169, 33, 0.2);
     border: 1px solid rgba(45, 169, 33, 1);
-    border-radius: 1vw;
+    border-radius: 0.5rem;
     overflow: hidden;
     transition: all ease 0.5s;
 }
@@ -147,8 +153,8 @@ section#content section div.dropdown.here {
 }
 
 @keyframes showme {
-    0% {margin-top: 26.3vw;}
-    100% {margin-top: 1.05vw;}
+    0% {margin-top: 50vh;}
+    100% {margin-top: 0.5rem;}
 }
 
 section#content section div.dropdown:hover {
@@ -159,52 +165,52 @@ section#content section div.dropdown p.description {
     display: inline-block;
     background: rgba(241, 71, 100, 0.1);
     border: 1px solid rgba(241, 71, 100, 1);
-    padding-top: 0.53vw;
-    padding-bottom: 0.53vw;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    border-radius: 1vw;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 0.5rem;
     color: rgba(241, 71, 100, 1);
-    font-size: 1.05vw;
+    font-size: 0.75rem;
     font-weight: bolder;
 }
 
 section#content section div.dropdown p.arguments {
     display: inline-block;
-    margin-top: 1.05vw;
+    margin-top: 0.5rem;
     background: rgba(79, 169, 255, 0.1);
     border: 1px solid rgba(79, 169, 255, 1);
-    padding-top: 0.53vw;
-    padding-bottom: 0.53vw;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    border-radius: 1vw;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 0.5rem;
     color: rgba(79, 169, 255, 1);
-    font-size: 1.05vw;
+    font-size: 0.75rem;
     font-style: italic;
 }
 
 section#content section div.dropdown p.requirements {
     display: inline-block;
-    margin-top: 1.05vw;
+    margin-top: 0.5rem;
     background: rgba(182, 77, 255, 0.1);
     border: 1px solid rgba(182, 77, 255, 1);
-    padding-top: 0.53vw;
-    padding-bottom: 0.53vw;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    border-radius: 1vw;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 0.5rem;
     color: rgba(182, 77, 255, 1);
-    font-size: 1.05vw;
+    font-size: 0.75rem;
     font-weight: bold;
 }
 
 section#content section div.dropdown img {
     display: block;
-    margin-top: 1.05vw;
-    padding: 0.53vw;
+    margin-top: 0.5rem;
+    padding: 0.3rem;
     border: 5px solid rgba(45, 169, 33, 0.5);
-    border-radius: 0.53vw;
+    border-radius: 0.9rem;
     width: 70vw;
     opacity: 75%;
     transition: all ease 0.3s;

@@ -5,42 +5,52 @@
     box-sizing: border-box;
 }
 
-section#rotate {
-    position: fixed;
-    width: 95vw;
-    height: 95vh;
-    top: 2.5vh;
-    left: 2.5vw;
-    background: #0C0C0C;
-    z-index: 20;
-    border-radius: 2vw;
-    opacity: 99%;
-}
-
 @media screen and (orientation: landscape) {
-    section#rotate {
+    nav button#toggler {
         display: none;
+    }
+    div#menu a button:hover {
+        width: 12vw;
+        height: 5.05vw;
+        margin-top: 0.105vw;
+        margin-left: 1vw;
+        margin-right: 1vw;
+        margin-bottom: 0.105vw;
+        color: rgba(241, 71, 100, 0.1);
     }
 }
 
-section#rotate h1 {
-    position: relative;
-    display: block;
-    color: #2DA921;
-    font-size: 6vh;
-    text-align: center;
-    margin-top: 37vh;
-    margin-left: 2.5vw;
-    width: 90vw;
-    height: 23vh;
-    overflow: hidden;
-    opacity: 75%;
+@media screen and (orientation: portrait) {
+    nav div#menu a button {
+        width: calc(91vw);
+        border-radius: 1.5rem;
+        height: 4rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+    }
+    nav div#menu.hidden {
+        display: none;
+    }
+    header nav div#menu {
+        animation-name: slidein;
+        animation-duration: 1s;
+        animation-timing-function: ease;
+        border-radius: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    main section#main-title {
+        margin-top: 1rem;
+    }
+}
+
+@keyframes slidein {
+    0% {margin-top: -100%; background-color: #0C0C0C; opacity: 0;}
+    100% {margin-top: 0;}
 }
 
 nav {
     position: fixed;
-    background: rgba(241, 71, 100, 1);
-    border-radius: 5% / 100%;
     left: 2.5vw;
     top: 1.32vw;
     width: 95vw;
@@ -50,11 +60,36 @@ nav {
     z-index: 10;
 }
 
+nav div#menu {
+    background: rgba(241, 71, 100, 1);
+    border-radius: 5% / 100%;
+}
+
+nav button#toggler {
+    width: 4rem;
+    height: 4rem;
+    border-width: 0;
+    background-color: rgba(241, 71, 100, 1);
+    border-color: transparent;
+    border-radius: 0.5rem;
+}
+
+nav button#toggler div {
+    display: block;
+    width: 3rem;
+    height: 0.4rem;
+    background-color: #0C0C0C;
+    margin: auto;
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+    border-radius: 1.6rem;
+}
+
 nav:hover {
     opacity: 100%;
 }
 
-nav a button {
+div#menu a button {
     background: #0C0C0C;
     border: transparent;
     border-radius: 30% / 70%;
@@ -62,21 +97,13 @@ nav a button {
     margin-top: 0.53vw;
     margin-left: 2vw;
     margin-right: 2vw;
+    margin-bottom: 0.53vw;
     color:rgba(241, 71, 100, 1);
     width: 10vw;
     height: 4.21vw;
     font-size: 1vw;
     font-weight: bolder;
     transition: all ease 0.5s;
-}
-
-nav a button:hover {
-    width: 12vw;
-    height: 5.05vw;
-    margin-top: 0.105vw;
-    margin-left: 1vw;
-    margin-right: 1vw;
-    color: rgba(241, 71, 100, 0.1);
 }
 
 section#main-title {
