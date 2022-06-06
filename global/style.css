@@ -55,8 +55,6 @@ nav {
     top: 1.32vw;
     width: 95vw;
     height: 5.26vw;
-    opacity: 50%;
-    transition: opacity ease 1s;
     z-index: 10;
 }
 
@@ -83,10 +81,6 @@ nav button#toggler div {
     margin-top: 0.6rem;
     margin-bottom: 0.6rem;
     border-radius: 1.6rem;
-}
-
-nav:hover {
-    opacity: 100%;
 }
 
 div#menu a button {
