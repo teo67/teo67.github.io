@@ -46,6 +46,19 @@ div.sand {
     background-color: yellow;
     border-color: tan;
 }
+div.shooter {
+    background-color: #ed5247;
+    border-color: #e86d64;
+    height: 12vw;
+    border-bottom-left-radius: 5vw;
+    border-bottom-right-radius: 5vw;
+    z-index: 30;
+}
+div.shooter::before {
+    margin-top: -5.5vw;
+    border-radius: 5vw;
+    z-index: 30;
+}
 div#player {
     content: "";
     width: 6vw;
@@ -150,4 +163,17 @@ div.wave::after {
 @keyframes swim {
     0% { left: -15vw; }
     100% { left: 100vw;}
+}
+div.bullet {
+    position: absolute;
+    display: inline-block;
+    width: 10vw;
+    height: 10vw;
+    border-radius: 5vw;
+    background-color: #e86d64;
+    content: "";
+    z-index: 28;
+    margin-bottom:1vw;
+    margin-left: 0vw;
+    transition: all linear 0.5s;
 }
