@@ -40,7 +40,24 @@ div.grass {
 div.wall {
     background-color: #474747;
     border-color: #363636;
-    height: 3vw;
+    height: 4vw;
+    z-index: 30;
+}
+div.brick {
+    background-color: #a85836;
+    border-color: #573324;
+    width: 11vw;
+    height: 4vw;
+    z-index: 30;
+    transform: translateX(-0.5vw);
+}
+div.checkpoint {
+    background-color: #68d62d;
+    border-color: #88f74d;
+}
+div.brick::before {
+    height: 11vw;
+    margin-top: -10.5vw;
 }
 div.sand { 
     background-color: yellow;
@@ -164,16 +181,117 @@ div.wave::after {
     0% { left: -15vw; }
     100% { left: 100vw;}
 }
-div.bullet {
+div.bulletup {
     position: absolute;
     display: inline-block;
-    width: 10vw;
-    height: 10vw;
+    width: 0; 
+    height: 0; 
+    border-left: 5vw solid transparent;
+    border-right: 5vw solid transparent;
+    border-bottom: 10vw solid #e86d64;
     border-radius: 5vw;
-    background-color: #e86d64;
     content: "";
     z-index: 28;
     margin-bottom:1vw;
     margin-left: 0vw;
-    transition: all linear 0.5s;
+    transition: all linear 0.25s;
+    animation: fadeup 1s linear;
+}
+div.bulletright {
+    position: absolute;
+    display: inline-block;
+    width: 0; 
+    height: 0; 
+    border-top: 5vw solid transparent;
+    border-bottom: 5vw solid transparent;
+    border-left: 10vw solid #e86d64;
+    border-radius: 5vw;
+    content: "";
+    z-index: 28;
+    margin-bottom:1vw;
+    margin-left: 0vw;
+    transition: all linear 0.25s;
+    animation: faderight 1s linear;
+}
+div.bulletdown {
+    position: absolute;
+    display: inline-block;
+    width: 0; 
+    height: 0; 
+    border-left: 5vw solid transparent;
+    border-right: 5vw solid transparent;
+    border-top: 10vw solid #e86d64;
+    border-radius: 5vw;
+    content: "";
+    z-index: 28;
+    margin-bottom:1vw;
+    margin-left: 0vw;
+    transition: all linear 0.25s;
+    animation: fadedown 1s linear;
+}
+div.bulletleft {
+    position: absolute;
+    display: inline-block;
+    width: 0; 
+    height: 0; 
+    border-top: 5vw solid transparent;
+    border-bottom: 5vw solid transparent;
+    border-right: 10vw solid #e86d64;
+    border-radius: 5vw;
+    content: "";
+    z-index: 28;
+    margin-bottom:1vw;
+    margin-left: 0vw;
+    transition: all linear 0.25s;
+    animation: fadeleft 1s linear;
+}
+@keyframes fadeup {
+    0% { opacity: 0%; transform: translateY(7vw);}
+    100% { opacity: 100%;}
+}
+@keyframes faderight {
+    0% { opacity: 0%; transform: translateX(-7vw);}
+    100% { opacity: 100%;}
+}
+@keyframes fadedown {
+    0% { opacity: 0%; transform: translateY(-7vw);}
+    100% { opacity: 100%;}
+}
+@keyframes fadeleft {
+    0% { opacity: 0%; transform: translateX(7vw);}
+    100% { opacity: 100%;}
+}
+div#death {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    z-index: 100;
+    display: block;
+    top: 0;
+    left: 0;
+    animation: blink 1s ease;
+}
+div#death.hidden {
+    display: none;
+}
+@keyframes blink {
+    0% { opacity: 0; }
+    50% { opacity: 0.75;}
+    100% { opacity: 0; }
+}
+div.shatter {
+    animation: shatter 1s ease;
+}
+@keyframes shatter {
+    0% { transform: scale(1);}
+    100% { transform: scale(0); opacity: 0;}
+}
+div.fakefloor {
+    background-color: lightgreen;
+    border-color: darkgreen;
+    transition: all ease 0.5s;
+}
+div.fakefloor.trapped {
+    background-color: #e86d64;
 }
