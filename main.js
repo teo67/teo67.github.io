@@ -2,8 +2,9 @@ const board = document.getElementById("board");
 const player = document.getElementById("player");
 const waves = document.getElementById("waves");
 const death = document.getElementById("death");
-const key = ["grass", "wall", "sand", "shooter", "brick", "checkpoint", "fakefloor"];
-const input = [];
+const banner = document.getElementById("banner");
+const key = ["grass", "wall", "sand", "shooter", "brick", "checkpoint", "fakefloor", "shifter", "lava", "clock", "counterclock", "finish"];
+const input = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 2, 2, 2, 6, 0, 6, 0, 0, 4, 4, 2, 0, 2, 0, 0, 7, 5, 2, 1], [1, 2, 2, 2, 0, 6, 0, 0, 0, 4, 4, 0, 2, 0, 0, 0, 1, 7, 7, 1], [1, 1, 1, 1, 1, 1, 1, 5, 5, 4, 4, 2, 0, 2, 0, 0, 1, 6, 6, 1], [1, 0, 0, 0, 3, 0, 0, 0, 0, 3, 4, 0, 2, 0, 0, 0, 1, 7, 7, 1], [1, 1, 5, 0, 0, 0, 1, 0, 1, 2, 4, 2, 3, 2, 0, 0, 1, 7, 7, 1], [1, 6, 6, 4, 4, 1, 0, 1, 4, 2, 4, 3, 0, 3, 0, 0, 1, 7, 7, 1], [1, 6, 6, 6, 4, 0, 0, 5, 2, 2, 2, 0, 0, 0, 5, 0, 1, 7, 7, 1], [1, 6, 6, 6, 4, 0, 0, 5, 2, 2, 2, 0, 0, 0, 5, 0, 1, 6, 6, 1], [1, 6, 6, 6, 4, 0, 0, 1, 4, 4, 4, 3, 0, 3, 0, 0, 1, 5, 5, 1], [1, 2, 2, 2, 0, 0, 0, 1, 4, 4, 4, 0, 3, 0, 1, 1, 1, 7, 7, 1], [1, 0, 0, 0, 0, 3, 0, 0, 1, 0, 9, 7, 7, 7, 5, 2, 8, 2, 8, 1], [1, 1, 1, 1, 0, 0, 0, 1, 0, 9, 10, 2, 2, 2, 8, 7, 7, 5, 2, 1], [1, 9, 7, 6, 1, 0, 1, 4, 0, 9, 10, 2, 2, 1, 1, 2, 2, 7, 1, 1], [1, 6, 1, 5, 2, 1, 4, 4, 2, 5, 9, 7, 7, 7, 10, 8, 2, 6, 4, 1], [1, 2, 3, 0, 8, 2, 8, 4, 2, 4, 7, 4, 4, 4, 5, 4, 1, 4, 4, 1], [1, 2, 1, 0, 2, 6, 2, 8, 2, 1, 10, 2, 7, 9, 7, 10, 8, 10, 2, 1], [1, 9, 10, 1, 8, 2, 6, 2, 2, 1, 10, 7, 9, 6, 9, 6, 7, 9, 2, 1], [1, 11, 10, 1, 2, 8, 2, 6, 2, 1, 10, 2, 8, 7, 2, 9, 7, 7, 8, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]];
 const nomove = [1, 3, 4];
 const enemies = [];
 const types = [3, 6];
@@ -39,33 +40,12 @@ const addRect = (x, y, w, h, num, fill = true) => {
     }
 }
 
-create(30, 30, 0);  
-addRect(0, 0, 30, 1, 1, false);
-addRect(0, 1, 1, 29, 1, false);
-addRect(29, 1, 1, 29, 1, false);
-addRect(1, 29, 28, 1, 1, false);
-addRect(1, 1, 5, 1, 2, false);
-addRect(5, 2, 1, 3, 2, false);
-addRect(1, 3, 3, 4, 4);
-add(7, 2, 3);
-add(9, 3, 3);
-add(2, 2, 1);
-addRect(6, 4, 2, 1, 2, false);
-add(8, 4, 5);
-add(6, 3, 1);
-add(6, 1, 1);
-add(8, 1, 5);
-addRect(4, 6, 10, 1, 1, false);
-add(10, 5, 4);
-add(10, 4, 4);
-addRect(10, 1, 8, 2, 6, false);
-add(18, 1, 1);
-add(18, 2, 1);
-add(18, 3, 1);
-addRect(10, 3, 7, 1, 1, false);
-add(17, 3, 2);
-addRect(11, 4, 8, 2, 2, false);
-
+// create(20, 20, 0);  
+// addRect(0, 0, 20, 1, 1, false);
+// addRect(0, 1, 1, 19, 1, false);
+// addRect(19, 1, 1, 19, 1, false);
+// addRect(1, 19, 18, 1, 1, false);
+let finish = null;
 for(let i = input.length - 1; i >= 0; i--) {
     for(let j = 0; j < input[i].length; j++) {
         const newE = document.createElement("div");
@@ -73,6 +53,9 @@ for(let i = input.length - 1; i >= 0; i--) {
         newE.classList.add(key[input[input.length - i - 1][j]]);
         if(types.includes(input[input.length - i - 1][j])) {
             enemies.push(newE);
+        }
+        if(newE.classList.contains('finish')) {
+            finish = newE;
         }
         newE.style.left = `${j * 10.5}vw`;
         newE.style.bottom = `${i * 11.5}vw`;
@@ -84,32 +67,27 @@ let prevY = spawn[1];
 let x = spawn[0];
 let y = spawn[1];
 let moving = false;
+let nextDirection = '';
 const map = {
     w: [0, -1], ArrowUp: [0, -1], a: [-1, 0], ArrowLeft: [-1, 0], s: [0, 1], ArrowDown: [0, 1], d: [1, 0], ArrowRight: [1, 0]
 }
-document.addEventListener('keydown', event => {
-    if(event.key == 'y') {
-        y--;
-        move([0, 0]);
-    } else if(event.key == 'g') {
-        x--;
-        move([0, 0]);
-    } else if(event.key == 'h') {
-        y++;
-        move([0, 0]);
-    } else if(event.key == 'j') {
-        x++;
-        move([0, 0]);
-    } else if(event.key == ' ') {
-        immune = !immune;
-    }
+const keydownevent = event => {
     if(!moving) {
         if(map[event.key] !== undefined) {
             moving = true;
             move(map[event.key]);
         }
+    } else {
+        nextDirection = event.key;
     }
-});
+}
+document.addEventListener('keydown', keydownevent);
+const keyupevent = event => {
+    if(moving && nextDirection == event.key) {
+        nextDirection = '';
+    }
+}
+document.addEventListener('keyup', keyupevent);
 const move = direction => {
     if(y + direction[1] < 0 || y + direction[1] >= input.length || x + direction[0] < 0 || x + direction[0] >= input[0].length) {
         moving = false;
@@ -120,26 +98,46 @@ const move = direction => {
         moving = false;
         return;
     }
-    if(val == 5) {
-        spawn[0] = x + direction[0];
-        spawn[1] = y + direction[1];
-    }
     prevX = x;
     prevY = y;
     x += direction[0];
     y += direction[1];
+    if(val == 5) {
+        spawn[0] = x;
+        spawn[1] = y;
+    } else if(val == 8) {
+        die();
+    }
     if(direction[0] + direction[1] != 0) {
         player.classList.add(`m${direction[0]}${direction[1]}1`);
         setTimeout(() => {
-            player.classList.remove(`m${direction[0]}${direction[1]}1`);
             prevX = x;
             prevY = y;
-            setTimeout(() => {
+            if(val == 7) {
+                move(direction);
+            } else if(val == 9) {
+                move([direction[1], -direction[0]]);
+            } else if(val == 10) {
+                move([-direction[1], direction[0]]);
+            } else if(val == 11 && finish !== null) {
+                player.classList.add('finished');
+                finish.classList.add('finished');
+                document.removeEventListener('keydown', keydownevent);
+                document.removeEventListener('keyup', keyupevent);
+                clearInterval(updateE);
+                const res = Math.round((Date.now() - startTime) / 1000);
+                banner.innerText = `Finished in ${res}s!`;
+                banner.style.left = '20vw';
+            } else if(map[nextDirection] !== undefined) {
+                move(map[nextDirection]);
+                nextDirection = '';
+            } else {
                 moving = false;
-            }, 10);
+            }
         }, 500);
-    }
+    };
     setTimeout(() => {
+        player.classList.remove(`m${direction[0]}${direction[1]}1`);
         board.style.marginLeft = `${42 - x * 10.5}vw`;
         board.style.marginTop = `${(input.length + 2 - y) * 11.5}vw`;
     }, 250);
@@ -151,7 +149,7 @@ setInterval(() => {
     }
     const newE = document.createElement("div");
     newE.classList.add("wave");
-    newE.style.top = `${Math.random() * 50}vh`;
+    newE.style.top = `${Math.random() * 30}vh`;
     newE.style.width = `${Math.random() * 10 + 5}vw`;
     newE.onanimationend = () => {
         newE.remove();
@@ -224,10 +222,15 @@ const updateEnemies = () => {
                 const xshifts = [0, 1, 0, -1];
                 const yshifts = [1, 0, -1, 0];
                 for(let i = 0; i < classes.length; i++) {
+                    const xr = decode(enemy.style.left);
+                    const yr = decode(enemy.style.bottom);
+                    if(nomove.includes(input[yToPos(yr) - yshifts[i]][xToPos(xr) + xshifts[i]])) {
+                        continue;
+                    }
                     const newE = document.createElement("div");
                     newE.classList.add(classes[i]);
-                    newE.style.left = `${decode(enemy.style.left) + 10.5 * xshifts[i]}vw`;
-                    newE.style.bottom = `${decode(enemy.style.bottom) + 11.5 * yshifts[i]}vw`;
+                    newE.style.left = `${xr + 10.5 * xshifts[i]}vw`;
+                    newE.style.bottom = `${yr + 11.5 * yshifts[i]}vw`;
                     enemies.push(newE);
                     board.appendChild(newE);
                 }
@@ -263,4 +266,5 @@ const updateEnemies = () => {
     }
     enemyTick++;
 }
-setInterval(updateEnemies, 250);
+const updateE = setInterval(updateEnemies, 250);
+const startTime = Date.now();

@@ -43,6 +43,47 @@ div.wall {
     height: 4vw;
     z-index: 30;
 }
+div.lava {
+    background-color: #e86d64;
+    border-color: #ed5247;
+}
+div.counterclock, div.clock, div.shifter {
+    background-color: plum;
+    border-color: pink;
+}
+div.clock::before {
+    background-image: url('clock.png');
+    background-size: 9vw;
+}
+div.counterclock::before {
+    background-image: url('counterclock.png');
+    background-size: 9vw;
+}
+div.finish {
+    background-color: black;
+    border-color: white;
+    transition: all linear 0.25s;
+}
+div.finish::before.finished {
+    z-index: 200;
+}
+div.finish.finished {
+    height: 9vw;
+}
+div.shifter::after {
+    margin-top: -7vw;
+    margin-left: 2.5vw;
+    content: "";
+    width: 3vw;
+    height: 3vw;
+    border-radius: 1vw;
+    background-color: plum;
+    border: 0.5vw solid transparent;
+    border-color: purple;
+    display: block;
+    position: relative;
+    opacity: 1;
+}
 div.brick {
     background-color: #a85836;
     border-color: #573324;
@@ -90,6 +131,11 @@ div#player {
     top: 28vw;
     left: 44vw;
     z-index: 20;
+    transition: all linear 0.25s;
+}
+div#player.finished {
+    transform: translateY(-7vw);
+    z-index: 201;
 }
 div#player::before {
     margin-top: -5.5vw;
@@ -104,6 +150,7 @@ div#player::before {
     display: block;
     position: relative;
     opacity: 1;
+    transition: all linear 0.25s;
 }
 div#board {
     transition: all linear 0.25s;
@@ -111,52 +158,25 @@ div#board {
     margin-left: 0;
     margin-right: 0;
 }
-div.m101 {
-    animation: m101 0.5s linear;
+div#player.m101 {
+    width: 16.5vw;
 }
-@keyframes m101 {
-    0% { width: 6vw; }
-    50% { width: 16.5vw; }
-    100% { width: 6vw;}
+div#player.m-101 {
+    width: 16.5vw;
+    margin-left: -10.5vw;
 }
-div.m-101 {
-    animation: m-101 0.5s linear;
+div#player.m0-11 {
+    height: 15vw;
+    margin-top: -11.5vw;
 }
-@keyframes m-101 {
-    50% { width: 16.5vw; transform: translateX(-10.5vw); }
-    100% { width: 6vw; transform: none; }
+div#player.m0-11::before {
+    height: 16.5vw;
 }
-div.m0-11 {
-    animation: m00-11 0.5s linear;
+div#player.m011 {
+    height: 15vw;
 }
-div.m0-11::before {
-    animation: m0-11 0.5s linear;
-}
-@keyframes m0-11 {
-    0% { height: 5vw; }
-    50% { height: 16.5vw;}
-    100% { height: 5vw; }
-}
-@keyframes m00-11 {
-    0% { height: 3.5vw; transform: none; }
-    50% { height: 15vw; transform: translateY(-11.5vw); }
-    100% { height: 3.5vw; transform: none;}
-}
-div.m011 {
-    animation: m0011 0.5s linear;
-}
-div.m011::before {
-    animation: m011 0.5s linear;
-}
-@keyframes m011 {
-    0% { height: 5vw; }
-    50% { height: 16.5vw;}
-    100% { height: 5vw; }
-}
-@keyframes m0011 {
-    0% { height: 3.5vw; }
-    50% { height: 15vw; }
-    100% { height: 3.5vw;}
+div#player.m011::before {
+    height: 16.5vw;
 }
 div.wave {
     position: absolute;
@@ -275,6 +295,9 @@ div#death {
 div#death.hidden {
     display: none;
 }
+div#selector.hidden {
+    display: none;
+}
 @keyframes blink {
     0% { opacity: 0; }
     50% { opacity: 0.75;}
@@ -294,4 +317,56 @@ div.fakefloor {
 }
 div.fakefloor.trapped {
     background-color: #e86d64;
+}
+div#selector {
+    position: fixed;
+    right: 1vw;
+    bottom: 1vw;
+    background-color: purple;
+    z-index: 100;
+    padding-right: 1vw;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    border-radius: 1vw;
+}
+div#selector button {
+    margin-left: 1vw;
+    background-color: violet;
+    border: 1px solid transparent;
+    border-radius: 0.5vw;
+    padding: 1vw;
+    color: purple;
+    font-family: Geneva;
+    transition: all ease 0.5s;
+}
+div#selector button:hover {
+    background-color: purple;
+    color: violet;
+    border-color: violet;
+}
+div#selector button.active {
+    background-color: lightgreen;
+}
+div.space {
+    display: block;
+    width: 100vw;
+    height: 40vw;
+}
+h1#banner {
+    font-size: 5vw;
+    z-index: 202;
+    color: purple;
+    position: fixed;
+    top: 40vh;
+    left: -60vw;
+    width: 60vw;
+    height: calc(20vh + 4vw);
+    line-height: 20vh;
+    text-align: center;
+    font-family: Verdana;
+    background-color: pink;
+    border-radius: 2vw;
+    border: 1vw solid purple;
+    transition: all ease 1s;
+    padding: 1vw;
 }
