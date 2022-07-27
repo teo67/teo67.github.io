@@ -4,8 +4,105 @@
     box-sizing: border-box;
 }
 html, body {
-    overflow: hidden;
     background-color: #66a1ff;
+}
+section#intro {
+    opacity: 1;
+    transition: all ease 1s;
+}
+section#intro nav {
+    display: block;
+    background-color: violet;
+    border: 0.5vw solid purple;
+    margin: 1vw;
+    width: 80vw;
+    height: 15vw;
+    margin-left: 10vw;
+    z-index: 21;
+    position: relative;
+    border-radius: 5vw;
+}
+section#intro nav img {
+    margin: 2vw;
+    height: 10vw;
+    transition: all ease 0.5s;
+}
+section#intro nav img:hover {
+    height: 8vw;
+    margin: 3vw;
+}
+div#slide {
+    display: block;
+    position: fixed;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    left: 0;
+    border-top: 100vh solid transparent;
+    border-bottom: 100vh solid transparent;
+    border-left: 100vw solid blue;
+    z-index: 20;
+    opacity: 0.2;
+    animation: fromleft 1s ease;
+}
+@keyframes fromleft {
+    0% { left: -100vw; opacity: 1;}
+    100% { left: 0;}
+}
+section#intro h1 {
+    width: 100vw;
+    position: relative;
+    text-align: center;
+    display: block;
+    font-family: Gill Sans;
+    font-size: 8vw;
+    z-index: 21;
+    color: violet;
+    opacity: 1;
+    text-shadow: 1vw 1vw 5vw red, -1vw -1vw 5vw blue;
+}
+section#intro h1#title {
+    font-size: 10vw;
+    line-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    animation: slideup 1s ease;
+}
+@keyframes slideup {
+    0% { transform: none; opacity: 0; font-size: 0; color: black;}
+    25% { transform: rotate(20deg);}
+    50% { transform: rotate(-10deg);}
+}
+div#slidered {
+    display: block;
+    position: fixed;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    left: 0;
+    border-left: 100vw solid transparent;
+    border-bottom: 100vh solid red;
+    border-right: 100vw solid transparent;
+    z-index: 20;
+    opacity: 0.2;
+    animation: fromright 1s ease;
+}
+@keyframes fromright {
+    0% { left: 100vw; opacity: 1;}
+    100% { left: 0; }
+}
+img#slideright {
+    display: block;
+    position: fixed;
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    right: 0;
+    top: 0;
+}
+section#game {
+    opacity: 0;
+    transition: all ease 1s;
 }
 div.block {
     content: "";
@@ -64,11 +161,12 @@ div.finish {
     border-color: white;
     transition: all linear 0.25s;
 }
-div.finish::before.finished {
-    z-index: 200;
+div.finish.finished::before {
+    z-index: 100;
 }
 div.finish.finished {
     height: 9vw;
+    z-index: 100;
 }
 div.shifter::after {
     margin-top: -7vw;
@@ -209,7 +307,7 @@ div.bulletup {
     border-left: 5vw solid transparent;
     border-right: 5vw solid transparent;
     border-bottom: 10vw solid #e86d64;
-    border-radius: 5vw;
+    border-radius: 3vw;
     content: "";
     z-index: 28;
     margin-bottom:1vw;
@@ -225,7 +323,7 @@ div.bulletright {
     border-top: 5vw solid transparent;
     border-bottom: 5vw solid transparent;
     border-left: 10vw solid #e86d64;
-    border-radius: 5vw;
+    border-radius: 3vw;
     content: "";
     z-index: 28;
     margin-bottom:1vw;
@@ -241,7 +339,7 @@ div.bulletdown {
     border-left: 5vw solid transparent;
     border-right: 5vw solid transparent;
     border-top: 10vw solid #e86d64;
-    border-radius: 5vw;
+    border-radius: 3vw;
     content: "";
     z-index: 28;
     margin-bottom:1vw;
@@ -257,7 +355,7 @@ div.bulletleft {
     border-top: 5vw solid transparent;
     border-bottom: 5vw solid transparent;
     border-right: 10vw solid #e86d64;
-    border-radius: 5vw;
+    border-radius: 3vw;
     content: "";
     z-index: 28;
     margin-bottom:1vw;
@@ -295,9 +393,6 @@ div#death {
 div#death.hidden {
     display: none;
 }
-div#selector.hidden {
-    display: none;
-}
 @keyframes blink {
     0% { opacity: 0; }
     50% { opacity: 0.75;}
@@ -319,18 +414,21 @@ div.fakefloor.trapped {
     background-color: #e86d64;
 }
 div#selector {
-    position: fixed;
-    right: 1vw;
-    bottom: 1vw;
+    float: right;
+    display: block;
     background-color: purple;
     z-index: 100;
+    margin-right: 1vw;
+    margin-top: 1vw;
     padding-right: 1vw;
     padding-top: 1vw;
-    padding-bottom: 1vw;
+    padding-bottom: 0vw;
     border-radius: 1vw;
+    transition: all ease 0.75s;
 }
 div#selector button {
     margin-left: 1vw;
+    margin-bottom: 1vw;
     background-color: violet;
     border: 1px solid transparent;
     border-radius: 0.5vw;
@@ -338,6 +436,9 @@ div#selector button {
     color: purple;
     font-family: Geneva;
     transition: all ease 0.5s;
+}
+div#selector.restricted {
+    opacity: 0.1;
 }
 div#selector button:hover {
     background-color: purple;
@@ -369,4 +470,164 @@ h1#banner {
     border: 1vw solid purple;
     transition: all ease 1s;
     padding: 1vw;
+}
+h1#tutorial {
+    display: block;
+    float: right;
+    position: relative;
+    border-radius: 2vw;
+    padding: 1vw;
+    background-color: violet;
+    border: 0.5vw solid purple;
+    z-index: 100;
+    font-family: Verdana;
+    color: purple;
+    animation: fly 1s ease;
+    transition: all ease 1s;
+    text-align: center;
+    margin: auto;
+    opacity: 1;
+    box-shadow: 0 0 2vw white;
+}   
+@keyframes fly {
+    0% { right: -100vw; opacity: 0;}
+    100% { right: 0; opacity: 1;}
+}
+h1#tutorial.hidden {
+    right: -100vw;
+    animation: flyout 1s ease;
+}
+@keyframes flyout {
+    0% { right: 0; opacity: 1;}
+    100% { right: -100vw; opacity: 0;}
+}
+section#bottomright {
+    z-index: 100;
+    position: fixed;
+    right: 1vw;
+    bottom: 1vw;
+}
+button.state {
+    margin-top: 1vw;
+    width: 5vw;
+    height: 5vw;
+    display: block;
+    margin-right: 1vw;
+    float: right;
+    z-index: 100;
+    border-radius: 3vw;
+    transition: all ease 0.75s;
+}
+button#edit {
+    clear:both;
+    border: 0vw solid palegoldenrod;
+    background-color: palegoldenrod;
+    color: coral;
+    font-family: Verdana;
+    font-size: 1.5vw;
+}
+button#play {
+    border: 0vw solid lightgreen;
+    background-color: lightgreen;
+}
+button#edit:hover {
+    border: 0.5vw solid goldenrod;
+}
+button#play:hover {
+    border: 0.5vw solid green;
+}
+button#play:hover::after {
+    margin-left: 1.5vw;
+}
+button#play::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin-left: 2vw;
+    border-top: 1.5vw solid transparent;
+    border-bottom: 1.5vw solid transparent;
+    border-left: 1.5vw solid green;
+    border-right: 0vw solid transparent;
+    transition: all ease 0.75s;
+}
+button.state.restricted {
+    border-color: lightgray !important;
+    background-color: lightgray !important;
+    color: gray !important;
+}
+button#play.restricted::after {
+    border-left-color: gray;
+}
+div.block.starting {
+    animation: start 1s ease;
+}
+@keyframes start {
+    0% { background-color: gold; }
+}
+div.checkpointing {
+    animation: check 1s ease;
+}
+div.checkpointing::before {
+    animation: check 1s ease;
+}
+@keyframes check {
+    0% { background-color: gold; border-color: goldenrod;}
+    50% { background-color: goldenrod; border-color: gold; opacity: 0.75;}
+}
+div.path {
+    position: absolute;
+    background-color: rgba(68, 150, 227);
+    display: block;
+    z-index: 20;
+    border-radius: 1vw;
+    width: 1vw;
+    height: 1vw;
+    opacity: 50%;
+}
+div.path.left {
+    animation: goleft 2s linear infinite;
+}
+@keyframes goleft {
+    0% { transform: translateX(10.5vw); }
+    100% { transform: translateX(0); }
+}
+div.path.right {
+    animation: goright 2s linear infinite;
+}
+@keyframes goright {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(10.5vw); }
+}
+div.path.up {
+    animation: goup 2s linear infinite;
+}
+@keyframes goup {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-11.5vw); }
+}
+div.path.down {
+    animation: godown 2s linear infinite;
+}
+@keyframes godown {
+    0% { transform: translateY(-11.5vw); }
+    100% { transform: translateY(0); }
+}
+button#mute {
+    position: fixed;
+    top: 1vw;
+    left: 1vw;
+    background-image: url('./audiosymbol.png');
+    width: 5vw;
+    height: 5vw;
+    background-size: 3.01vw;
+    background-color: lightcoral;
+    content: "";
+    border: 1vw solid lightcoral;
+    border-radius: 2vw;
+    z-index: 100;
+}
+button#mute.unmuted {
+    background-color: lightgreen;
+    border-color: lightgreen;
 }

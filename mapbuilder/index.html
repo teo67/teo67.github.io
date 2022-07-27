@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--  -->
+<html lang="en">
+    <head>
+        <link href='../style.css' rel='stylesheet'>
+        <title>Website</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <header>
+        </header>
+        <main>
+            <div id="board" class="builder">
+                <div id="cleaner"></div>
+            </div>
+            <div id="player"></div>
+            <div id="waves"></div>
+            <div id="death" class="hidden"></div>
+            <section id="bottomright">
+                <h1 id="tutorial"></h1>
+                <button id="edit" class="state restricted">edit</button>
+                <button id="play" class="state restricted"></button>
+                <div id="selector"></div>
+            </section>
+            <div class="space"></div>
+            <h1 id="banner">Complete!</h1>
+            <audio src="../soundtrack.wav" id="soundtrack" muted loop></audio>
+            <audio src="../checkpoint.mp3" id="checkpoint"></audio>
+            <button id="mute"></button>
+        </main>
+        <footer>
+        </footer>
+        <script src="../dijkstra.js"></script>
+        <script src="../main.js"></script>
+        <script src="./main.js"></script>
+    </body>
+</html>

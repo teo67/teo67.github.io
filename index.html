@@ -11,17 +11,37 @@
         <header>
         </header>
         <main>
-            <div id="board"></div>
-            <div id="player"></div>
-            <div id="waves"></div>
-            <div id="death" class="hidden"></div>
-            <div id="selector" class="hidden"></div>
-            <div class="space"></div>
-            <h1 id="banner">Complete!</h1>
+            <section id="intro">
+                <h1 id="title">Hi, I'm Theo</h1>
+                <div id="slide"></div>
+                <div id="slidered"></div>
+                <img id="slideright" src="./me.JPG">
+                <h1>Here, take some links:</h1>
+                <nav>
+                    <a href="https://github.com/teo67" target="_blank"><img src="./github.png"></a>
+                    <a href="https://radishpl.com" target="_blank"><img src="./radish.png"></a>
+                    <a href="https://github.com/teo67" target="_blank"><img src="./cosmos.png"></a>
+                </nav>
+            </section>
+            <section id="game">
+                <div id="board">
+                    <div id="cleaner"></div>
+                </div>
+                <div id="player"></div>
+                <div id="waves"></div>
+                <div id="death" class="hidden"></div>
+                <section id="bottomright">
+                    <h1 id="tutorial"></h1>
+                </section>
+                <h1 id="banner">Complete!</h1>
+                <audio src="./soundtrack.wav" id="soundtrack" muted loop></audio>
+                <audio src="./checkpoint.mp3" id="checkpoint"></audio>
+                <button id="mute"></button>
+            </section>
         </main>
         <footer>
         </footer>
+        <script src="./dijkstra.js"></script>
         <script src="./main.js"></script>
-        <!-- <script src="./mapbuilder.js"></script> -->
     </body>
 </html>

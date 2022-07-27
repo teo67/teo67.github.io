@@ -3,8 +3,15 @@ const player = document.getElementById("player");
 const waves = document.getElementById("waves");
 const death = document.getElementById("death");
 const banner = document.getElementById("banner");
+const tutorial = document.getElementById("tutorial");
+const muter = document.getElementById("mute");
+const sounds = {
+    soundtrack: document.getElementById("soundtrack"), 
+    checkpoint: document.getElementById("checkpoint")
+};
+let muted = true;
 const key = ["grass", "wall", "sand", "shooter", "brick", "checkpoint", "fakefloor", "shifter", "lava", "clock", "counterclock", "finish"];
-const input = [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 2, 2, 2, 6, 0, 6, 0, 0, 4, 4, 2, 0, 2, 0, 0, 7, 5, 2, 1], [1, 2, 2, 2, 0, 6, 0, 0, 0, 4, 4, 0, 2, 0, 0, 0, 1, 7, 7, 1], [1, 1, 1, 1, 1, 1, 1, 5, 5, 4, 4, 2, 0, 2, 0, 0, 1, 6, 6, 1], [1, 0, 0, 0, 3, 0, 0, 0, 0, 3, 4, 0, 2, 0, 0, 0, 1, 7, 7, 1], [1, 1, 5, 0, 0, 0, 1, 0, 1, 2, 4, 2, 3, 2, 0, 0, 1, 7, 7, 1], [1, 6, 6, 4, 4, 1, 0, 1, 4, 2, 4, 3, 0, 3, 0, 0, 1, 7, 7, 1], [1, 6, 6, 6, 4, 0, 0, 5, 2, 2, 2, 0, 0, 0, 5, 0, 1, 7, 7, 1], [1, 6, 6, 6, 4, 0, 0, 5, 2, 2, 2, 0, 0, 0, 5, 0, 1, 6, 6, 1], [1, 6, 6, 6, 4, 0, 0, 1, 4, 4, 4, 3, 0, 3, 0, 0, 1, 5, 5, 1], [1, 2, 2, 2, 0, 0, 0, 1, 4, 4, 4, 0, 3, 0, 1, 1, 1, 7, 7, 1], [1, 0, 0, 0, 0, 3, 0, 0, 1, 0, 9, 7, 7, 7, 5, 2, 8, 2, 8, 1], [1, 1, 1, 1, 0, 0, 0, 1, 0, 9, 10, 2, 2, 2, 8, 7, 7, 5, 2, 1], [1, 9, 7, 6, 1, 0, 1, 4, 0, 9, 10, 2, 2, 1, 1, 2, 2, 7, 1, 1], [1, 6, 1, 5, 2, 1, 4, 4, 2, 5, 9, 7, 7, 7, 10, 8, 2, 6, 4, 1], [1, 2, 3, 0, 8, 2, 8, 4, 2, 4, 7, 4, 4, 4, 5, 4, 1, 4, 4, 1], [1, 2, 1, 0, 2, 6, 2, 8, 2, 1, 10, 2, 7, 9, 7, 10, 8, 10, 2, 1], [1, 9, 10, 1, 8, 2, 6, 2, 2, 1, 10, 7, 9, 6, 9, 6, 7, 9, 2, 1], [1, 11, 10, 1, 2, 8, 2, 6, 2, 1, 10, 2, 8, 7, 2, 9, 7, 7, 8, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]];
+const input = board.classList.contains("builder") ? [] : [[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 2, 2, 2, 6, 0, 6, 0, 0, 4, 4, 2, 0, 2, 0, 0, 7, 5, 2, 1], [1, 2, 2, 2, 0, 6, 0, 0, 0, 4, 4, 0, 2, 0, 0, 0, 1, 7, 7, 1], [1, 1, 1, 1, 1, 1, 1, 5, 5, 4, 4, 2, 0, 2, 0, 0, 1, 6, 6, 1], [1, 0, 0, 0, 3, 0, 0, 0, 0, 3, 4, 0, 2, 0, 0, 0, 1, 7, 7, 1], [1, 1, 5, 0, 0, 0, 1, 0, 1, 2, 4, 2, 3, 2, 0, 0, 1, 7, 7, 1], [1, 6, 6, 4, 4, 1, 0, 1, 4, 2, 4, 3, 0, 3, 0, 0, 1, 7, 7, 1], [1, 6, 6, 6, 4, 0, 0, 5, 2, 2, 2, 0, 0, 0, 5, 0, 1, 7, 7, 1], [1, 6, 6, 6, 4, 0, 0, 5, 2, 2, 2, 0, 0, 0, 5, 0, 1, 6, 6, 1], [1, 6, 6, 6, 4, 0, 0, 1, 4, 4, 4, 3, 0, 3, 0, 0, 1, 5, 5, 1], [1, 2, 2, 2, 0, 0, 0, 1, 4, 4, 4, 0, 3, 0, 1, 1, 1, 7, 7, 1], [1, 0, 0, 0, 0, 3, 0, 0, 1, 0, 9, 7, 7, 7, 5, 2, 8, 2, 8, 1], [1, 1, 1, 1, 0, 0, 0, 1, 0, 9, 10, 2, 2, 2, 8, 7, 7, 5, 2, 1], [1, 9, 7, 6, 1, 0, 1, 4, 0, 9, 10, 2, 2, 1, 1, 2, 2, 7, 1, 1], [1, 6, 1, 5, 2, 1, 4, 4, 2, 5, 9, 7, 7, 7, 10, 8, 2, 6, 4, 1], [1, 2, 3, 0, 8, 2, 8, 4, 2, 4, 7, 4, 4, 4, 5, 4, 1, 4, 4, 1], [1, 2, 1, 0, 2, 6, 2, 8, 2, 1, 10, 2, 7, 9, 7, 10, 8, 10, 2, 1], [1, 9, 10, 1, 8, 2, 6, 2, 2, 1, 10, 7, 9, 6, 9, 6, 7, 9, 2, 1], [1, 11, 10, 1, 2, 8, 2, 6, 2, 1, 10, 2, 8, 7, 2, 9, 7, 7, 8, 1], [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]];
 const nomove = [1, 3, 4];
 const enemies = [];
 const types = [3, 6];
@@ -39,13 +46,14 @@ const addRect = (x, y, w, h, num, fill = true) => {
         add(i, y + h - 1, num);
     }
 }
-
-// create(20, 20, 0);  
-// addRect(0, 0, 20, 1, 1, false);
-// addRect(0, 1, 1, 19, 1, false);
-// addRect(19, 1, 1, 19, 1, false);
-// addRect(1, 19, 18, 1, 1, false);
-let finish = null;
+if(board.classList.contains("builder")) {
+    create(20, 20, 0);  
+    addRect(0, 0, 20, 1, 1, false);
+    addRect(0, 1, 1, 19, 1, false);
+    addRect(19, 1, 1, 19, 1, false);
+    addRect(1, 19, 18, 1, 1, false);
+}
+let finish = [];
 for(let i = input.length - 1; i >= 0; i--) {
     for(let j = 0; j < input[i].length; j++) {
         const newE = document.createElement("div");
@@ -55,7 +63,7 @@ for(let i = input.length - 1; i >= 0; i--) {
             enemies.push(newE);
         }
         if(newE.classList.contains('finish')) {
-            finish = newE;
+            finish.push(newE);
         }
         newE.style.left = `${j * 10.5}vw`;
         newE.style.bottom = `${i * 11.5}vw`;
@@ -72,19 +80,26 @@ const map = {
     w: [0, -1], ArrowUp: [0, -1], a: [-1, 0], ArrowLeft: [-1, 0], s: [0, 1], ArrowDown: [0, 1], d: [1, 0], ArrowRight: [1, 0]
 }
 const keydownevent = event => {
-    if(!moving) {
-        if(map[event.key] !== undefined) {
-            moving = true;
-            move(map[event.key]);
+    if(!player.classList.contains('finished')) {
+        if(!moving) {
+            if(map[event.key] !== undefined) {
+                if(tutorialIndex == 0) {
+                    updateTutorial();
+                }
+                moving = true;
+                move(map[event.key]);
+            }
+        } else {
+            nextDirection = event.key;
         }
-    } else {
-        nextDirection = event.key;
     }
 }
 document.addEventListener('keydown', keydownevent);
 const keyupevent = event => {
-    if(moving && nextDirection == event.key) {
-        nextDirection = '';
+    if(!player.classList.contains('finished')) {
+        if(moving && nextDirection == event.key) {
+            nextDirection = '';
+        }
     }
 }
 document.addEventListener('keyup', keyupevent);
@@ -119,12 +134,11 @@ const move = direction => {
                 move([direction[1], -direction[0]]);
             } else if(val == 10) {
                 move([-direction[1], direction[0]]);
-            } else if(val == 11 && finish !== null) {
+            } else if(val == 11 && !board.classList.contains("builder")) {
                 player.classList.add('finished');
-                finish.classList.add('finished');
-                document.removeEventListener('keydown', keydownevent);
-                document.removeEventListener('keyup', keyupevent);
-                clearInterval(updateE);
+                for(const fin of finish) {
+                    fin.classList.add('finished');
+                }
                 const res = Math.round((Date.now() - startTime) / 1000);
                 banner.innerText = `Finished in ${res}s!`;
                 banner.style.left = '20vw';
@@ -140,6 +154,16 @@ const move = direction => {
         player.classList.remove(`m${direction[0]}${direction[1]}1`);
         board.style.marginLeft = `${42 - x * 10.5}vw`;
         board.style.marginTop = `${(input.length + 2 - y) * 11.5}vw`;
+        if(val == 5) {
+            if(!muted) {
+                sounds.checkpoint.currentTime = 0;
+                sounds.checkpoint.play();
+            }
+            player.classList.add("checkpointing");
+            player.onanimationend = () => {
+                player.classList.remove("checkpointing");
+            }
+        }
     }, 250);
 }
 move([0, 0]);
@@ -204,67 +228,94 @@ const bulletUpdate = (dx, dy, enemy, rem) => {
     }
 }
 const updateEnemies = () => {
-    let iLength = enemies.length;
-    for(let i = 0; i < iLength; i++) {
-        const enemy = enemies[i];
-        const rem = () => {
-            enemies.splice(i, 1);
-            i--;
-            iLength--;
-            enemy.classList.add("shatter");
-            setTimeout(() => {
-                enemy.remove();
-            }, 1000);
-        }
-        if(enemy.classList.contains("shooter")) {
-            if(enemyTick % 12 == 0) {
-                const classes = ["bulletup", "bulletright", "bulletdown", "bulletleft"];
-                const xshifts = [0, 1, 0, -1];
-                const yshifts = [1, 0, -1, 0];
-                for(let i = 0; i < classes.length; i++) {
+    if(!player.classList.contains('finished')) {
+        let iLength = enemies.length;
+        for(let i = 0; i < iLength; i++) {
+            const enemy = enemies[i];
+            const rem = () => {
+                enemies.splice(i, 1);
+                i--;
+                iLength--;
+                enemy.classList.add("shatter");
+                setTimeout(() => {
+                    enemy.remove();
+                }, 1000);
+            }
+            if(enemy.classList.contains("shooter")) {
+                if(enemyTick % 12 == 0) {
+                    const classes = ["bulletup", "bulletright", "bulletdown", "bulletleft"];
+                    const xshifts = [0, 1, 0, -1];
+                    const yshifts = [1, 0, -1, 0];
+                    for(let i = 0; i < classes.length; i++) {
+                        const xr = decode(enemy.style.left);
+                        const yr = decode(enemy.style.bottom);
+                        if(nomove.includes(input[yToPos(yr) - yshifts[i]][xToPos(xr) + xshifts[i]])) {
+                            continue;
+                        }
+                        const newE = document.createElement("div");
+                        newE.classList.add(classes[i]);
+                        newE.style.left = `${xr + 10.5 * xshifts[i]}vw`;
+                        newE.style.bottom = `${yr + 11.5 * yshifts[i]}vw`;
+                        enemies.push(newE);
+                        board.appendChild(newE);
+                    }
+                }
+            } else if(enemy.classList.contains("bulletup")) {
+                bulletUpdate(0, -1, enemy, rem);
+            } else if(enemy.classList.contains("bulletright")) {
+                bulletUpdate(1, 0, enemy, rem);
+            } else if(enemy.classList.contains("bulletdown")) {
+                bulletUpdate(0, 1, enemy, rem);
+            } else if(enemy.classList.contains("bulletleft")) {
+                bulletUpdate(-1, 0, enemy, rem);
+            } else if(enemy.classList.contains("fakefloor")) {
+                if(enemyTick % 2 == 0) {
                     const xr = decode(enemy.style.left);
                     const yr = decode(enemy.style.bottom);
-                    if(nomove.includes(input[yToPos(yr) - yshifts[i]][xToPos(xr) + xshifts[i]])) {
-                        continue;
+                    const xt = xToPos(xr);
+                    const yt = yToPos(yr);
+                    if(enemy.classList.contains("trapped")) {
+                        if(x == xt && y == yt) {
+                            die();
+                        }
+                    } else {
+                        if(prevX == xt && prevY == yt) {
+                            enemy.classList.add("trapped");
+                            setTimeout(() => {
+                                enemy.classList.remove("trapped");
+                            }, 1000);
+                        } 
                     }
-                    const newE = document.createElement("div");
-                    newE.classList.add(classes[i]);
-                    newE.style.left = `${xr + 10.5 * xshifts[i]}vw`;
-                    newE.style.bottom = `${yr + 11.5 * yshifts[i]}vw`;
-                    enemies.push(newE);
-                    board.appendChild(newE);
-                }
-            }
-        } else if(enemy.classList.contains("bulletup")) {
-            bulletUpdate(0, -1, enemy, rem);
-        } else if(enemy.classList.contains("bulletright")) {
-            bulletUpdate(1, 0, enemy, rem);
-        } else if(enemy.classList.contains("bulletdown")) {
-            bulletUpdate(0, 1, enemy, rem);
-        } else if(enemy.classList.contains("bulletleft")) {
-            bulletUpdate(-1, 0, enemy, rem);
-        } else if(enemy.classList.contains("fakefloor")) {
-            if(enemyTick % 2 == 0) {
-                const xr = decode(enemy.style.left);
-                const yr = decode(enemy.style.bottom);
-                const xt = xToPos(xr);
-                const yt = yToPos(yr);
-                if(enemy.classList.contains("trapped")) {
-                    if(x == xt && y == yt) {
-                        die();
-                    }
-                } else {
-                    if(prevX == xt && prevY == yt) {
-                        enemy.classList.add("trapped");
-                        setTimeout(() => {
-                            enemy.classList.remove("trapped");
-                        }, 1000);
-                    } 
                 }
             }
         }
+        enemyTick++;
     }
-    enemyTick++;
+}
+const updateTutorial = () => {
+    tutorialIndex++;
+    if(tutorialIndex >= tutorialItems.length) {
+        tutorial.classList.add('hidden');
+        return;
+    }
+    tutorial.innerText = tutorialItems[tutorialIndex];
 }
 const updateE = setInterval(updateEnemies, 250);
-const startTime = Date.now();
+const tutorialItems = [
+    "Use WASD or the arrow keys to move. Follow the blue dots to the finish!",
+];
+let tutorialIndex = -1;
+updateTutorial();
+run(spawn[0], spawn[1]);
+muter.onclick = () => {
+    if(muter.classList.contains("unmuted")) {
+        muter.classList.remove("unmuted");
+    } else {
+        muter.classList.add("unmuted");
+        sounds.soundtrack.play();
+        sounds.soundtrack.volume = 0.3;
+    }
+    muted = !muted;
+    sounds.soundtrack.muted = muted;
+}
+let startTime = Date.now();
