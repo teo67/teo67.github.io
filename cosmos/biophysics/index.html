@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--  -->
+<html lang="en">
+    <head>
+        <link href='../style.css' rel='stylesheet'>
+        <title>Theo's Portfolio</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="../"><button>-> Journal</button></a>
+                <a href="../robotics/"><button>-> Robotics</button></a>
+            </nav>
+        </header>
+        <main>
+            <img id="background" src="../gif0.gif">
+            <section id="lines"></section>
+            
+           <h1 id="title">Biophysics</h1>
+           <div class="space"></div> <div class="space"></div> 
+           <section class="journal">
+            <h1>Journal 7/11</h1>
+            <p>On the first day of biophysics, we got familiar with the Linux environment using basic commands such as mkdir, cd, vi, and ls.
+            Aside from that, everybody introduced themselves using programming experience and grade level, and most of us (besides me) had some experience with python, which we'll be using for the course.
+            I'm excited to learn more about both Linux and Python (and maybe ViM, although it's famously hard to exit), and I'm also wondering what types of simulations we'll be running to integrate physics and biology with CS.
+            </p>
+           </section>
+           <div class="space"></div>
+           <section class="journal">
+            <h1>Journal 7/12</h1>
+            <p>Today, we focused on learning Python using Jupyter Notebooks. While much of our time was spent in a heated debate around and/or precedence and short circuit evaluation, I came out of the class with much more knowledge of the language than I had previously (which was zero).
+            We also learned the fundamentals of atomic and molecular physics - specifically, the randomness of particle motion and the sheer number of molecules all around us.
+            My main takeaway was that molecules actually move incredibly fast, but their lack of a consistent direction (disregarding external forces) makes them not very mobile.
+            </p>
+           </section>
+           <div class="space"></div>
+           <section class="journal none">
+            <h1>No Journal 7/13</h1>
+           </section>
+           <div class="space"></div>
+           <section class="journal">
+            <h1>Journal 7/14</h1>
+            <p>Our main focus in the lecture today was the nature of temperature. What exactly is temperature, when you think about it? It can be measured by a thermometer, but there are many types of thermometers that all have different methods for gathering data.
+            On the lowest level, temperature is a measure of the kinetic energy of small molecules, and it can be converted from units of energy (J) to units of temperature (K/C/F) using a rate constant (R).
+            It turns out that heat tends to spread from hot to cold because particles moving fast are likely to collide with particles that are moving slowly. When they collide, the faster particle expends some of its energy pushing the slower molecule forwards.
+            Repeat the process, and you end up with a relatively even distribution of energy.
+            </p>
+           </section>
+           <div class="space"></div>
+           <section class="journal">
+            <h1>Journal 7/15</h1>
+            <p>Today, we learned about the nature of randomness and how it relates to programming. I've always been interested in the theory that nothing is truly random, and so I was excited when the professor brought up the subject.
+            As it turns out, python's random function is very evenly distributed - we performed tests using a histogram and both 2d and 3d graphs to ensure that consecutive values shared no pattern. Finally, we worked on a Monte Carlo algorithm to estimate the value of pi.
+            The test works by generating random points on a 1x1 square and counting the number that are inside the unit circle. The fraction of points inside versus outside the circle should be pi / 4, so we just had to multiply by 4 to find pi.
+            </p>
+           </section>
+           <div class="space"></div>
+           <section class="journal">
+            <h1>Journal 7/18</h1>
+            <p>The lecture today was about common biomolecules, especially water. We focused on water's numerous special properties, including high heat capacity, cohesion, and surface tension.
+            For example, did you know that our body sweats water because we can pour tons of excess heat into it before it vaporizes? That wouldn't work with most other small molecules.
+            After the lecture, we did a bit of python coding and finished up the previous discussion on how to estimate pi.
+            </p>
+           </section>
+           <div class="space"></div>
+           <section class="journal">
+            <h1>Journal 7/19</h1>
+            <p>We started off the day with another form of the Monte Carlo pi algorithm. But instead of actually estimating pi, we graphed the standard deviation of pi as it related to the number of random values used.
+            As it turned out, a graph of 1/sqrt(x) vs standard deviation of pi(x) was linear increasing, which means that the standard deviation is predictable for a given number of values used.
+            Afterwards, we had a discussion about the basics of random walks. I thought it was really interesting that a random walk can essentially be modeled as a Pascal's Triangle, just with x values shifted such that you calculate (t choose (t - x) / 2) instead of just (t choose x).
+            </p>
+           </section>
+           <div class="space"></div>
+           <section class="journal">
+            <h1>Journal 7/20</h1>
+            <p>Today, we used python to graph various relationships concerning random walks. First, we graphed a bunch of random walks, which didn't tell us that much about the data itself.
+            Then, we graphed the mean result and mean result squared for different walk lengths, and used that to find the diffusion constant. The diffusion constant ended up at 1, which meant that the slope of mean x^2 was approximately 1:1.
+            Finally, I graphed how long it took on average for random walks to reach a target value. The data appeared completely random, mainly because some walks took thousands and thousands of steps to get the target just because they never went the right direction.
+            </p>
+           </section>
+           <div class="space"></div>
+           <section class="journal">
+            <h1>Journal 7/22</h1>
+            <p>Today, we continued the random walk simulations in python. The main experiment involved running 10000 random walks of length 1000 each and creating 5 histograms. Each histogram recorded the average X value at a certain point in the walk (200, 400, 600, 800, or 1000 steps). As expected, all of the histograms centered around 0 and had standard distributions.</p>
+           </section>
+           <div class="space"></div>
+           <section class="journal">
+            <h1>Journal 7/25</h1>
+            <p>Today, we completed the set of random walk simulations using Jupyter Notebooks. At the end of the lesson, Dr. Singh introduced a game called Gambler's Ruin. 
+            Because gambles can go one of two ways (randomly) and bets are always $1, we can simulate this using a single random walk. If the walk ever reaches positive M1, then player 1 has lost.
+            If the walk reaches negative M2 first, player 2 has lost. In other words, +1 represents a dollar gained for player 2, and -1 represents a dollar gained for player 1.
+            </p>
+           </section>
+           <div class="space"></div>
+        </main>
+        <footer>
+        </footer>
+        <script src="../main.js"></script>
+    </body>
+</html>

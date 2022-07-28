@@ -1,0 +1,193 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: monospace  ;
+    box-sizing: border-box;
+}
+html {
+    background-color: rgb(152, 127, 177);
+    max-width: 100%;
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+section.journal h1 {
+    color: rgba(100, 0, 50, 0.75);
+    font-size: 2vw;
+    border: 1px solid rgba(100, 0, 50, 0.75);
+    display: inline-block;
+    padding: 0.5vw;
+    border-radius: 0.5vw;
+    transition: all ease 0.2s;
+}
+section.journal p {
+    color: rgba(100, 0, 50, 1);
+    font-weight: bolder;
+    font-size: 1.5vw;
+    display: block;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
+@media screen and (orientation: portrait) {
+    section.journal p {
+        font-size: 4vw;
+    }
+    section.journal h1 {
+        font-size: 5vw;
+    }
+    header nav a button {
+        font-size: 5vw;
+    }
+}
+nav {
+    position: fixed;
+    left: 1vw;
+    top: 1vw;
+    background-color: rgba(100, 0, 50, 0.2);
+    padding: 0.5vw;
+    border-radius: 0.8vw;
+}
+nav a button {
+    position: relative;
+    display: inline-block;
+    border-radius: 0.8vw;
+    border: none;
+    font-size: 2vw;
+    color: rgba(100, 0, 50, 0.5);
+    background-color: rgba(100, 0, 50, 0.25);
+    padding: 1vw;
+    border: 1px solid transparent;
+}
+nav a button:hover {
+    border: 1px solid rgba(100, 0, 50, 0.75);
+}
+div.space {
+    position: relative;
+    display: block;
+    width: 100vw;
+    height: 50vh;
+    z-index: -1;
+}
+div.line {
+    position: absolute;
+    width: 0.5vw;
+    border-radius: 5vw;
+    animation-name: out;
+    animation-duration: 5s;
+    animation-timing-function: ease-out;
+    transform-origin: center;
+    z-index: inherit;
+}
+@keyframes out {
+    0% { opacity: 0%; }
+    50% { opacity: 50%; }
+    100% { opacity: 0%; height: 0vw; background-color: black; }
+}
+section#lines {
+    position: fixed;
+    top: 20vh;
+    left: 37.5vw;
+    width: 25vw;
+    height: 25vw;
+    z-index: -1;
+    opacity: 100%;
+    transition: all ease 1s;
+}
+h1#title {
+    position: fixed;
+    display: block;
+    font-size: 10vw;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    text-align: center;
+    line-height: 100vh;
+    color: transparent;
+    text-shadow: -0.1vw -0.1vw rgba(100, 0, 50, 0.5), 0.1vw 0.1vw rgba(50, 0, 100, 0.5);
+    z-index: -1;
+    opacity: 100%;
+    transition: all ease 1s;
+}
+section#title {
+    height: 100vh;
+    width: 100vw;
+    display: block;
+}
+div.up {
+    height: 20vh;
+    transition: all ease 1s;
+}
+section.journal {
+    width: 90vw;
+    display: block;
+    margin-left: 5vw;
+    background-color: rgba(100, 0, 50, 0.25);
+    padding: 4vw;
+    border-radius: 1vw;
+    border: 1px solid rgba(100, 0, 50, 0.5);
+    transition: all ease 0.5s
+}
+section.journal:hover {
+    box-shadow: 0px 0px 1vw rgba(100, 0, 50, 0.25), 0px 0px 3vw rgba(100, 0, 50, 0.75);
+    background-color: rgba(100, 0, 50, 0.1);
+}
+section.journal h1:hover {
+    background-color: rgba(100, 0, 50, 0.5);
+    color: rgb(152, 127, 177);
+    margin-left: 1vw;
+}
+section.journal p:hover {
+    margin-bottom: 0vw;
+}
+section.journal p:hover::after {
+    display: block;
+    content: "";
+    width: 100%;
+    height: 0.5vw;
+    background-color: rgba(100, 0, 50, 0.75);
+    border-radius: 1vw;
+    margin-top: 0.5vw;
+    animation-name: roll;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+}
+@keyframes roll {
+    0% { width: 0%; opacity: 0; }
+    100% { opacity: 100%; }
+}
+section.journal.none {
+    background-color: rgba(100, 0, 10, 0.25);
+    border-color: rgba(100, 0, 10, 0.5);
+}
+section.journal.none:hover {
+    background-color: rgba(100, 0, 10, 0.1);
+}
+img {
+    width: 50vw;
+    margin-left: 25vw;
+    padding: 0.5vw;
+    border: 1vw solid rgba(100, 0, 50, 0.4);
+    border-radius: 4vw;
+    transition: all ease 0.5s;
+}
+img:hover {
+    width: 55vw;
+    margin-left: 22.5vw;
+}
+img#background {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    margin-left: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 10%;
+}
+img#background:hover {
+    width: 100vw;
+    margin-left: 0;
+}
