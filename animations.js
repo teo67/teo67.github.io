@@ -4,6 +4,7 @@ const blue = document.getElementById("slide");
 const red = document.getElementById("slidered");
 const img = document.getElementById("slideright");
 const game = document.getElementById("game");
+const links = document.getElementById("links");
 const vh = () => {
     return Math.max(document.documentElement.clientHeight, window.innerHeight) / 100;
 }
@@ -17,16 +18,21 @@ const listener = () => {
         blue.style.opacity = `${60 - (1.6 * bottom / vh1)}%`;
         red.style.opacity = `${60 - (1.6 * bottom / vh1)}%`;
     }
-    if(window.innerHeight + window.scrollY >= document.body.scrollHeight - 20) {
+    if(window.innerHeight + window.scrollY >= document.body.scrollHeight - 20 * vh1) {
         init();
+        links.style.opacity = "0";
         blue.style.opacity = "1";
         red.style.opacity = "1";
-        blue.classList.add("moving");
-        red.classList.add("moving");
-        img.style.display = "none";
-        game.style.display = "block";
+        
+        setTimeout(() => {
+            img.style.display = "none";
+            game.style.display = "block";
+            blue.classList.add("moving");
+            red.classList.add("moving");
+        }, 500);
+        
+        
         document.body.style.overflow = "hidden";
-        window.scroll(0, document.documentElement.scrollHeight);
         document.removeEventListener('scroll', listener);
         setTimeout(() => {
             intro.style.display = "none";

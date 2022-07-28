@@ -54,7 +54,7 @@ div#slide {
     border-right: 100vw solid transparent;
     z-index: 20;
     opacity: 0.2;
-    transition: right ease 3s;
+    transition: right ease 3s, opacity ease 0.5s;
     animation: fromleft 1.5s ease;
 }
 div#slide.moving {
@@ -107,14 +107,14 @@ div#slidered {
     position: fixed;
     width: 0;
     height: 0;
-    top: 0;
+    bottom: 0;
     left: 0;
     border-left: 100vw solid transparent;
     border-bottom: 100vh solid #ed3b7a;
     border-right: 100vw solid transparent;
     z-index: 20;
     opacity: 0.2;
-    transition: left ease 3s;
+    transition: left ease 3s, opacity ease 0.5s;
     animation: fromright 1.5s ease;
 }
 @keyframes fromright {
