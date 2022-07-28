@@ -94,7 +94,6 @@ const keydownevent = event => {
         }
     }
 }
-document.addEventListener('keydown', keydownevent);
 const keyupevent = event => {
     if(!player.classList.contains('finished')) {
         if(moving && nextDirection == event.key) {
@@ -102,7 +101,7 @@ const keyupevent = event => {
         }
     }
 }
-document.addEventListener('keyup', keyupevent);
+
 const move = direction => {
     if(y + direction[1] < 0 || y + direction[1] >= input.length || x + direction[0] < 0 || x + direction[0] >= input[0].length) {
         moving = false;
@@ -167,19 +166,7 @@ const move = direction => {
     }, 250);
 }
 move([0, 0]);
-setInterval(() => {
-    if(document.hidden) {
-        return;
-    }
-    const newE = document.createElement("div");
-    newE.classList.add("wave");
-    newE.style.top = `${Math.random() * 30}vh`;
-    newE.style.width = `${Math.random() * 10 + 5}vw`;
-    newE.onanimationend = () => {
-        newE.remove();
-    }
-    waves.appendChild(newE);
-}, 5000);
+
 const decode = val => {
     return 1 * val.substring(0, val.length - 2);
 }
@@ -300,22 +287,41 @@ const updateTutorial = () => {
     }
     tutorial.innerText = tutorialItems[tutorialIndex];
 }
-const updateE = setInterval(updateEnemies, 250);
+
 const tutorialItems = [
     "Use WASD or the arrow keys to move. Follow the blue dots to the finish!",
 ];
 let tutorialIndex = -1;
-updateTutorial();
-run(spawn[0], spawn[1]);
-muter.onclick = () => {
-    if(muter.classList.contains("unmuted")) {
-        muter.classList.remove("unmuted");
-    } else {
-        muter.classList.add("unmuted");
-        sounds.soundtrack.play();
-        sounds.soundtrack.volume = 0.3;
+let startTime = 0;
+const init = () => {
+    run(spawn[0], spawn[1]);
+    muter.onclick = () => {
+        if(muter.classList.contains("unmuted")) {
+            muter.classList.remove("unmuted");
+        } else {
+            muter.classList.add("unmuted");
+            sounds.soundtrack.play();
+            sounds.soundtrack.volume = 0.3;
+        }
+        muted = !muted;
+        sounds.soundtrack.muted = muted;
     }
-    muted = !muted;
-    sounds.soundtrack.muted = muted;
+    startTime = Date.now();
+    document.addEventListener('keydown', keydownevent);
+    document.addEventListener('keyup', keyupevent);
+    setInterval(() => {
+        if(document.hidden) {
+            return;
+        }
+        const newE = document.createElement("div");
+        newE.classList.add("wave");
+        newE.style.top = `${Math.random() * 30}vh`;
+        newE.style.width = `${Math.random() * 10 + 5}vw`;
+        newE.onanimationend = () => {
+            newE.remove();
+        }
+        waves.appendChild(newE);
+    }, 5000);
+    setInterval(updateEnemies, 250);
+    updateTutorial();
 }
-let startTime = Date.now();

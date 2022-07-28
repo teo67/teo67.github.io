@@ -10,47 +10,63 @@ section#intro {
     opacity: 1;
     transition: all ease 1s;
 }
+section#game {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
 section#intro nav {
     display: block;
     background-color: violet;
     border: 0.5vw solid purple;
-    margin: 1vw;
-    width: 80vw;
-    height: 15vw;
-    margin-left: 10vw;
+    margin: 1vw;    
+    width: 92vw;
+    margin-left: 4vw;
     z-index: 21;
     position: relative;
     border-radius: 5vw;
+    transition: opacity ease 0.5s;
+    opacity: 1;
+}
+div.bigspace {
+    height: 100vh;
+    display: block;
+    width: 100vw;
 }
 section#intro nav img {
     margin: 2vw;
-    height: 10vw;
+    width: 10vw;
     transition: all ease 0.5s;
 }
 section#intro nav img:hover {
-    height: 8vw;
+    width: 8vw;
     margin: 3vw;
 }
 div#slide {
-    display: block;
     position: fixed;
     width: 0;
     height: 0;
     bottom: 0;
-    left: 0;
-    border-top: 100vh solid transparent;
-    border-bottom: 100vh solid transparent;
-    border-left: 100vw solid blue;
+    right: 0;
+    border-left: 100vw solid transparent;
+    border-top: 100vh solid #3bb5ed;
+    border-right: 100vw solid transparent;
     z-index: 20;
     opacity: 0.2;
-    animation: fromleft 1s ease;
+    transition: right ease 3s;
+    animation: fromleft 1.5s ease;
+}
+div#slide.moving {
+    right: 100vw;
+}
+div#slidered.moving {
+    left: 100vw;
 }
 @keyframes fromleft {
-    0% { left: -100vw; opacity: 1;}
-    100% { left: 0;}
+    0% { right: 100vw; border-top-color: black; }
 }
 section#intro h1 {
-    width: 100vw;
     position: relative;
     text-align: center;
     display: block;
@@ -61,48 +77,56 @@ section#intro h1 {
     opacity: 1;
     text-shadow: 1vw 1vw 5vw red, -1vw -1vw 5vw blue;
 }
+section#intro h1#title::after {
+    content: "";
+    width: 2vw;
+    height: 7vw;
+    background-color: #76f500;
+    display: inline-block;
+    position: relative;
+    margin-top: 0;
+    margin-left: 2vw;
+    transition: none;
+    animation: cursor 0.7s linear infinite;
+}
+@keyframes cursor {
+    49% { opacity: 1;}
+    50% { opacity: 0;}
+    99% { opacity: 0;}
+    100% { opacity: 1;}
+}
 section#intro h1#title {
+    display: inline-block;
     font-size: 10vw;
     line-height: 100vh;
-    width: 100vw;
     height: 100vh;
-    animation: slideup 1s ease;
-}
-@keyframes slideup {
-    0% { transform: none; opacity: 0; font-size: 0; color: black;}
-    25% { transform: rotate(20deg);}
-    50% { transform: rotate(-10deg);}
+    text-align: left;
+    opacity: 0;
 }
 div#slidered {
-    display: block;
     position: fixed;
     width: 0;
     height: 0;
-    bottom: 0;
+    top: 0;
     left: 0;
     border-left: 100vw solid transparent;
-    border-bottom: 100vh solid red;
+    border-bottom: 100vh solid #ed3b7a;
     border-right: 100vw solid transparent;
     z-index: 20;
     opacity: 0.2;
-    animation: fromright 1s ease;
+    transition: left ease 3s;
+    animation: fromright 1.5s ease;
 }
 @keyframes fromright {
-    0% { left: 100vw; opacity: 1;}
-    100% { left: 0; }
+    0% { left: 100vw; border-bottom-color: black;}
 }
 img#slideright {
-    display: block;
     position: fixed;
-    object-fit: cover;
     width: 100vw;
     height: 100vh;
-    right: 0;
+    object-fit: cover;
+    left: 0;
     top: 0;
-}
-section#game {
-    opacity: 0;
-    transition: all ease 1s;
 }
 div.block {
     content: "";
@@ -159,14 +183,18 @@ div.counterclock::before {
 div.finish {
     background-color: black;
     border-color: white;
+    transition: background-color linear 0.25s;
+}
+div.finish::before {
     transition: all linear 0.25s;
 }
-div.finish.finished::before {
-    z-index: 100;
-}
 div.finish.finished {
-    height: 9vw;
-    z-index: 100;
+    background-color: white;
+}
+div.finish.finished::before {
+    width: 6vw;
+    height: 6vw;
+    border-width: 2vw;
 }
 div.shifter::after {
     margin-top: -7vw;
@@ -229,11 +257,7 @@ div#player {
     top: 28vw;
     left: 44vw;
     z-index: 20;
-    transition: all linear 0.25s;
-}
-div#player.finished {
-    transform: translateY(-7vw);
-    z-index: 201;
+    transition: width linear 0.25s, margin-left linear 0.25s, height linear 0.25s, margin-top linear 0.25s;
 }
 div#player::before {
     margin-top: -5.5vw;
@@ -275,6 +299,15 @@ div#player.m011 {
 }
 div#player.m011::before {
     height: 16.5vw;
+}
+div#waves {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 div.wave {
     position: absolute;
@@ -408,7 +441,7 @@ div.shatter {
 div.fakefloor {
     background-color: lightgreen;
     border-color: darkgreen;
-    transition: all ease 0.5s;
+    transition: background-color ease 0.5s;
 }
 div.fakefloor.trapped {
     background-color: #e86d64;
@@ -613,6 +646,9 @@ div.path.down {
     0% { transform: translateY(-11.5vw); }
     100% { transform: translateY(0); }
 }
+button {
+    cursor: pointer;
+}
 button#mute {
     position: fixed;
     top: 1vw;
@@ -627,7 +663,57 @@ button#mute {
     border-radius: 2vw;
     z-index: 100;
 }
+a#build {
+    position: fixed;
+    top: 1vw;
+    left: 7vw;
+    background-color: lightsteelblue;
+    color: steelblue;
+    font-family: Gill Sans;
+    font-size: 2vw;
+    z-index: 100;
+    display: inline;
+    padding: 1vw;
+    border-radius: 2vw;
+    border: 0.25vw solid steelblue;
+    text-decoration: none;
+    transition: all ease 0.4s;
+}
+a#build:hover {
+    border-color: gold;
+    color: gold;
+    background-color: transparent;
+}
 button#mute.unmuted {
     background-color: lightgreen;
     border-color: lightgreen;
+}
+
+@media screen and (orientation: portrait) {
+    button#mute {
+        width: 10vw;
+        height: 10vw;
+        background-size: 8.01vw;
+    }
+    a#build {
+        left: 12vw;
+        font-size: 5vw;
+    }
+    button.state {
+        width: 10vw;
+        height: 10vw;
+        border-radius: 10vw;
+    }
+    button#edit {
+        font-size: 4vw;
+    }
+    button#play::after {
+        border-top-width: 3vw;
+        border-bottom-width: 3vw;
+        border-left-width: 3vw;
+        margin-left: 4vw;
+    }
+    button#play:hover::after {
+        margin-left: 3.5vw;
+    }
 }

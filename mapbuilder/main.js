@@ -1,3 +1,4 @@
+init();
 const selector = document.getElementById("selector");
 const play = document.getElementById("play");
 const edit = document.getElementById("edit");
