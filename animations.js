@@ -5,6 +5,7 @@ const red = document.getElementById("slidered");
 const img = document.getElementById("slideright");
 const game = document.getElementById("game");
 const links = document.getElementById("links");
+const links1 = document.getElementById("links1");
 const vh = () => {
     return Math.max(document.documentElement.clientHeight, window.innerHeight) / 100;
 }
@@ -20,6 +21,7 @@ const listener = () => {
     }
     if(window.innerHeight + window.scrollY >= document.body.scrollHeight - 20 * vh1) {
         init();
+        links1.style.opacity = "0";
         links.style.opacity = "0";
         blue.style.opacity = "1";
         red.style.opacity = "1";
