@@ -103,12 +103,21 @@
             </p>
            </section>
            <div class="space"></div>
-           <section class="journal" id="latest">
+           <section class="journal">
             <h1>Journal 7/27</h1>
             <p>We started class with two-dimensional random walks, graphing both the walks themselves and their length distributions. 
             It seemed most realistic to allow the simulated particle to move in any direction (rather than just up, down, left, or right), but this created some problems down the line.
             Reaching an exact target when your coordinates are almost always precise decimals is practically impossible, and so I had to set up a check to end the function if the particle entered within a given radius of the target.
             In the future, we'll be organizing into groups and working on a final project for biophysics that's related to the topics we've covered so far.
+            </p>
+           </section>
+           <div class="space"></div>
+           <section class="journal" id="latest">
+            <h1>Journal 7/29</h1>
+            <p>Today, we had a mix of lecture and programming. The lecture concerned the nature of random walks in an energy landscape, and, although some of it took a while to parse, I was generally able to follow along.
+            Basically, particles tend towards lower energy states, which means that there's a lower chance that they move "uphill." The equation is probability = e^(-E / T), where E is the difference in energy for the next state and T is the temperature.
+            This equation tends towards 0 as T decreases or E increases, and 1 as T increases or E decreases. After learning this equation, we set out to program a simple 1d simulation with an energy ratchet.
+            As Dr. Singh predicted, the ratchet proved relatively inefficient until we added occasional bursts of energy to move the particle along.
             </p>
            </section>
            <div class="space"></div>
