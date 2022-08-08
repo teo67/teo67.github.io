@@ -5,6 +5,12 @@
 }
 html, body {
     background-color: #66a1ff;
+    width: 100vw;
+    overflow-x: hidden;
+    scrollbar-width: 0;
+}
+::-webkit-scrollbar {
+    display: none;
 }
 section#intro {
     opacity: 1;
@@ -70,7 +76,7 @@ section#intro h1 {
     position: relative;
     text-align: center;
     display: block;
-    font-family: Gill Sans;
+    font-family: Tahoma;
     font-size: 8vw;
     z-index: 21;
     color: violet;
@@ -467,7 +473,7 @@ div#selector button {
     border-radius: 0.5vw;
     padding: 1vw;
     color: purple;
-    font-family: Geneva;
+    font-family: Tahoma;
     transition: all ease 0.5s;
 }
 div#selector.restricted {
@@ -497,7 +503,7 @@ h1#banner {
     height: calc(20vh + 4vw);
     line-height: 20vh;
     text-align: center;
-    font-family: Verdana;
+    font-family: Tahoma;
     background-color: pink;
     border-radius: 2vw;
     border: 1vw solid purple;
@@ -513,7 +519,7 @@ h1#tutorial {
     background-color: violet;
     border: 0.5vw solid purple;
     z-index: 100;
-    font-family: Verdana;
+    font-family: Tahoma;
     color: purple;
     animation: fly 1s ease;
     transition: all ease 1s;
@@ -556,7 +562,7 @@ button#edit {
     border: 0vw solid palegoldenrod;
     background-color: palegoldenrod;
     color: coral;
-    font-family: Verdana;
+    font-family: Tahoma;
     font-size: 1.5vw;
 }
 button#play {
@@ -669,7 +675,7 @@ a#build {
     left: 7vw;
     background-color: lightsteelblue;
     color: steelblue;
-    font-family: Gill Sans;
+    font-family: Tahoma;
     font-size: 2vw;
     z-index: 100;
     display: inline;
