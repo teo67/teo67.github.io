@@ -10,9 +10,9 @@ class Command {
 const commands = [
     new Command(
         'allmoves',
-        'This command prints a list of all learned moves on the Discit currently selected.',
+        'This command prints a list of all learned moves on the Discit currently selected and allows the user to equip moves to their battle set.',
         '',
-        'Have an account, have a Discit selected (check out the \'select\' command)'
+        'Have an account, have a Discit selected (check out the \'list\' command). If equipping a move, must be out of battle and in a Discit Station, and the move cannot be equipped already'
     ),
     new Command(
         'battle',
@@ -45,12 +45,6 @@ const commands = [
         'Has registered for an account, has at least Tier 1 Premium, is not in battle'
     ),
     new Command(
-        'equip',
-        'This command equips an attack on the Discit you currently have selected.',
-        '[index of new attack in the full list (use \'allmoves\')] [attack slot (1 - 4)]',
-        'Have an account, be in a Discit Station, have a Discit selected, can\'t be used during combat, can\'t equip the same move more than once'
-    ),
-    new Command(
         'help',
         'Prints a list of commands or the description of a specific command.',
         '[name of command (optional)]',
@@ -70,9 +64,9 @@ const commands = [
     ),
     new Command(
         'list',
-        'This command prints a list of every Discit you own and the index of that Discit.',
+        'This command prints a list of every Discit you own and the index of that Discit. It also allows you to select Discits in order to view their stats and attacks for later.  ',
         '',
-        'Has registered for an account'
+        'Has registered for an account. If selecting a Discit, cannot be in battle'
     ),
     new Command(
         'map',
@@ -94,7 +88,7 @@ const commands = [
     ),
     new Command(
         'party',
-        'This command can be used to view and edit your party. If you supply two integer arguments, you can add a Discit to your party. Otherwise, this command will show you the discits in your party.',
+        'This command can be used to view and edit your party. If you supply two integer arguments, you can add a Discit to your party. Otherwise, this command will show you the discits in your party and allow edits using buttons.',
         '[index of added Discit (use \'list\') (optional)] [party slot (between 1 and 6) (also optional)]',
         'Have an account. Requirements for editing your party: Be in a Discit Station, the chosen Discit has attacks equipped, can\'t be used during combat, can\'t equip the same Discit more than once'
     ),
@@ -115,12 +109,6 @@ const commands = [
         'This should be the very first command that you use, as it will register you for an account',
         '',
         'Doesn\'t have an account already'
-    ),
-    new Command(
-        'select',
-        'This command selects a Discit you own so that you can change its nickname, equip attacks, etc.',
-        '[index of Discit in your collection (use \'list\')]',
-        'Have an account, can\'t be used while in combat (your selected Discit in combat counts as the one that is currently fighting)'
     ),
     new Command(
         'shop',
