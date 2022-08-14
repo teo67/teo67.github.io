@@ -21,12 +21,6 @@ const commands = [
         'Have an account, be in a Discit Station, have Discits in your party, not currently in combat (all of these apply to your opponent too), wager is above 0 but not more than either person has'
     ),
     new Command(
-        'buy',
-        'Purchase an item from the shop.',
-        '[amount to buy (optional)] [item name]',
-        'Has an account, is not in combat, is in a Discit Station, has enough coins to purchase item'
-    ),
-    new Command(
         'choose',
         'Choose a starter Discit between Koulit, Leafid, and Ferenhyde.',
         '',
@@ -52,15 +46,9 @@ const commands = [
     ),
     new Command(
         'inventory',
-        'This command will print out a list of items in your inventory. If you specify a page in your inventory, you can find items more easily.',
-        '[inventory page (optional)]',
-        'Has registered for an account'
-    ),
-    new Command(
-        'item',
-        'This command allows you to use an item from your inventory while not in battle.',
-        '[index of item in your inventory] [index of Discit in party to use it on (only required for some items)]',
-        'Has an account, is not in combat, item is usable'
+        'This command will print out a list of items in your inventory, allowing you to use items as you wish.',
+        '',
+        'Has registered for an account, cannot be in battle if buying items'
     ),
     new Command(
         'list',
@@ -93,12 +81,6 @@ const commands = [
         'Have an account. Requirements for editing your party: Be in a Discit Station, the chosen Discit has attacks equipped, can\'t be used during combat, can\'t equip the same Discit more than once'
     ),
     new Command(
-        'partyselect',
-        'This command selects a Discit you own so that you can change its nickname, equip attacks, etc.',
-        '[index of Discit in your party (use \'party\' with no arguments)]',
-        'Have an account, can\'t be used while in combat (your selected Discit in combat counts as the one that is currently fighting)'
-    ),
-    new Command(
         'profile',
         'This command will show you some helpful information such as your location and the number of Discits you\'ve caught.',
         '',
@@ -109,6 +91,12 @@ const commands = [
         'This should be the very first command that you use, as it will register you for an account',
         '',
         'Doesn\'t have an account already'
+    ),
+    new Command(
+        'select', 
+        'This command selects a Discit in your party so that you can change its nickname, equip attacks, etc.',
+        '',
+        'Have an account, can\'t be used while in combat (your selected Discit in combat counts as the one that is currently fighting)'
     ),
     new Command(
         'shop',
@@ -131,8 +119,8 @@ const commands = [
     new Command(
         'switch',
         'Swap around the positions of two Discits in your party.',
-        '[index of Discit #1 in your party] [index of Discit #2 in your party]',
-        'Have an account, can\'t be used while in combat, both arguments should be positive integers that refer to slots in your party'
+        '',
+        'Have an account, can\'t be used while in combat'
     ),
     new Command(
         'trade',
