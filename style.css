@@ -28,12 +28,15 @@ section#intro nav {
     border: 0.5vw solid purple;
     margin: 1vw;    
     width: 92vw;
+    height: 13vw;
     margin-left: 4vw;
     z-index: 21;
     position: relative;
     border-radius: 5vw;
     transition: opacity ease 0.5s;
     opacity: 1;
+    padding: 0;
+    overflow: hidden;
 }
 div.bigspace {
     height: 100vh;
@@ -42,11 +45,11 @@ div.bigspace {
 }
 section#intro nav img {
     margin: 2vw;
-    width: 10vw;
+    width: 8vw;
     transition: all ease 0.5s;
 }
 section#intro nav img:hover {
-    width: 8vw;
+    width: 6vw;
     margin: 3vw;
 }
 div#slide {
@@ -511,6 +514,7 @@ h1#banner {
     padding: 1vw;
 }
 h1#tutorial {
+    font-size: 1vw;
     display: block;
     float: right;
     position: relative;

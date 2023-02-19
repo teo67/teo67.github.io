@@ -1,0 +1,235 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: all ease 0.4s;
+    font-family: "Verdana";
+}
+
+section#circuit {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(245, 186, 199, 1.0);
+}
+
+div#positive {
+    position: absolute;
+    left: 0;
+    top: 35vh;
+    background-color: red;
+    width: 5vw;
+    height: 30vh;
+    border-top-right-radius: 1vw;
+    border-bottom-right-radius: 1vw;
+    z-index: 5;
+}
+
+div#positive:hover {
+    height: 40vh;
+    top: 30vh;
+}
+
+div#negative:hover {
+    height: 40vh;
+    top: 30vh;
+}
+
+div#negative {
+    position: absolute;
+    right: 0;
+    top: 35vh;
+    background-color: black;
+    width: 5vw;
+    height: 30vh;
+    border-top-left-radius: 1vw;
+    border-bottom-left-radius: 1vw;
+    z-index: 5;
+}
+
+div.component {
+    position: absolute;
+}
+
+div.series {
+    background-color: black;
+    z-index: 1;
+}
+div.series:hover {
+    transform: scaleY(900%) scaleX(101%);
+}
+div.adder {
+    background-color: rgba(97, 222, 224, 100);
+    border-radius: 40%;
+    border: 0 solid rgba(42, 167, 209, 100);
+    z-index: 4;
+    transition: all ease 0.4s;
+    cursor: pointer;
+}
+div.adder:hover {
+    scale: 120%;
+    transform: rotate(180deg);
+    border-width: 0.1px !important;
+}
+div.adder::after {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    background-color: rgba(42, 167, 209, 100);
+    border-radius: 20% / 100%; 
+    z-index: 5;
+    width: 80%;
+    height: 20%;
+    content: "";
+}
+div.adder::before {
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    background-color: rgba(42, 167, 209, 100);
+    border-radius: 100% / 20%; 
+    z-index: 5;
+    width: 20%;
+    height: 80%;
+    content: "";
+}
+div.resistor {
+    background-color: blue;
+    z-index: 4;
+}
+div.resistor:hover {
+    animation: resist 0.5s ease;
+}
+@keyframes resist {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-30%); }
+    75% { transform: translateY(30%); }
+}
+div.switch {
+    background-color: green;
+    z-index: 4;
+    transform: rotate(-20deg);
+    transform-origin: left;
+    border: 0 solid green;
+    border-radius: 1vw;
+}
+div.switch:hover {
+    border-width: 0.1px;
+    background-color: transparent;
+}
+div.switch.closed {
+    transform: none;
+}
+div.parallel {
+    background-color: black;
+    z-index: 3;
+}
+div.parallel:hover {
+    transform: scaleX(900%) scaleY(101%);
+}
+div.blocker {
+    background-color: rgba(245, 186, 199, 100);
+    z-index: 2;
+}
+div.LED {
+    background-color: gray;
+    z-index: 4;
+    border-radius: 30% / 60%;
+}
+div.LED.on {
+    background-color: darkviolet;
+}
+
+section#adding-bar, section#display {
+    position: absolute;
+    border-radius: 1vw;
+    background-color: rgba(240, 79, 174);
+    bottom: 5vh;
+    width: 80vw;
+    left: 10vw;
+    border: 0.0vw solid transparent;
+    transition: all ease 0.1s;
+}
+section#adding-bar:hover {
+    background-color: rgba(240, 79, 174, 0.3);
+    border-color: rgba(240, 79, 174);
+    border-width: 0.1vh;
+}
+section#adding-bar {
+    z-index: 50;
+}
+section#dispay {
+    z-index: 49;
+}
+section.hidden {
+    opacity: 0;
+}
+section#adding-bar button, section#display div {
+    position: relative;
+    font-size: 2vh;
+    margin: 1vh;
+    padding: 0;
+    border: 0;
+    float: left;
+    border-radius: 1vw;
+    padding: 1vh;
+    background-color: rgba(252, 184, 224);
+    color: rgba(240, 79, 174);
+}
+section#adding-bar button:hover {
+    background-color: rgba(240, 79, 174);
+    color: rgba(252, 184, 224);
+}
+button#reset {
+    position: absolute;
+    top: 1vw;
+    left: 1vw;
+    z-index: 100;
+    font-size: 3vh;
+    border: 0.2vw solid violet;
+    color: violet;
+    background-color: darkviolet;
+    padding: 1.2vh;
+    border-radius: 1vh;
+    cursor: pointer;
+}
+button#reset:hover {
+    opacity: 0.8;
+    scale: 120%;
+}
+
+div#rotate {
+    display: none;
+    position: absolute;
+    z-index: 101;
+    background-color: violet;
+    width: 90vw;
+    height: 30vw;
+    left: 5vw;
+    top: 15vh;
+    border-radius: 2vh;
+    padding: 3vw;
+    transition: none;
+}
+div#rotate p {
+    color: darkviolet;
+    font-size: 6vw;
+    line-height: 24vw;
+    float: top;
+    margin-left: 25vw;
+    transition: none;
+}
+div#rotate img {
+    filter: invert(12%) sepia(95%) saturate(6115%) hue-rotate(283deg) brightness(86%) contrast(112%);
+    width: 20vw;
+    margin-top: 2vw;
+    display: inline;
+    position: absolute;
+    transition: none;
+}
+
+@media screen and (orientation: portrait) {
+    div#rotate {
+        display: block;
+    }
+}
