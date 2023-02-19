@@ -79,7 +79,7 @@ section#intro h1 {
     position: relative;
     text-align: center;
     display: block;
-    font-family: Tahoma;
+    font-family: "Tahoma";
     font-size: 8vw;
     z-index: 21;
     color: violet;
@@ -463,21 +463,20 @@ div#selector {
     margin-right: 1vw;
     margin-top: 1vw;
     padding-right: 1vw;
-    padding-top: 1vw;
-    padding-bottom: 0vw;
     border-radius: 1vw;
     transition: all ease 0.75s;
 }
 div#selector button {
     margin-left: 1vw;
-    margin-bottom: 1vw;
+    margin-bottom: 1.5vw;
     background-color: violet;
     border: 1px solid transparent;
     border-radius: 0.5vw;
     padding: 1vw;
     color: purple;
-    font-family: Tahoma;
+    font-family: "Tahoma";
     transition: all ease 0.5s;
+    font-size: 1vw;
 }
 div#selector.restricted {
     opacity: 0.1;
@@ -506,7 +505,7 @@ h1#banner {
     height: calc(20vh + 4vw);
     line-height: 20vh;
     text-align: center;
-    font-family: Tahoma;
+    font-family: "Tahoma";
     background-color: pink;
     border-radius: 2vw;
     border: 1vw solid purple;
@@ -523,7 +522,7 @@ h1#tutorial {
     background-color: violet;
     border: 0.5vw solid purple;
     z-index: 100;
-    font-family: Tahoma;
+    font-family: "Tahoma";
     color: purple;
     animation: fly 1s ease;
     transition: all ease 1s;
@@ -566,7 +565,7 @@ button#edit {
     border: 0vw solid palegoldenrod;
     background-color: palegoldenrod;
     color: coral;
-    font-family: Tahoma;
+    font-family: "Tahoma";
     font-size: 1.5vw;
 }
 button#play {
@@ -679,7 +678,7 @@ a#build {
     left: 7vw;
     background-color: lightsteelblue;
     color: steelblue;
-    font-family: Tahoma;
+    font-family: "Tahoma";
     font-size: 2vw;
     z-index: 100;
     display: inline;

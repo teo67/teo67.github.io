@@ -6,6 +6,10 @@
     font-family: "Verdana";
 }
 
+html {
+    background-color: rgba(245, 186, 199, 1.0);
+}
+
 section#circuit {
     position: fixed;
     width: 100%;
@@ -56,7 +60,7 @@ div.series {
     z-index: 1;
 }
 div.series:hover {
-    transform: scaleY(900%) scaleX(101%);
+    transform: scaleY(500%) scaleX(101%);
 }
 div.adder {
     background-color: rgba(97, 222, 224, 100);
@@ -114,7 +118,7 @@ div.switch {
     border-radius: 1vw;
 }
 div.switch:hover {
-    border-width: 0.1px;
+    border-width: 0.2vw;
     background-color: transparent;
 }
 div.switch.closed {
@@ -125,7 +129,7 @@ div.parallel {
     z-index: 3;
 }
 div.parallel:hover {
-    transform: scaleX(900%) scaleY(101%);
+    transform: scaleX(500%) scaleY(101%);
 }
 div.blocker {
     background-color: rgba(245, 186, 199, 100);
