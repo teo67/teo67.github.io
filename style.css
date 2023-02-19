@@ -462,13 +462,14 @@ div#selector {
     z-index: 100;
     margin-right: 1vw;
     margin-top: 1vw;
+    padding-top: 1vw;
     padding-right: 1vw;
     border-radius: 1vw;
     transition: all ease 0.75s;
 }
 div#selector button {
     margin-left: 1vw;
-    margin-bottom: 1.5vw;
+    margin-bottom: 1vw;
     background-color: violet;
     border: 1px solid transparent;
     border-radius: 0.5vw;
