@@ -12,6 +12,21 @@ html, body {
 ::-webkit-scrollbar {
     display: none;
 }
+a#resume {
+    position: fixed;
+    top: 1vw;
+    right: 1vw;
+    z-index: 1000;
+    background-color: wheat;
+    padding: 1vw;
+    border-radius: 0.5vw;
+    color: black;
+    text-decoration: none;
+    font-family: "Tahoma";
+}
+a#resume:hover {
+    cursor: pointer;
+}
 section#intro {
     opacity: 1;
     transition: all ease 1s;
