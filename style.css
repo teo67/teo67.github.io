@@ -60,11 +60,11 @@ div.bigspace {
 }
 section#intro nav img {
     margin: 2vw;
-    width: 8vw;
+    width: 7vw;
     transition: all ease 0.5s;
 }
 section#intro nav img:hover {
-    width: 6vw;
+    width: 5vw;
     margin: 3vw;
 }
 div#slide {
