@@ -7,6 +7,7 @@ const buoys = document.getElementById("buoys");
 const redSupply = document.getElementById("red-supply");
 const greenSupply = document.getElementById("green-supply");
 const linesHolder = document.getElementById("lines");
+const weights = document.getElementById("weights");
 let boatX = 0;
 let boatY = 0;
 const boatRadius = 75/2;
@@ -97,6 +98,10 @@ document.addEventListener('mouseup', () => {
             }
             clearInterval(registeredTurnInterval);
         } else {
+            if(window.innerWidth - selected.x < 50) {
+                selected.element.remove();
+                buoyList.splice(buoyList.indexOf(selected), 1);
+            }
             updateRelativePosition(selected);
         }
         selected = null;
@@ -117,9 +122,18 @@ const regenSupply = isRed => {
     }
 }
 
+let stepping = false;
+
 document.addEventListener('mousemove', ev => {
     if(selected !== null) {
         updatePosition(selected, ev.pageX - offsetX, ev.pageY - offsetY, selected == boat ? boatRadius : buoyRadius);
+        if(selected !== boat) {
+            if(window.innerWidth - selected.x < 50) {
+                selected.element.classList.add("removing");
+            } else if(selected.element.classList.contains("removing")) {
+                selected.element.classList.remove("removing");
+            }
+        }
     }
 });
 
@@ -128,6 +142,8 @@ document.addEventListener('keydown', ev => {
         turnDirection = 1;
     } else if(ev.key == 'e') {
         turnDirection = -1;
+    } else if(ev.key == ' ') {
+        stepping = true;
     }
 });
 
@@ -136,6 +152,8 @@ document.addEventListener('keyup', ev => {
         turnDirection = 0;
     } else if(ev.key == 'e' && turnDirection == -1) {
         turnDirection = 0;
+    } else if(ev.key == ' ') {
+        stepping = false;
     }
 });
 
@@ -167,7 +185,7 @@ const getBuoyOrderings = () => {
             const index = chooseNext(allGreenBuoys, greenOrdering);
             allGreenBuoys.delete(index);
             greenOrdering.push(index);
-        }
+        }   
         if(allRedBuoys.size > 0) {
             const index = chooseNext(allRedBuoys, redOrdering);
             allRedBuoys.delete(index);
@@ -182,6 +200,50 @@ const getBuoyOrderings = () => {
             drawLine(buoyList[ordering[i]].x, buoyList[ordering[i]].y, buoyList[ordering[i + 1]].x, buoyList[ordering[i + 1]].y);
         }
     }
+
+    const waypoints = [];
+    for(let i = 0; i < Math.min(greenOrdering.length, redOrdering.length); i++) {
+        waypoints.push({x: buoyList[greenOrdering[i]].x/2 + buoyList[redOrdering[i]].x/2,
+                        y: buoyList[greenOrdering[i]].y/2 + buoyList[redOrdering[i]].y/2});
+    }
+
+    if(waypoints.length > 0) {
+        drawLine(boat.x, boat.y, waypoints[0].x, waypoints[0].y, "waypoint");
+        for(let i = 0; i < waypoints.length - 1; i++) {
+            drawLine(waypoints[i].x, waypoints[i].y, waypoints[i + 1].x, waypoints[i + 1].y, "waypoint");
+        }
+    }
+
+    return waypoints;
+}
+
+const magnitude = (x, y) => {
+    return (x**2 + y**2)**0.5;
+}
+
+const addWeight = (name, defaultValue) => {
+    const label = document.createElement("label");
+    label.htmlFor = name;
+    label.innerText = name;
+    label.classList.add("weight");
+    const input = document.createElement("input");
+    input.type = "number";
+    input.name = name;
+    input.value = defaultValue;
+    input.classList.add("weight");
+    input.addEventListener('keydown', () => getBuoyOrderings());
+    input.addEventListener('paste', () => getBuoyOrderings());
+    input.addEventListener('input', () => getBuoyOrderings());
+    weights.appendChild(label);
+    weights.appendChild(input);
+    return input;
+}
+
+const distanceWeight = addWeight('same-color-dist', 1);
+const angleWeight = addWeight('inline-angle', 200/Math.PI);
+
+const angleBetween = (x1, y1, x2, y2) => {
+    return Math.acos((x1 * x2 + y1 * y2) / (magnitude(x1, y1) * magnitude(x2, y2)));
 }
 
 const chooseNext = (set, ordering) => {
@@ -189,9 +251,20 @@ const chooseNext = (set, ordering) => {
     let lowestIndex = -1;
     const referenceX = ordering.length == 0 ? 0 : buoyList[ordering[ordering.length - 1]].relativeX;
     const referenceY = ordering.length == 0 ? 0 : buoyList[ordering[ordering.length - 1]].relativeY;
-
+    let previousVectorX = 0;
+    let previousVectorY = 0;
+    if(ordering.length > 1) {
+        previousVectorX = buoyList[ordering[ordering.length - 1]].relativeX - buoyList[ordering[ordering.length - 2]].relativeX;
+        previousVectorY = buoyList[ordering[ordering.length - 1]].relativeY - buoyList[ordering[ordering.length - 2]].relativeY;
+    }
     for(const index of set) {
-        const dist = ((buoyList[index].relativeX - referenceX)**2 + (buoyList[index].relativeY - referenceY)**2)**0.5;
+        const xDiff = buoyList[index].relativeX - referenceX;
+        const yDiff = buoyList[index].relativeY - referenceY;
+        let dist = magnitude(xDiff, yDiff) * distanceWeight.value;
+        if(ordering.length > 1) {
+            const angle = angleBetween(xDiff, yDiff, previousVectorX, previousVectorY);
+            dist += angle * angleWeight.value;
+        }
         if(lowestDist == null || dist < lowestDist) {
             lowestDist = dist;  
             lowestIndex = index;
@@ -203,3 +276,35 @@ const chooseNext = (set, ordering) => {
 const drawLine = (x1, y1, x2, y2, line_class = "line") => {
     linesHolder.innerHTML += `<svg><line class=${line_class} x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/></svg>`
 }
+
+const speed = 100; // pixels/sec
+const stepUpdateRate = .01;// seconds
+
+const step = () => {
+    if(!stepping) {
+        return;
+    }
+    const pixelStep = speed * stepUpdateRate;
+    const waypoints = getBuoyOrderings();
+    if(waypoints.length == 0) {
+        return;
+    }
+    const targetPosition = waypoints[0];
+    let targetAngle = boatOrientation;
+    if(waypoints.length > 1) {
+        targetAngle = -Math.atan2(waypoints[1].y - waypoints[0].y, waypoints[1].x - waypoints[0].x) + Math.PI/2;
+    }
+    const positionDiff = magnitude(boat.x - targetPosition.x, boat.y - targetPosition.y);
+    const fractionMoved = pixelStep / positionDiff;
+    let angleDiff = (targetAngle - boatOrientation) % (2 * Math.PI);
+    if(angleDiff > Math.PI) {
+        angleDiff -= 2 * Math.PI;
+    }
+    updateBoatOrientation(boatOrientation + fractionMoved * angleDiff);
+    updatePosition(boat, boat.x + fractionMoved * (targetPosition.x - boat.x), boat.y + fractionMoved * (targetPosition.y - boat.y), boatRadius);
+    for(const buoy of buoyList) {
+        updateRelativePosition(buoy);
+    }
+}
+
+setInterval(step, stepUpdateRate*1000);

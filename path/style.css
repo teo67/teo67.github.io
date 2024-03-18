@@ -45,6 +45,7 @@ div#green-supply, div#red-supply {
     height: 25px;
     content: "";
     border-radius: 25px;
+    transition: width ease 0.4s, height ease 0.4s, opacity ease 0.4s;
 }
 .green {
     background-color: green;
@@ -55,7 +56,10 @@ div#green-supply, div#red-supply {
 .line {
     stroke-width: 1px;
     stroke: black;
-    position: fixed;
+}
+.waypoint {
+    stroke-width: 2px;
+    stroke: magenta;
 }
 section#lines svg {
     width: 100vw;
@@ -63,4 +67,34 @@ section#lines svg {
     position: fixed;
     top: 0;
     left: 0;
+}
+section#weights {
+    position: absolute;
+    bottom: 1vw;
+    left: 1vw;
+    background-color: lightblue;
+    padding: 0.5vw;
+}
+label.weight {
+    display: inline-block;
+    font-size: 1.3vw;
+}
+.removing {
+    opacity: 0.3;
+    width: 50px;
+    height: 50px;
+}
+input.weight {
+    margin: 1vw;
+    display: inline-block;
+    width: 5vw;
+}
+section#trash {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 5vw;
+    background: linear-gradient(to right, lightgrey, red);
+    z-index: -1;
 }
