@@ -42,9 +42,9 @@ section#intro nav {
     background-color: violet;
     border: 0.5vw solid purple;
     margin: 1vw;    
-    width: 92vw;
-    height: 13vw;
-    margin-left: 4vw;
+    width: 94vw;
+    height: 11.5vw;
+    margin-left: 3vw;
     z-index: 21;
     position: relative;
     border-radius: 5vw;
@@ -60,11 +60,11 @@ div.bigspace {
 }
 section#intro nav img {
     margin: 2vw;
-    width: 7vw;
+    width: 6vw;
     transition: all ease 0.5s;
 }
 section#intro nav img:hover {
-    width: 5vw;
+    width: 4vw;
     margin: 3vw;
 }
 div#slide {

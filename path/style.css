@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+    font-family: "Verdana";
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+html {
+    background-color: lightgray;
+}
+body {
+    overflow: hidden;
+}
+.draggable {
+    position: fixed;
+}
+img#boat {
+    width: 75px;
+    height: 75px;
+    left: 0;
+    top: 0;
+}
+.hidden {
+    opacity: 0.5;
+}
+section#supply {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding: 5px;
+    background-color: tan;
+    border-radius: 1vw;
+}
+div#green-supply, div#red-supply {
+    width: 30px;
+    height: 30px;
+    padding: 2.5px;
+    background-color: lightgrey;
+    border-radius: 1vw;
+    content: "";
+    display: inline-block;
+}
+.green, .red {
+    width: 25px;
+    height: 25px;
+    content: "";
+    border-radius: 25px;
+}
+.green {
+    background-color: green;
+}
+.red {
+    background-color: red;
+}
+.line {
+    stroke-width: 1px;
+    stroke: black;
+    position: fixed;
+}
+section#lines svg {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
