@@ -98,7 +98,7 @@ input {
     display: inline-block;
     width: 5vw;
 }
-button#generate input {
+div#generate input {
     margin: 0;
 }
 section#trash {
@@ -157,7 +157,7 @@ div#head {
     right: 1vw;
     z-index: 10;
 }
-button#generate, button#clear {
+div#generate, div#clear {
     opacity: 1;
     display: inline-block;
     background-color: lightblue;
@@ -167,12 +167,11 @@ button#generate, button#clear {
     transition: all ease 0.4s;
     padding: 1vw;
 }
-
-button#generate:hover {
+div#generate:hover {
     padding: 1.3vw;
     background-color: aquamarine;
 }
-button#clear:hover {
+div#clear:hover {
     padding: 0.7vw;
     background-color: pink;
 }
