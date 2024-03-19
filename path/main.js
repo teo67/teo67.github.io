@@ -319,6 +319,7 @@ const diffColorDistanceWeight = addWeight('diff-color-dist', 1/5);
 const diffColorDistanceMaxDeviation = addWeight('MAX', (diffColorMaxDist - diffColorMinDist) * 1.5);
 const crossAngleWeight = addWeight('cross-section-angle', 3/Math.PI);
 const crossAngleMaxDeviation = addWeight('MAX', Math.PI/2.5);
+const boatSpeed = addWeight("boat-speed", 10);
 
 const angleBetween = (x1, y1, x2, y2) => {
     return Math.acos((x1 * x2 + y1 * y2) / (magnitude(x1, y1) * magnitude(x2, y2)));
@@ -420,14 +421,13 @@ const makeGrid = () => {
 makeGrid();
 addEventListener('resize', makeGrid);
 
-const speed = 100; // pixels/sec
 const stepUpdateRate = .01;// seconds
 
 const step = () => {
     if(!stepping) {
         return;
     }
-    const pixelStep = speed * stepUpdateRate;
+    const pixelStep = boatSpeed.value * pixelsPerFoot * stepUpdateRate;
     const waypoints = getBuoyOrderings();
     if(waypoints.length == 0) {
         return;
