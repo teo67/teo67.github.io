@@ -53,15 +53,23 @@ div#green-supply, div#red-supply {
 .red {
     background-color: red;
 }
-.line {
+.line, .gridline {
     stroke-width: 1px;
+    stroke: black;
+}
+.gridline {
+    opacity: 0.3;
+}
+.cross {
+    stroke-width: 1px;
+    stroke-dasharray: 5,5;
     stroke: black;
 }
 .waypoint {
     stroke-width: 2px;
     stroke: magenta;
 }
-section#lines svg {
+svg {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -72,6 +80,7 @@ section#weights {
     position: absolute;
     bottom: 1vw;
     left: 1vw;
+    width: 98vw;
     background-color: lightblue;
     padding: 0.5vw;
 }
@@ -84,10 +93,13 @@ label.weight {
     width: 50px;
     height: 50px;
 }
-input.weight {
+input {
     margin: 1vw;
     display: inline-block;
     width: 5vw;
+}
+button#generate input {
+    margin: 0;
 }
 section#trash {
     position: absolute;
@@ -97,4 +109,70 @@ section#trash {
     width: 5vw;
     background: linear-gradient(to right, lightgrey, red);
     z-index: -1;
+}
+section#grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+}
+div.radial-display {
+    z-index: -1;
+    position: absolute;
+    animation: radial-in 0.2s ease;
+    border-radius: 100%;
+    opacity: 0.1;
+}
+div.radial-outline {
+    position: absolute;
+    z-index: -1;
+    border-radius: 100%;
+    border: 1px solid black;
+    animation: radial-in 0.2s ease;
+}
+@keyframes radial-in {
+    from {transform: scale(0);}
+    to {transform: scale(1);}
+}
+.outer {
+    opacity: 0.3;
+}
+.center {
+    opacity: 1;
+}
+.inner {
+    opacity: 0.3;
+}
+.same {
+    background-color: lightblue;
+}
+.diff {
+    background: gray;
+}
+div#head {
+    position: absolute;
+    top: 1vw;
+    right: 1vw;
+    z-index: 10;
+}
+button#generate, button#clear {
+    opacity: 1;
+    display: inline-block;
+    background-color: lightblue;
+    border: none;
+    cursor: pointer;
+    border-radius: 1vw;
+    transition: all ease 0.4s;
+    padding: 1vw;
+}
+
+button#generate:hover {
+    padding: 1.3vw;
+    background-color: aquamarine;
+}
+button#clear:hover {
+    padding: 0.7vw;
+    background-color: pink;
 }
