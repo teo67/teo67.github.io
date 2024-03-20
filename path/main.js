@@ -315,19 +315,21 @@ const gridInterval = 5; //feet
 const distanceWeight = addWeight('same-color-dist', 1/5);
 const distanceMaxDeviation = addWeight('MAX', (sameColorMaxDist - sameColorMinDist)/2 * 1.5);
 
-const angleWeight = addWeight('inline-angle-per-dist', 0);//3/Math.PI;
-const angleMaxDeviation = addWeight('MAX', 1.2);//0.9;
+const angleWeight = addWeight('inline-angle', 6/Math.PI);//3/Math.PI;
+const angleMaxDeviation = addWeight('MAX', 1.1);//0.9;
+const nextAngleWeight = addWeight('next-angle', 6/Math.PI);
+const nextAngleMaxDeviation = addWeight('MAX', 1.1);
 
 const diffColorDistanceWeight = addWeight('diff-color-dist', 1/5);
 const diffColorDistanceMaxDeviation = addWeight('MAX', (diffColorMaxDist - diffColorMinDist)/2 * 1.5);
-const crossAngleWeight = addWeight('cross-section-angle', 3/Math.PI);
+const crossAngleWeight = addWeight('cross-section-angle', 6/Math.PI);
 const crossAngleMaxDeviation = addWeight('MAX', 1.0);
 
 const intersectionWeight = addWeight('intersection', 0);
 const intersectionMax = addWeight('MAX', 99999);
 
-const intersectionRatioWeight = addWeight('intersection-ratio', 1);
-const intersectionRatioMax = addWeight('MAX', 3);
+const intersectionRatioWeight = addWeight('intersection-ratio', 0);
+const intersectionRatioMax = addWeight('MAX', 99999);
 
 const boatSpeed = addWeight("boat-speed", 10);
 
@@ -352,11 +354,17 @@ const getReference = (ordering, isRed) => {
     };
 }
 
-const getSameColorVector = (greenOrdering, redOrdering) => {
+const getNormal = (redIndex, greenIndex) => {
     return {
-        x: greenOrdering.length < 1 ? 0 : buoyList[greenOrdering[greenOrdering.length - 1]].relativeY - buoyList[redOrdering[redOrdering.length - 1]].relativeY,
-        y: greenOrdering.length < 1 ? 1 : buoyList[redOrdering[redOrdering.length - 1]].relativeX - buoyList[greenOrdering[greenOrdering.length - 1]].relativeX
-    };
+        x: buoyList[greenIndex].relativeY - buoyList[redIndex].relativeY,
+        y: buoyList[redIndex].relativeX - buoyList[greenIndex].relativeX
+    }; 
+}
+
+const getSameColorVector = (greenOrdering, redOrdering) => {
+    return greenOrdering.length < 1 ? {
+        x: 0, y: 1
+    } : getNormal(redOrdering[redOrdering.length - 1], greenOrdering[greenOrdering.length - 1]);
 }
 
 const getValue = input => {
@@ -417,7 +425,7 @@ const chooseNext = (greenSet, redSet, greenOrdering, redOrdering) => {
             const diffColorDist = distFeet * getValue(diffColorDistanceWeight);
             const crossAngle = angleBetween(redRef.x - greenRef.x, redRef.y - greenRef.y, buoyList[redIndex].relativeX - buoyList[greenIndex].relativeX, buoyList[redIndex].relativeY - buoyList[greenIndex].relativeY);
             
-            console.log(crossAngle);
+            console.log('cross = ' + crossAngle);
             if(crossAngle > getValue(crossAngleMaxDeviation)) {
                 console.log([redRef.x  - greenRef.x, redRef.y - greenRef.y]);
                 console.log([buoyList[redIndex].relativeX - buoyList[greenIndex].relativeX, buoyList[redIndex].relativeY - buoyList[greenIndex].relativeY]);
@@ -426,18 +434,40 @@ const chooseNext = (greenSet, redSet, greenOrdering, redOrdering) => {
             }
             
             const crossAngleContribution = crossAngle * getValue(crossAngleWeight);
-
             const xDiff = (buoyList[redIndex].relativeX + buoyList[greenIndex].relativeX - greenRef.x - redRef.x)/2;
             const yDiff = (buoyList[redIndex].relativeY + buoyList[greenIndex].relativeY - greenRef.y - redRef.y)/2;
 
-            const angle = angleBetween(xDiff, yDiff, scv.x, scv.y);
-
-            console.log('angle = ' + angle + ' for red ' + redIndex + ', green ' + greenIndex);
-            if(angle > getValue(angleMaxDeviation)) {
-                console.log('angle too high');
-                continue;
+            let willConsiderAngle = true;
+            if(greenOrdering.length == 0) {
+                const betweenBuoysDiffX = buoyList[redIndex].relativeX - buoyList[greenIndex].relativeX;
+                const betweenBuoysDiffY = buoyList[redIndex].relativeY - buoyList[greenIndex].relativeY;
+                
+                const projection = (xDiff * betweenBuoysDiffX + yDiff * betweenBuoysDiffY)/(magnitude(betweenBuoysDiffX, betweenBuoysDiffY)**2);
+                console.log('projection = ' + projection);
+                if(Math.abs(projection) < 0.5) {
+                    willConsiderAngle = false;
+                }
             }
-            const angleContribution = angle * getValue(angleWeight);
+            let angleContribution = 0;
+
+            // if(willConsiderAngle) {
+                const angle = angleBetween(xDiff, yDiff, scv.x, scv.y);
+
+                console.log('angle = ' + angle + ' for red ' + redIndex + ', green ' + greenIndex);
+            const nextNormal = getNormal(redIndex, greenIndex);
+            const nextAngle = angleBetween(xDiff, yDiff, nextNormal.x, nextNormal.y);
+            console.log('next angle = ' + nextAngle);
+            if(willConsiderAngle) {
+                if(angle > getValue(angleMaxDeviation)) {
+                    console.log('angle too high');
+                    continue;
+                }
+                if(nextAngle > getValue(nextAngleMaxDeviation)) {
+                    console.log('next angle too high');
+                    continue;
+                }
+                angleContribution = angle * getValue(angleWeight) + nextAngle * getValue(nextAngleWeight);
+            }
 
             const intersectionAmtCross = getLinesIntersection(buoyList[greenIndex].relativeX, buoyList[greenIndex].relativeY, buoyList[redIndex].relativeX, buoyList[redIndex].relativeY, midpointRef.x, midpointRef.y, midpointRef.x + scv.x, midpointRef.y + scv.y);
             const intersectionAmtTrajectory = getLinesIntersection(midpointRef.x, midpointRef.y, midpointRef.x + scv.x, midpointRef.y + scv.y, buoyList[greenIndex].relativeX, buoyList[greenIndex].relativeY, buoyList[redIndex].relativeX, buoyList[redIndex].relativeY);
@@ -452,28 +482,10 @@ const chooseNext = (greenSet, redSet, greenOrdering, redOrdering) => {
             }
 
             const intersectionContribution = normalizedCrossIntersection * getValue(intersectionWeight);
-            const somewhatNormalizedTrajectoryIntersection = 2 * intersectionAmtTrajectory*magnitude(scv.x, scv.y)/magnitude(buoyList[greenIndex].relativeX - buoyList[redIndex].relativeX, buoyList[greenIndex].relativeY - buoyList[redIndex].relativeY);
-            console.log('trajectory normalized: ' + somewhatNormalizedTrajectoryIntersection);
-            const intersectionRatio = normalizedCrossIntersection/(somewhatNormalizedTrajectoryIntersection**2);
-            console.log('intersection ratio: ' + intersectionRatio);
 
-            if(normalizedCrossIntersection > 0.9) {
-                if(intersectionAmtTrajectory < 0) {
-                    console.log('going backwards??');
-                    continue;
-                }
-                if(intersectionRatio > getValue(intersectionRatioMax)) {
-                    console.log('intersection ratio too high');
-                    continue;
-                } 
-            }
-            
-            const intersectionRatioContribution = intersectionRatio * getValue(intersectionRatioWeight);
-            
-
-            const dist = greenWeight + cachedRedWeights[redIndex] + diffColorDist + crossAngleContribution + angleContribution + intersectionContribution + intersectionRatioContribution;
+            const dist = greenWeight + cachedRedWeights[redIndex] + diffColorDist + crossAngleContribution + angleContribution + intersectionContribution;
             console.log(`found weight = ${dist} for green=${greenIndex}, red=${redIndex}`);
-            console.log({green: greenWeight, red: cachedRedWeights[redIndex], diff: diffColorDist, cross: crossAngle, angle: angleContribution, intersection: intersectionContribution, ratio: intersectionRatioContribution});
+            console.log({green: greenWeight, red: cachedRedWeights[redIndex], diff: diffColorDist, cross: crossAngle, angle: angleContribution, intersection: intersectionContribution});
             if(lowestDist == null || dist < lowestDist) {
                 console.log("helloooo");
                 lowestDist = dist;  
