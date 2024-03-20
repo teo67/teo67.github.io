@@ -328,9 +328,6 @@ const crossAngleMaxDeviation = addWeight('MAX', 1.0);
 const intersectionWeight = addWeight('intersection', 0);
 const intersectionMax = addWeight('MAX', 99999);
 
-const intersectionRatioWeight = addWeight('intersection-ratio', 0);
-const intersectionRatioMax = addWeight('MAX', 99999);
-
 const boatSpeed = addWeight("boat-speed", 10);
 
 
