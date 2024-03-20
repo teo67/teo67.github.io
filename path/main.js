@@ -243,6 +243,7 @@ const getBuoyOrderings = () => {
     }
     let result = chooseNext(allGreenBuoys, allRedBuoys, greenOrdering, redOrdering);
     while(result !== null) {
+        console.log('going again');
         allGreenBuoys.delete(result.green);
         greenOrdering.push(result.green);
         allRedBuoys.delete(result.red);
@@ -312,49 +313,73 @@ const diffColorMidpointDist = (diffColorMaxDist + diffColorMinDist)/2;
 const gridInterval = 5; //feet
 
 const distanceWeight = addWeight('same-color-dist', 1/5);
-const distanceMaxDeviation = addWeight('MAX', (sameColorMaxDist - sameColorMinDist) * 1.5);
-const angleWeight = addWeight('inline-angle', 3/Math.PI);
-const angleMaxDeviation = addWeight('MAX', Math.PI/2.5);
+const distanceMaxDeviation = addWeight('MAX', (sameColorMaxDist - sameColorMinDist)/2 * 1.5);
+
+const angleWeight = addWeight('inline-angle-per-dist', 0);//3/Math.PI;
+const angleMaxDeviation = addWeight('MAX', 1.2);//0.9;
+
 const diffColorDistanceWeight = addWeight('diff-color-dist', 1/5);
-const diffColorDistanceMaxDeviation = addWeight('MAX', (diffColorMaxDist - diffColorMinDist) * 1.5);
+const diffColorDistanceMaxDeviation = addWeight('MAX', (diffColorMaxDist - diffColorMinDist)/2 * 1.5);
 const crossAngleWeight = addWeight('cross-section-angle', 3/Math.PI);
-const crossAngleMaxDeviation = addWeight('MAX', Math.PI/2.5);
+const crossAngleMaxDeviation = addWeight('MAX', 1.0);
+
+const intersectionWeight = addWeight('intersection', 0);
+const intersectionMax = addWeight('MAX', 99999);
+
+const intersectionRatioWeight = addWeight('intersection-ratio', 1);
+const intersectionRatioMax = addWeight('MAX', 3);
+
 const boatSpeed = addWeight("boat-speed", 10);
+
+
 
 const angleBetween = (x1, y1, x2, y2) => {
     return Math.acos((x1 * x2 + y1 * y2) / (magnitude(x1, y1) * magnitude(x2, y2)));
 }
 
-const getReference = ordering => {
+const getOrderingItemX = (ordering, index, isRed) => {
+    return index < 0 ? (diffColorMidpointDist*pixelsPerFoot/2 * (isRed ? 1 : -1)) : buoyList[ordering[index]].relativeX;
+}
+
+const getOrderingItemY = (ordering, index, _) => {
+    return index < 0 ? 0 : buoyList[ordering[index]].relativeY;
+}
+
+const getReference = (ordering, isRed) => {
     return {
-        x: ordering.length == 0 ? 0 : buoyList[ordering[ordering.length - 1]].relativeX,
-        y: ordering.length == 0 ? 0 : buoyList[ordering[ordering.length - 1]].relativeY
+        x: getOrderingItemX(ordering, ordering.length - 1, isRed),
+        y: getOrderingItemY(ordering, ordering.length - 1, isRed)
     };
 }
 
-const getSameColorVector = ordering => {
+const getSameColorVector = (greenOrdering, redOrdering) => {
     return {
-        x: ordering.length < 2 ? 0 : buoyList[ordering[ordering.length - 1]].relativeX - buoyList[ordering[ordering.length - 2]].relativeX,
-        y: ordering.length < 2 ? 0 : buoyList[ordering[ordering.length - 1]].relativeY - buoyList[ordering[ordering.length - 2]].relativeY
+        x: greenOrdering.length < 1 ? 0 : buoyList[greenOrdering[greenOrdering.length - 1]].relativeY - buoyList[redOrdering[redOrdering.length - 1]].relativeY,
+        y: greenOrdering.length < 1 ? 1 : buoyList[redOrdering[redOrdering.length - 1]].relativeX - buoyList[greenOrdering[greenOrdering.length - 1]].relativeX
     };
 }
 
-const getWeight = (ordering, index, reference, scv) => {
+const getValue = input => {
+    return Number(input.value); // i hate you javascript
+}
+
+const getWeight = (ordering, index, reference) => {
     const xDiff = buoyList[index].relativeX - reference.x;
     const yDiff = buoyList[index].relativeY - reference.y;
     const distanceFeet = Math.abs(magnitude(xDiff, yDiff)/pixelsPerFoot - (ordering.length == 0 ? 0 : sameColorMidpointDist));
-    if(ordering.length > 0 && distanceFeet > distanceMaxDeviation.value) {
+    console.log(magnitude(xDiff, yDiff)/pixelsPerFoot);
+    console.log(distanceFeet);
+    if(distanceFeet > (ordering.length == 0 ? sameColorMidpointDist : 0) + getValue(distanceMaxDeviation)) {
         return null;
     }
-    let dist = distanceFeet * distanceWeight.value;
-    if(ordering.length > 1) {
-        const angle = angleBetween(xDiff, yDiff, scv.x, scv.y);
-        if(angle > angleMaxDeviation.value) {
-            return null;
-        }
-        dist += angle * angleWeight.value;
-    }
-    return dist;
+    console.log('distance for index ' + index + ' = ' + distanceFeet);
+    return distanceFeet * getValue(distanceWeight);
+}
+
+const getLinesIntersection = (x11, y11, x12, y12, x21, y21, x22, y22) => {
+    // assumes lines are not parallel
+    const a = ((x22-x21)*(y11-y21)-(x11-x21)*(y22-y21))/((x12-x11)*(y22-y21)-(x22-x21)*(y12-y11));
+    return a;
 }
 
 const chooseNext = (greenSet, redSet, greenOrdering, redOrdering) => {
@@ -362,36 +387,95 @@ const chooseNext = (greenSet, redSet, greenOrdering, redOrdering) => {
     let lowestDist = null;
     let lowestIndexGreen = -1;
     let lowestIndexRed = -1;
-    const greenRef = getReference(greenOrdering);
-    const redRef = getReference(redOrdering);
-    const greenSCV = getSameColorVector(greenOrdering);
-    const redSCV = getSameColorVector(redOrdering);
+    const greenRef = getReference(greenOrdering, false);
+    const redRef = getReference(redOrdering, true);
+    const midpointRef = {
+        x: greenRef.x/2 + redRef.x/2,
+        y: greenRef.y/2 + redRef.y/2
+    };
+    const scv = getSameColorVector(greenOrdering, redOrdering);
+    const cachedRedWeights = {};
     for(const greenIndex of greenSet) {
-        const greenWeight = getWeight(greenOrdering, greenIndex, greenRef, greenSCV);
+        const greenWeight = getWeight(greenOrdering, greenIndex, greenRef);
         if(greenWeight == null) {
+            console.log('green weight too high for green ' + greenIndex);
             continue;
         }
         for(const redIndex of redSet) {
-            const redWeight = getWeight(redOrdering, redIndex, redRef, redSCV);
-            if(redWeight == null) {
+            if(cachedRedWeights[redIndex] === undefined) {
+                cachedRedWeights[redIndex] = getWeight(redOrdering, redIndex, redRef);
+            }
+            if(cachedRedWeights[redIndex] == null) {
+                console.log('red weight too high for red ' + redIndex);
                 continue;
             }
             const distFeet = Math.abs(magnitude(buoyList[redIndex].relativeX - buoyList[greenIndex].relativeX, buoyList[redIndex].relativeY - buoyList[greenIndex].relativeY)/pixelsPerFoot - diffColorMidpointDist);
-            if(distFeet > diffColorDistanceMaxDeviation.value) {
+            if(distFeet > getValue(diffColorDistanceMaxDeviation)) {
+                console.log('diff dist too high for green ' + greenIndex + ' red ' + redIndex + ' ' + distFeet);
                 continue;
             }
-            const diffColorDist = distFeet * diffColorDistanceWeight.value;
-            let crossAngle = 0;
-            if(greenOrdering.length > 0 && redOrdering.length > 0) {
-                crossAngle = angleBetween(redRef.x - greenRef.x, redRef.y - greenRef.y, buoyList[redIndex].relativeX - buoyList[greenIndex].relativeX, buoyList[redIndex].relativeY - buoyList[greenIndex].relativeY) * crossAngleWeight.value;
-                if(crossAngle > crossAngleMaxDeviation.value) {
+            const diffColorDist = distFeet * getValue(diffColorDistanceWeight);
+            const crossAngle = angleBetween(redRef.x - greenRef.x, redRef.y - greenRef.y, buoyList[redIndex].relativeX - buoyList[greenIndex].relativeX, buoyList[redIndex].relativeY - buoyList[greenIndex].relativeY);
+            
+            console.log(crossAngle);
+            if(crossAngle > getValue(crossAngleMaxDeviation)) {
+                console.log([redRef.x  - greenRef.x, redRef.y - greenRef.y]);
+                console.log([buoyList[redIndex].relativeX - buoyList[greenIndex].relativeX, buoyList[redIndex].relativeY - buoyList[greenIndex].relativeY]);
+                console.log('cross angle too high for green ' + greenIndex + ' red ' + redIndex + ' ' + crossAngle);
+                continue;
+            }
+            
+            const crossAngleContribution = crossAngle * getValue(crossAngleWeight);
+
+            const xDiff = (buoyList[redIndex].relativeX + buoyList[greenIndex].relativeX - greenRef.x - redRef.x)/2;
+            const yDiff = (buoyList[redIndex].relativeY + buoyList[greenIndex].relativeY - greenRef.y - redRef.y)/2;
+
+            const angle = angleBetween(xDiff, yDiff, scv.x, scv.y);
+
+            console.log('angle = ' + angle + ' for red ' + redIndex + ', green ' + greenIndex);
+            if(angle > getValue(angleMaxDeviation)) {
+                console.log('angle too high');
+                continue;
+            }
+            const angleContribution = angle * getValue(angleWeight);
+
+            const intersectionAmtCross = getLinesIntersection(buoyList[greenIndex].relativeX, buoyList[greenIndex].relativeY, buoyList[redIndex].relativeX, buoyList[redIndex].relativeY, midpointRef.x, midpointRef.y, midpointRef.x + scv.x, midpointRef.y + scv.y);
+            const intersectionAmtTrajectory = getLinesIntersection(midpointRef.x, midpointRef.y, midpointRef.x + scv.x, midpointRef.y + scv.y, buoyList[greenIndex].relativeX, buoyList[greenIndex].relativeY, buoyList[redIndex].relativeX, buoyList[redIndex].relativeY);
+            console.log('intersection amounts');
+            console.log(intersectionAmtCross, intersectionAmtTrajectory);
+            
+            const normalizedCrossIntersection = Math.abs(intersectionAmtCross-0.5) * 2; // distance from target midpoint, 1 = buoy to midpoint dist
+            console.log('normalized: ' + normalizedCrossIntersection);
+            if(normalizedCrossIntersection > getValue(intersectionMax)) {
+                console.log('intersection too high');
+                continue;
+            }
+
+            const intersectionContribution = normalizedCrossIntersection * getValue(intersectionWeight);
+            const somewhatNormalizedTrajectoryIntersection = 2 * intersectionAmtTrajectory*magnitude(scv.x, scv.y)/magnitude(buoyList[greenIndex].relativeX - buoyList[redIndex].relativeX, buoyList[greenIndex].relativeY - buoyList[redIndex].relativeY);
+            console.log('trajectory normalized: ' + somewhatNormalizedTrajectoryIntersection);
+            const intersectionRatio = normalizedCrossIntersection/(somewhatNormalizedTrajectoryIntersection**2);
+            console.log('intersection ratio: ' + intersectionRatio);
+
+            if(normalizedCrossIntersection > 0.9) {
+                if(intersectionAmtTrajectory < 0) {
+                    console.log('going backwards??');
                     continue;
                 }
+                if(intersectionRatio > getValue(intersectionRatioMax)) {
+                    console.log('intersection ratio too high');
+                    continue;
+                } 
             }
-            const dist = greenWeight + redWeight + diffColorDist + crossAngle;
+            
+            const intersectionRatioContribution = intersectionRatio * getValue(intersectionRatioWeight);
+            
+
+            const dist = greenWeight + cachedRedWeights[redIndex] + diffColorDist + crossAngleContribution + angleContribution + intersectionContribution + intersectionRatioContribution;
             console.log(`found weight = ${dist} for green=${greenIndex}, red=${redIndex}`);
-            console.log({green: greenWeight, red: redWeight, diff: diffColorDist, cross: crossAngle});
+            console.log({green: greenWeight, red: cachedRedWeights[redIndex], diff: diffColorDist, cross: crossAngle, angle: angleContribution, intersection: intersectionContribution, ratio: intersectionRatioContribution});
             if(lowestDist == null || dist < lowestDist) {
+                console.log("helloooo");
                 lowestDist = dist;  
                 lowestIndexGreen = greenIndex;
                 lowestIndexRed = redIndex;
@@ -427,7 +511,7 @@ const step = () => {
     if(!stepping) {
         return;
     }
-    const pixelStep = boatSpeed.value * pixelsPerFoot * stepUpdateRate;
+    const pixelStep = getValue(boatSpeed) * pixelsPerFoot * stepUpdateRate;
     const waypoints = getBuoyOrderings();
     if(waypoints.length == 0) {
         return;
@@ -467,14 +551,14 @@ const generatePath = () => {
         buoys.appendChild(newElement);
         buoyList.push(newBuoy);
 
-        const randAngle = (Math.random() - 0.5) * 2 * generateAngularDeviation.value;
+        const randAngle = (Math.random() - 0.5) * 2 * getValue(generateAngularDeviation);
         if(isFirst) {
-            const randDist = sameColorMidpointDist + (Math.random() - 0.5) * (sameColorMaxDist - sameColorMinDist) * generateLinearDeviation.value;
+            const randDist = sameColorMidpointDist + (Math.random() - 0.5) * (sameColorMaxDist - sameColorMinDist) * getValue(generateLinearDeviation);
             isFirst = false;
             currentX += randDist*pixelsPerFoot*Math.cos(randAngle);
             currentY -= randDist*pixelsPerFoot*Math.sin(randAngle);
         } else {
-            const randDist = diffColorMidpointDist + (Math.random() - 0.5) * (diffColorMaxDist - diffColorMinDist) * generateLinearDeviation.value;
+            const randDist = diffColorMidpointDist + (Math.random() - 0.5) * (diffColorMaxDist - diffColorMinDist) * getValue(generateLinearDeviation);
             
             currentX += randDist*pixelsPerFoot*Math.sin(randAngle);
             currentY += randDist*pixelsPerFoot*Math.cos(randAngle) * (isRed ? -1 : 1);
