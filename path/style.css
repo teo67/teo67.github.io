@@ -116,8 +116,15 @@ input {
     display: inline-block;
     width: 5vw;
 }
-div#generate input {
+div#generate input, div#export input {
     margin: 0;
+}
+input#import-input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline;
 }
 section#trash {
     position: absolute;
@@ -175,7 +182,7 @@ div#head {
     right: 1vw;
     z-index: 10;
 }
-div#generate, div#clear {
+div#generate, div#clear, div#export, div#import {
     opacity: 1;
     display: inline-block;
     background-color: lightblue;
@@ -192,4 +199,8 @@ div#generate:hover {
 div#clear:hover {
     padding: 0.7vw;
     background-color: pink;
+}
+div#export:hover {
+    padding: 1.1vw;
+    background-color: lightgreen;
 }

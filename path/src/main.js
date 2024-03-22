@@ -1,4 +1,4 @@
-import { turnUpdateInterval, turnSpeed, stepUpdateRate, pixelsPerFoot, sameColorMaxDist, sameColorMinDist, sameColorMidpointDist, diffColorMaxDist, diffColorMinDist, diffColorMidpointDist, boatRadius, buoyRadius } from "./constants.js";
+import { turnUpdateInterval, turnSpeed, stepUpdateRate, pixelsPerFoot, sameColorMaxDist, sameColorMinDist, sameColorMidpointDist, diffColorMaxDist, diffColorMinDist, diffColorMidpointDist, buoyRadius, boatWidth, boatLength } from "./constants.js";
 import { updateBoatOrientation, addWeight, getValue, makeBuoyElement, makeFullRadialDisplay, makeGrid, clearBuoys } from "./util.js";
 import Vector from "./Vector.js";
 import Buoy from "./Buoy.js";
@@ -7,12 +7,16 @@ import weights from "./weights.js";
 import getBuoyOrderings from "./getBuoyOrderings.js";
 import step from "./step.js";
 import generatePath from "./generatePath.js";
+import { exportJSON, importJSON } from "./JSON.js";
 
 const weightsElement = document.getElementById("weights");
 const boatElement = document.getElementById("boat");
 const buoys = document.getElementById("buoys");
 const redSupply = document.getElementById("red-supply");
 const greenSupply = document.getElementById("green-supply");
+const exportButton = document.getElementById("export");
+const filenameInput = document.getElementById("filename-input");
+const importInput = document.getElementById("import-input");
 
 const generateButton = document.getElementById("generate");
 
@@ -40,8 +44,8 @@ const regenSupply = isRed => {
     }
 }
 
-for(const weight of weights) {
-    weight.configureCallbacks(() => getBuoyOrderings(boat, buoyList));
+for(const weightName in weights) {
+    weights[weightName].configureCallbacks(() => getBuoyOrderings(boat, buoyList));
 }
 
 let selected = null;
@@ -58,8 +62,10 @@ let stepTimestamp = null;
 
 const boatSpeed = addWeight(weightsElement, 'boat speed', 10, false, false);
 const boat = new MovingObject(boatElement);
+boatElement.style.width = `${boatWidth}px`;
+boatElement.style.height = `${boatLength}px`;
 boat.orientation = 0;
-boat.updatePosition(new Vector(100, 100), boatRadius);
+boat.updatePosition(new Vector(100, 100), boatWidth/2, boatLength/2);
 updateBoatOrientation(boat, 0);
 
 regenSupply(true);
@@ -70,7 +76,7 @@ makeGrid();
 generatePath(buoyList, boat);
 
 document.addEventListener('mousedown', ev => {
-    if(!tryClick(ev, boat, boatRadius)) {
+    if(!tryClick(ev, boat, Math.max(boatWidth, boatLength)/2)) {
         if(tryClick(ev, nextGreenBuoy, buoyRadius)) return;
         if(tryClick(ev, nextRedBuoy, buoyRadius)) return;
         for(const buoy of buoyList) {
@@ -120,7 +126,7 @@ document.addEventListener('mouseup', () => {
 document.addEventListener('mousemove', ev => {
     if(selected !== null) {
         const mouseVector = new Vector(ev.pageX, ev.pageY);
-        selected.updatePosition(mouseVector.subtract(offset), selected == boat ? boatRadius : buoyRadius);
+        selected.updatePosition(mouseVector.subtract(offset), selected == boat ? boatWidth/2 : buoyRadius, selected == boat ? boatLength/2 : buoyRadius);
         if(selected !== boat) {
             if(window.innerWidth - selected.position.x < 50) {
                 selected.element.classList.add("removing");
@@ -190,4 +196,14 @@ generateButton.onclick = ev => {
 clearButton.onclick = () => {
     clearBuoys(buoyList);
     getBuoyOrderings(boat, buoyList);
+};
+
+exportButton.onclick = ev => {
+    if(ev.target !== exportButton) return;
+    const filename = filenameInput.value.length == 0 ? "my-path" : filenameInput.value;
+    exportJSON(boat, buoyList, filename);
+}
+
+importInput.oninput = () => {
+    importJSON(boat, buoyList, importInput.files);
 };

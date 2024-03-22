@@ -49,15 +49,33 @@ class Weight {
         return false;
     }
     getWeighted(rawValue) {
-        const weighted = rawValue * getValue(this.maxValueInput);
+        const weighted = rawValue * getValue(this.weightInput);
         this.log(`${this.name} converted raw ${rawValue} to weighted ${weighted}`);
         return weighted;
     }
     isEnabled() {
         return this.enabledCheckbox.checked;
     }
+    enable(enabled = true) {
+        this.enabledCheckbox.checked = enabled;
+    }
     isLoggingEnabled() {
         return this.debugMode.checked;
+    }
+    enableLogging(enabled = true) {
+        this.debugMode.checked = enabled;
+    }
+    getWeight() {
+        return getValue(this.weightInput);
+    }
+    setWeight(value) {
+        this.weightInput.value = value;
+    }
+    getMaxValue() {
+        return getValue(this.maxValueInput);
+    }
+    setMaxValue(value) {
+        this.maxValueInput.value = value;
     }
 }
 

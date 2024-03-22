@@ -5,10 +5,10 @@ class MovingObject {
         this.element = element;
         this.position = new Vector(0, 0);
     }
-    updatePosition(position, radius) {
+    updatePosition(position, halfWidth, halfHeight) {
         this.position = position;
-        this.element.style.left = `${position.x - radius}px`;
-        this.element.style.top = `${position.y - radius}px`;
+        this.element.style.left = `${position.x - halfWidth}px`;
+        this.element.style.top = `${position.y - halfHeight}px`;
     }
 }
 

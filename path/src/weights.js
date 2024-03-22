@@ -113,13 +113,17 @@ class IntersectionWeight extends Weight {
     }
 }
 
-const weights = [
-    new SameColorDistanceWeight('same color dist', 1/5, (sameColorMaxDist - sameColorMinDist)/2 * 1.5, true),
-    new IncomingAngleWeight('incoming angle', 6/Math.PI, 1.1, true),
-    new OutgoingAngleWeight('outgoing angle', 6/Math.PI, 1.1, true),
-    new CrossAngleWeight('cross angle', 6/Math.PI, 1.0, true),
-    new DiffColorDistanceWeight('diff color dist', 1/5, (diffColorMaxDist - diffColorMinDist)/2 * 1.5, true),
-    new IntersectionWeight('intersection', 0.5, 3, false)
-];
+const weights = {};
+
+const pushWeight = weight => {
+    weights[weight.name] = weight;
+}
+
+pushWeight(    new SameColorDistanceWeight('same color dist', 1/5, (sameColorMaxDist - sameColorMinDist)/2 * 1.5, true));
+pushWeight(    new IncomingAngleWeight('incoming angle', 6/Math.PI, 1.1, true));
+pushWeight(    new OutgoingAngleWeight('outgoing angle', 6/Math.PI, 1.1, true));
+pushWeight(    new CrossAngleWeight('cross angle', 6/Math.PI, 1.0, true));
+pushWeight(    new DiffColorDistanceWeight('diff color dist', 1/5, (diffColorMaxDist - diffColorMinDist)/2 * 1.5, true));
+pushWeight(    new IntersectionWeight('intersection', 0.5, 3, false));
 
 export default weights;

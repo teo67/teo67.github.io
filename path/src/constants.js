@@ -10,8 +10,12 @@ export const diffColorMidpointDist = (diffColorMaxDist + diffColorMinDist)/2;
 
 export const gridInterval = 5; //feet
 
-export const boatRadius = 75/2;
-export const buoyRadius = 25/2;
+export const boatWidth = 33/12 * pixelsPerFoot; //px
+export const boatLength = 48/12 * pixelsPerFoot; //px
+
+// actual buoy radius = 20.3 * .0328084 / 2 * pixelsPerFoot; since diameter = 20.3cm
+// this would be annoyingly small so we enlarge them significantly
+export const buoyRadius = 25/2
 
 export const turnSpeed = 2; //rad/sec
 export const turnUpdateInterval = 0.01; //seconds

@@ -1,4 +1,4 @@
-import { pixelsPerFoot, boatRadius } from "./constants.js";
+import { pixelsPerFoot, boatWidth, boatLength } from "./constants.js";
 import { updateBoatOrientation } from "./util.js";
 import getBuoyOrderings from "./getBuoyOrderings.js";
 
@@ -21,7 +21,7 @@ const step = (speed, boat, buoyList, dt) => {
     }
     updateBoatOrientation(boat, boat.orientation + fractionMoved * angleDiff);
 
-    boat.updatePosition(boat.position.combination(targetPositionDiff, 1, fractionMoved), boatRadius);
+    boat.updatePosition(boat.position.combination(targetPositionDiff, 1, fractionMoved), boatWidth/2, boatLength/2);
     for(const buoy of buoyList) {
         buoy.updateRelativePosition(boat, boat.orientation);
     }

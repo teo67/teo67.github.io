@@ -3,11 +3,11 @@ import weights from "./weights.js";
 
 const singleColorWeights = [];
 const multicolorWeights = [];
-for(const weight of weights) {
-    if(weight.requiresBothColors()) {
-        multicolorWeights.push(weight);
+for(const weightName in weights) {
+    if(weights[weightName].requiresBothColors()) {
+        multicolorWeights.push(weights[weightName]);
     } else {
-        singleColorWeights.push(weight);
+        singleColorWeights.push(weights[weightName]);
     }
 }
 

@@ -5,7 +5,7 @@ class Buoy extends MovingObject {
     constructor(isRed, element, position, radius, boat) {
         super(element);
         this.isRed = isRed;
-        this.updatePosition(position, radius);
+        this.updatePosition(position, radius, radius);
         this.updateRelativePosition(boat);
         this.radialDisplay = null;
     }

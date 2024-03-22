@@ -13,8 +13,8 @@ const chooseNext = (buoyList, greenSet, redSet, greenOrdering, redOrdering) => {
     let lowestIndexGreen = -1;
     let lowestIndexRed = -1;
     let logsEnabled = false;
-    for(const weight of weights) {
-        if(weight.isLoggingEnabled()) {
+    for(const weightName in weights) {
+        if(weights[weightName].isLoggingEnabled()) {
             logsEnabled = true;
             break;
         }
