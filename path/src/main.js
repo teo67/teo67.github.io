@@ -205,5 +205,6 @@ exportButton.onclick = ev => {
 }
 
 importInput.oninput = () => {
+    importInput.blur();
     importJSON(boat, buoyList, importInput.files);
 };
