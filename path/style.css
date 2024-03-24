@@ -37,9 +37,9 @@ section#tutorial {
 }
 p#tutorial-description {
     text-align: center;
-    font-size: 2vw;
+    font-size: 3vh;
     display: block;
-    bottom: 1vw;
+    bottom: 1vh;
     position: absolute;
     width: 45vw;
     left: 2.5vw;
