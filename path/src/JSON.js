@@ -81,14 +81,16 @@ export const importJSON = async (boat, buoyList, files) => {
         buoyList.push(newBuoy);
     }
 
-    for(const weightName in jsResult.weights) {
-        if(weightName in weights) {
-            const selectedWeight = weights[weightName];
+    for(const weightName in weights) {
+        const selectedWeight = weights[weightName];
+        if(weightName in jsResult.weights) {
             const selectedWeightLoaded = jsResult.weights[weightName];
             selectedWeight.enable(selectedWeightLoaded.enabled);
             selectedWeight.setWeight(selectedWeightLoaded.weight);
             selectedWeight.setMaxValue(selectedWeightLoaded.max);
             selectedWeight.enableLogging(selectedWeightLoaded.debug);
+        } else {
+            selectedWeight.enable(false);
         }
     }
 

@@ -23,6 +23,36 @@ img#boat {
 .hidden {
     opacity: 0.5;
 }
+.disabled {
+    display: none;
+}
+section#tutorial {
+    position: fixed;
+    width: 50vw;
+    left: 25vw;
+    background-color: aquamarine;
+    border-radius: 1vw;
+    height: 50vh;
+    top: 25vh;
+}
+p#tutorial-description {
+    text-align: center;
+    font-size: 2vw;
+    display: block;
+    bottom: 1vw;
+    position: absolute;
+    width: 45vw;
+    left: 2.5vw;
+}
+img#tutorial-image {
+    max-height: 30vh;
+    max-width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    display: block;
+}
 section#supply {
     position: absolute;
     top: 5px;
@@ -86,8 +116,10 @@ section#weights {
 }
 h2.weight-name {
     color: red;
+    display: inline-block;
     font-size: 1vw;
     text-align: center;
+    margin: 0.5vw;
 }
 div.weight-holder {
     display: inline-block;
@@ -192,6 +224,9 @@ div#generate, div#clear, div#export, div#import {
     transition: all ease 0.4s;
     padding: 1vw;
 }
+div#import {
+    cursor: default;
+}
 div#generate:hover {
     padding: 1.3vw;
     background-color: aquamarine;
@@ -200,7 +235,28 @@ div#clear:hover {
     padding: 0.7vw;
     background-color: pink;
 }
-div#export:hover {
+label {
+    display: inline-block;
+}
+div#export:hover, div#import:hover {
     padding: 1.1vw;
+    background-color: lightgreen;
+}
+div.info-hover {
+    display: inline-block;
+    background-color: lightgray;
+    border-radius: 1vw;
+    width: 2vw;
+    height: 2vw;
+    text-align: center;
+}
+div.info {
+    position: absolute;
+    bottom: 13vw;
+    left: 0;
+    font-size: 1.3vw;
+    padding: 0.5vw;
+    border: 1px solid green;
+    border-radius: 0.5vw;
     background-color: lightgreen;
 }

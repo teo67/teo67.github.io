@@ -4,18 +4,29 @@ import { getValue, addWeight } from "./util.js";
 class Weight {
     constructor(name, defaultValue, defaultMaximum, defaultIsEnabled) {
         this.name = name;
+        this.infoElement = null;
         const weightHolder = document.createElement("div");
         weightHolder.classList.add('weight-holder');
         weightsElement.appendChild(weightHolder);
+
+        const infoHover = document.createElement("div");
+        infoHover.classList.add('info-hover');
+        weightHolder.appendChild(infoHover);
+        infoHover.innerText = 'i'; // todo: get image?
+        infoHover.addEventListener('mouseenter', () => this.showInfo());
+        infoHover.addEventListener('mouseleave', () => this.hideInfo());
 
         const title = document.createElement('h2');
         title.classList.add('weight-name');
         title.innerText = name;
         weightHolder.appendChild(title);
-        this.enabledCheckbox = addWeight(weightHolder, 'enabled', defaultIsEnabled, true, false);
+        this.enabledCheckbox = addWeight(weightHolder, 'enabled', defaultIsEnabled, true);
         this.weightInput = addWeight(weightHolder, 'weight', defaultValue, false);
         this.maxValueInput = addWeight(weightHolder, 'max value', defaultMaximum, false);
         this.debugMode = addWeight(weightHolder, 'debug', false, true);
+    }
+    getInfostring() {
+        return "No information available.";
     }
     log(msg) {
         if(this.debugMode.checked) {
@@ -76,6 +87,18 @@ class Weight {
     }
     setMaxValue(value) {
         this.maxValueInput.value = value;
+    }
+    showInfo() {
+        if(this.infoElement != null) return;
+        this.infoElement = document.createElement("div");
+        this.infoElement.classList.add("info");
+        this.infoElement.innerText = this.getInfostring();
+        weightsElement.appendChild(this.infoElement);
+    }
+    hideInfo() {
+        if(this.infoElement == null) return;
+        this.infoElement.remove();
+        this.infoElement = null;
     }
 }
 

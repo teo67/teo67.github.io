@@ -1,4 +1,3 @@
-import { getReference } from "./util.js";
 import getTotalWeight from "./getTotalWeight.js";
 import weights from "./weights.js";
 
@@ -19,23 +18,19 @@ const chooseNext = (buoyList, greenSet, redSet, greenOrdering, redOrdering) => {
             break;
         }
     }
-    const greenRef = getReference(buoyList, greenOrdering, false);
-    const redRef = getReference(buoyList, redOrdering, true);
     const cachedRedWeights = {};
     const greenMonocolorData = {
         buoyList: buoyList,
-        reference: greenRef,
-        ordering: greenOrdering
+        ordering: greenOrdering,
+        isRed: false
     };
     const redMonocolorData = {
         buoyList: buoyList,
-        reference: redRef,
-        ordering: redOrdering
+        ordering: redOrdering,
+        isRed: true
     };
     const inputDataMulticolor = {
         buoyList : buoyList,
-        greenRef : greenRef,
-        redRef : redRef,
         greenOrdering : greenOrdering,
         redOrdering : redOrdering
     };

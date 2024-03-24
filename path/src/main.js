@@ -7,7 +7,9 @@ import weights from "./weights.js";
 import getBuoyOrderings from "./getBuoyOrderings.js";
 import step from "./step.js";
 import generatePath from "./generatePath.js";
+import updateTutorial from "./updateTutorial.js";
 import { exportJSON, importJSON } from "./JSON.js";
+import tutorialSlides from "./tutorialSlides.js";
 
 const weightsElement = document.getElementById("weights");
 const boatElement = document.getElementById("boat");
@@ -59,6 +61,9 @@ let turnDirection = 0;
 let registeredTurnInterval = null;
 let stepping = false;
 let stepTimestamp = null;
+let tutorialSlide = 0;
+let leftArrowDown = false;
+let rightArrowDown = false;
 
 const boatSpeed = addWeight(weightsElement, 'boat speed', 10, false, false);
 const boat = new MovingObject(boatElement);
@@ -74,6 +79,8 @@ regenSupply(false);
 makeGrid();
 
 generatePath(buoyList, boat);
+
+updateTutorial(tutorialSlide);
 
 document.addEventListener('mousedown', ev => {
     if(!tryClick(ev, boat, Math.max(boatWidth, boatLength)/2)) {
@@ -161,6 +168,24 @@ document.addEventListener('keydown', ev => {
         turnDirection = -1;
     } else if(ev.key == ' ') {
         stepping = true;
+    } else if(ev.key == 'ArrowRight') {
+        if(!rightArrowDown) {
+            rightArrowDown = true;
+            tutorialSlide++;
+            if(tutorialSlide >= tutorialSlides.length) {
+                tutorialSlide = -1;
+            }
+            updateTutorial(tutorialSlide);
+        }
+    } else if(ev.key == 'ArrowLeft') {
+        if(!leftArrowDown) {
+            leftArrowDown = true;
+            if(tutorialSlide == -1) {
+                tutorialSlide = tutorialSlides.length;
+            }
+            tutorialSlide--;
+            updateTutorial(tutorialSlide);
+        }
     }
 });
 
@@ -172,6 +197,10 @@ document.addEventListener('keyup', ev => {
     } else if(ev.key == ' ') {
         stepping = false;
         stepTimestamp = null;
+    } else if(ev.key == 'ArrowRight') {
+        rightArrowDown = false;
+    } else if(ev.key == 'ArrowLeft') {
+        leftArrowDown = false;
     }
 });
 
@@ -206,5 +235,8 @@ exportButton.onclick = ev => {
 
 importInput.oninput = () => {
     importInput.blur();
+    // console.log('trying to import');
     importJSON(boat, buoyList, importInput.files);
+    // importInput.files.clear();
+    // TODO: reset file input somehow so it works twice in a row on the same file
 };

@@ -29,18 +29,18 @@ export const addWeight = (parent, name, defaultValue, isBoolean, withNewline = t
     return input;
 }
 
-const getOrderingItemX = (buoyList, ordering, index, isRed) => {
+const getOrderingItemX = (buoyList, ordering, index, isRed, _) => {
     return index < 0 ? (diffColorMidpointDist*pixelsPerFoot/2 * (isRed ? 1 : -1)) : buoyList[ordering[index]].relative.x;
 }
 
-const getOrderingItemY = (buoyList, ordering, index, _) => {
-    return index < 0 ? 0 : buoyList[ordering[index]].relative.y;
+const getOrderingItemY = (buoyList, ordering, index, _, stepback) => {
+    return index < 0 ? (1 - stepback) : buoyList[ordering[index]].relative.y;
 }
 
-export const getReference = (buoyList, ordering, isRed) => {
+export const getReference = (buoyList, ordering, isRed, stepback = 1) => {
     return new Vector(
-        getOrderingItemX(buoyList, ordering, ordering.length - 1, isRed),
-        getOrderingItemY(buoyList, ordering, ordering.length - 1, isRed)
+        getOrderingItemX(buoyList, ordering, ordering.length - stepback, isRed, stepback),
+        getOrderingItemY(buoyList, ordering, ordering.length - stepback, isRed, stepback)
     );
 }
 
