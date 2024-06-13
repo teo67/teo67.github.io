@@ -21,3 +21,7 @@ export const turnSpeed = 2; //rad/sec
 export const turnUpdateInterval = 0.01; //seconds
 
 export const stepUpdateRate = .01;// seconds
+
+export const RED = 0;
+export const GREEN = 1;
+export const BLACK = 2;

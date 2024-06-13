@@ -22,7 +22,7 @@ export const exportJSON = (boat, buoyList, fileName) => {
         packedBuoys.push({
             x: buoy.position.x,
             y: buoy.position.y,
-            isRed: buoy.isRed
+            color: buoy.color
         });
     }
     const jsObj = {
@@ -74,10 +74,10 @@ export const importJSON = async (boat, buoyList, files) => {
     updateBoatOrientation(boat, jsResult.boat.orientation);
 
     for(const buoy of jsResult.buoys) {
-        const newElement = makeBuoyElement(buoy.isRed);
+        const newElement = makeBuoyElement(buoy.color);
         buoys.appendChild(newElement);
 
-        const newBuoy = new Buoy(buoy.isRed, newElement, new Vector(buoy.x, buoy.y), buoyRadius, boat);
+        const newBuoy = new Buoy(buoy.color, newElement, new Vector(buoy.x, buoy.y), buoyRadius, boat);
         buoyList.push(newBuoy);
     }
 
