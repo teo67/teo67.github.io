@@ -1,5 +1,5 @@
 import getBuoyOrderings from "./getBuoyOrderings.js";
-import { pixelsPerFoot, buoyRadius, sameColorMaxDist, sameColorMinDist, sameColorMidpointDist, diffColorMaxDist, diffColorMinDist, diffColorMidpointDist, RED, GREEN } from "./constants.js";
+import { pixelsPerFoot, buoyRadius, sameColorMaxDist, sameColorMinDist, sameColorMidpointDist, diffColorMaxDist, diffColorMinDist, diffColorMidpointDist } from "./constants.js";
 import { getValue, makeBuoyElement } from "./util.js";
 import Vector from "./Vector.js";
 import Buoy from "./Buoy.js";
@@ -19,8 +19,8 @@ const generatePath = (buoyList, boat) => {
     let isFirst = false;
 
     while(currentX >= minX && currentX <= maxX && currentY >= minY && currentY <= maxY) {
-        const newElement = makeBuoyElement(isRed ? RED : GREEN);
-        const newBuoy = new Buoy(isRed ? RED : GREEN, newElement, new Vector(currentX, currentY), buoyRadius, boat);
+        const newElement = makeBuoyElement(isRed);
+        const newBuoy = new Buoy(isRed, newElement, new Vector(currentX, currentY), buoyRadius, boat);
         buoys.appendChild(newElement);
         buoyList.push(newBuoy);
 

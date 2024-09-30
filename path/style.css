@@ -61,7 +61,7 @@ section#supply {
     background-color: tan;
     border-radius: 1vw;
 }
-div#green-supply, div#red-supply, div#black-supply {
+div#green-supply, div#red-supply {
     width: 30px;
     height: 30px;
     padding: 2.5px;
@@ -70,7 +70,7 @@ div#green-supply, div#red-supply, div#black-supply {
     content: "";
     display: inline-block;
 }
-.green, .red, .black {
+.green, .red {
     width: 25px;
     height: 25px;
     content: "";
@@ -82,9 +82,6 @@ div#green-supply, div#red-supply, div#black-supply {
 }
 .red {
     background-color: red;
-}
-.black {
-    background: black;
 }
 .line, .gridline {
     stroke-width: 1px;

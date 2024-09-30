@@ -2,9 +2,9 @@ import MovingObject from "./MovingObject.js";
 import Vector from "./Vector.js";
 
 class Buoy extends MovingObject {
-    constructor(color, element, position, radius, boat) {
+    constructor(isRed, element, position, radius, boat) {
         super(element);
-        this.color = color;
+        this.isRed = isRed;
         this.updatePosition(position, radius, radius);
         this.updateRelativePosition(boat);
         this.radialDisplay = null;

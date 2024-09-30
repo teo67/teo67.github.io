@@ -1,4 +1,4 @@
-import { turnUpdateInterval, turnSpeed, stepUpdateRate, pixelsPerFoot, sameColorMaxDist, sameColorMinDist, sameColorMidpointDist, diffColorMaxDist, diffColorMinDist, diffColorMidpointDist, buoyRadius, boatWidth, boatLength, RED, GREEN, BLACK } from "./constants.js";
+import { turnUpdateInterval, turnSpeed, stepUpdateRate, pixelsPerFoot, sameColorMaxDist, sameColorMinDist, sameColorMidpointDist, diffColorMaxDist, diffColorMinDist, diffColorMidpointDist, buoyRadius, boatWidth, boatLength } from "./constants.js";
 import { updateBoatOrientation, addWeight, getValue, makeBuoyElement, makeFullRadialDisplay, makeGrid, clearBuoys } from "./util.js";
 import Vector from "./Vector.js";
 import Buoy from "./Buoy.js";
@@ -16,7 +16,6 @@ const boatElement = document.getElementById("boat");
 const buoys = document.getElementById("buoys");
 const redSupply = document.getElementById("red-supply");
 const greenSupply = document.getElementById("green-supply");
-const blackSupply = document.getElementById("black-supply");
 const exportButton = document.getElementById("export");
 const filenameInput = document.getElementById("filename-input");
 const importInput = document.getElementById("import-input");
@@ -36,25 +35,14 @@ const tryClick = (ev, target, radius) => {
     return false;
 }
 
-const regenSupply = color => {
-    const newElement = makeBuoyElement(color);
-    let supply = blackSupply;
-    let xOffset = 71;
-    if(color == RED) {
-        supply = redSupply;
-        xOffset = 0;
-    } else if(color == GREEN) {
-        supply = greenSupply;
-        xOffset = 35;
-    }
-    supply.appendChild(newElement);
-    const newBuoy = new Buoy(color, newElement, new Vector(2 * buoyRadius + xOffset, 2 * buoyRadius), buoyRadius, boat);
-    if(color == RED) {
+const regenSupply = isRed => {
+    const newElement = makeBuoyElement(isRed);
+    (isRed ? redSupply : greenSupply).appendChild(newElement);
+    const newBuoy = new Buoy(isRed, newElement, new Vector(isRed ? 2 * buoyRadius : 35 + 2 * buoyRadius, 2 * buoyRadius), buoyRadius, boat);
+    if(isRed) {
         nextRedBuoy = newBuoy;
-    } else if(color == GREEN) {
-        nextGreenBuoy = newBuoy;
     } else {
-        nextBlackBuoy = newBuoy;
+        nextGreenBuoy = newBuoy;
     }
 }
 
@@ -69,7 +57,6 @@ let offset = new Vector(0, 0);
 const buoyList = [];
 let nextRedBuoy = null;
 let nextGreenBuoy = null;
-let nextBlackBuoy = null
 let turnDirection = 0;
 let registeredTurnInterval = null;
 let stepping = false;
@@ -86,9 +73,8 @@ boat.orientation = 0;
 boat.updatePosition(new Vector(100, 100), boatWidth/2, boatLength/2);
 updateBoatOrientation(boat, 0);
 
-regenSupply(RED);
-regenSupply(GREEN);
-regenSupply(BLACK);
+regenSupply(true);
+regenSupply(false);
 
 makeGrid();
 
@@ -100,7 +86,6 @@ document.addEventListener('mousedown', ev => {
     if(!tryClick(ev, boat, Math.max(boatWidth, boatLength)/2)) {
         if(tryClick(ev, nextGreenBuoy, buoyRadius)) return;
         if(tryClick(ev, nextRedBuoy, buoyRadius)) return;
-        if(tryClick(ev, nextBlackBuoy, buoyRadius)) return;
         for(const buoy of buoyList) {
             if(tryClick(ev, buoy, buoyRadius)) return;
         }
@@ -113,16 +98,10 @@ document.addEventListener('mousedown', ev => {
 
 document.addEventListener('mouseup', () => {
     if(selected !== null) {
-        let supplyColor = null;
-        if(selected == nextRedBuoy) {
-            supplyColor = RED;
-        } else if(selected == nextGreenBuoy) {
-            supplyColor = GREEN;
-        } else if(selected == nextBlackBuoy) {
-            supplyColor = BLACK;
-        }
-        if(supplyColor != null) {
-            regenSupply(supplyColor);
+        const isRedSupply = selected == nextRedBuoy;
+        const isGreenSupply = selected == nextGreenBuoy;
+        if(isRedSupply || isGreenSupply) {
+            regenSupply(isRedSupply);
             buoys.appendChild(selected.element);
             buoyList.push(selected);
         }
@@ -161,22 +140,20 @@ document.addEventListener('mousemove', ev => {
             } else if(selected.element.classList.contains("removing")) {
                 selected.element.classList.remove("removing");
             }
-            if(selected.color != BLACK) {
-                for(const buoy of buoyList) {
-                    if(buoy == selected || buoy.color == BLACK) continue;
-                    const sameColor = (buoy.color == selected.color);
-                    const maxRadius = (sameColor ? sameColorMaxDist : diffColorMaxDist)*pixelsPerFoot;
-                    if(buoy.position.subtract(selected.position).magnitude() <= maxRadius) {
-                        if(buoy.radialDisplay == null) {
-                            buoy.radialDisplay = makeFullRadialDisplay(buoy.position, sameColor);
+            for(const buoy of buoyList) {
+                if(buoy == selected) continue;
+                const sameColor = (buoy.isRed == selected.isRed);
+                const maxRadius = (sameColor ? sameColorMaxDist : diffColorMaxDist)*pixelsPerFoot;
+                if(buoy.position.subtract(selected.position).magnitude() <= maxRadius) {
+                    if(buoy.radialDisplay == null) {
+                        buoy.radialDisplay = makeFullRadialDisplay(buoy.position, sameColor);
+                    }
+                } else {
+                    if(buoy.radialDisplay !== null) {
+                        for(const display of buoy.radialDisplay) {
+                            display.remove();
                         }
-                    } else {
-                        if(buoy.radialDisplay !== null) {
-                            for(const display of buoy.radialDisplay) {
-                                display.remove();
-                            }
-                            buoy.radialDisplay = null;
-                        }
+                        buoy.radialDisplay = null;
                     }
                 }
             }

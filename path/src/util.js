@@ -1,5 +1,5 @@
 import Vector from "./Vector.js";
-import { gridInterval, pixelsPerFoot, sameColorMaxDist, sameColorMinDist, sameColorMidpointDist, diffColorMaxDist, diffColorMinDist, diffColorMidpointDist, RED, GREEN } from "./constants.js";
+import { gridInterval, pixelsPerFoot, sameColorMaxDist, sameColorMinDist, sameColorMidpointDist, diffColorMaxDist, diffColorMinDist, diffColorMidpointDist } from "./constants.js";
 const radialDisplays = document.getElementById("radial-displays");
 const radialOutlines = document.getElementById("radial-outlines");
 const grid = document.getElementById("grid");
@@ -48,10 +48,10 @@ export const drawLine = (p1, p2, holder, line_class = "line") => {
     holder.innerHTML += `<svg><line class=${line_class} x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}"/></svg>`
 }
 
-export const makeBuoyElement = color => {
+export const makeBuoyElement = isRed => {
     const newElement = document.createElement('div');
     newElement.classList.add('draggable');
-    newElement.classList.add(color == RED ? 'red' : (color == GREEN ? 'green' : 'black'));
+    newElement.classList.add(isRed ? 'red' : 'green');
     return newElement;
 }
 
