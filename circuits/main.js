@@ -164,7 +164,7 @@ class Series extends CircuitComponent {
                 this.addItem(new Parallel(), x, y, w, h);
             }
             addResistor.onclick = () => {
-                this.addItem(new Resistor(5), x, y, w, h);
+                this.addItem(new Resistor(parseInt(prompt("Resistance: ", "5"))), x, y, w, h);
             }
             addLED.onclick = () => {
                 this.addItem(new LED(5), x, y, w, h);
